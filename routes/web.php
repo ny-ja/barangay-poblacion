@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ContactUsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +19,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+    return Inertia::render('Welcome');
+})->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -33,3 +31,8 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.index');
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.index');
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
