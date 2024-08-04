@@ -7,7 +7,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
             <section class="text-gray-600 body-font">
                 <div class="mx-auto flex px-5 py-16 items-center justify-center flex-col">
                     <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Barangay History</h1>
-                    <img class="lg:w-3/4 md:w-2/6 w-3/6 mb-10 object-cover object-center rounded" alt="Admin building"
+                    <img class="w-3/4 mb-10 object-cover object-center rounded" alt="Admin building"
                         src="/images/admin-building.webp">
                     <div class="text-center lg:w-3/4 w-full text-lg">
                         <p class="mb-8 leading-relaxed text-justify indent-12">The history of our barangay dates back to
@@ -66,7 +66,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
             <section class="text-gray-600 body-font">
                 <div class="mx-auto flex px-5 py-16 items-center justify-center flex-col">
                     <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Barangay Officials</h1>
-                    <img class="lg:w-3/4 md:w-2/6 w-3/6 mb-10 object-cover object-center rounded"
+                    <img class="w-3/4 mb-10 object-cover object-center rounded"
                         alt="Barangay Officials" src="/images/officials.webp">
                     <div class="text-center lg:w-3/4 w-full text-lg">
                         <p class="mb-8 leading-relaxed text-justify indent-12">The barangay officials play a pivotal
@@ -93,7 +93,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
             </section>
 
             <section class="text-gray-600 body-font">
-                <div class="mx-auto flex px-5 py-16 md:flex-row flex-col items-center  bg-[#73BBA3]">
+                <div class="mx-auto flex px-5 py-16 md:flex-row flex-col items-center  bg-teal-800">
                     <div
                         class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col text-white md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
                         <h1 class="title-font border-b w-full sm:text-4xl text-3xl mb-4 font-medium">Barangay Captain
@@ -133,7 +133,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-man.webp">
+                                    src="/images/man.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Juan Dela Cruz</h2>
                                     <h3 class="text-gray-500 mb-3">Community Organizer</h3>
@@ -178,7 +178,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-woman.webp">
+                                    src="/images/woman.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Maria Santos</h2>
                                     <h3 class="text-gray-500 mb-3">Education Advocate</h3>
@@ -222,7 +222,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-man.webp">
+                                    src="/images/man.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Carlos Reyes</h2>
                                     <h3 class="text-gray-500 mb-3">Health Advocate</h3>
@@ -266,7 +266,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-woman.webp">
+                                    src="/images/woman.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Anna Mendoza</h2>
                                     <h3 class="text-gray-500 mb-3">Youth Coordinator</h3>
@@ -310,7 +310,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-man.webp">
+                                    src="/images/man.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Luis Rivera</h2>
                                     <h3 class="text-gray-500 mb-3">Disaster Response Officer</h3>
@@ -365,7 +365,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-man.webp">
+                                    src="/images/man.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Juan Dela Cruz</h2>
                                     <h3 class="text-gray-500 mb-3">Community Organizer</h3>
@@ -410,7 +410,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-woman.webp">
+                                    src="/images/woman.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Maria Santos</h2>
                                     <h3 class="text-gray-500 mb-3">Education Advocate</h3>
@@ -454,7 +454,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-man.webp">
+                                    src="/images/man.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Carlos Reyes</h2>
                                     <h3 class="text-gray-500 mb-3">Health Advocate</h3>
@@ -498,7 +498,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-woman.webp">
+                                    src="/images/woman.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Anna Mendoza</h2>
                                     <h3 class="text-gray-500 mb-3">Youth Coordinator</h3>
@@ -542,7 +542,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                                 class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                 <img alt="team"
                                     class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/kagawad-man.webp">
+                                    src="/images/man.webp">
                                 <div class="flex-grow sm:pl-8">
                                     <h2 class="title-font font-medium text-lg text-gray-900">Luis Rivera</h2>
                                     <h3 class="text-gray-500 mb-3">Disaster Response Officer</h3>
