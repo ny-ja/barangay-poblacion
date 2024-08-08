@@ -29,7 +29,6 @@ onMounted(() => {
         }
     );
 
-    // Add logo animation
     gsap.fromTo(
         ".logo",
         {
@@ -74,14 +73,8 @@ onMounted(() => {
     </div>
 </template>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
 
 .container {
     font-family: "Michroma", sans-serif;

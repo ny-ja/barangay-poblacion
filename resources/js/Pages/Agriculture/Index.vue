@@ -39,12 +39,12 @@ const downloadPDF = (url) => {
                             <div class="flex mb-4">
                                 <span class="flex py-2 space-x-2">
                                     <div class="flex flex-row space-x-1 items-center">
-                                        <Icon name="phone" :classes="'text-teal-800 size-4'" /><a href="#"
+                                        <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
                                             class="text-sm text-gray-900 hover:underline">(888)
                                             888-8888</a>
                                     </div>
                                     <div class="flex flex-row space-x-1 items-center">
-                                        <Icon name="mobile" :classes="'text-teal-800 size-4'" /><a href="#"
+                                        <Icon name="mobile" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
                                             class="text-sm text-gray-900 hover:underline">(999)
                                             999-9999</a>
                                     </div>
@@ -396,11 +396,11 @@ const downloadPDF = (url) => {
                                         <div class="flex gap-3">
                                             <button
                                                 class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
-                                                <Icon name="view" :classes="'size-4'" />
+                                                <Icon name="view" :classes="'size-4'" :fill="'white'" />
                                             </button>
                                             <button @click="downloadPDF(file.pdfUrl)"
                                                 class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
-                                                <Icon name="download" :classes="'size-4'" />
+                                                <Icon name="download" :classes="'size-4'" :fill="'white'" />
                                             </button>
                                         </div>
 
@@ -423,11 +423,11 @@ const downloadPDF = (url) => {
                                         <div class="flex gap-3">
                                             <button
                                                 class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
-                                                <Icon name="view" :classes="'size-4'" />
+                                                <Icon name="view" :classes="'size-4'" :fill="'white'" />
                                             </button>
                                             <button @click="downloadPDF(file.pdfUrl)"
                                                 class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
-                                                <Icon name="download" :classes="'size-4'" />
+                                                <Icon name="download" :classes="'size-4'" :fill="'white'" />
                                             </button>
                                         </div>
 

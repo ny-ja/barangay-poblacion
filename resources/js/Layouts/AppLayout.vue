@@ -86,33 +86,33 @@ onMounted(() => {
                     <div class="hidden lg:flex flex-col lg:items-end items-center space-y-2">
                         <div class="flex items-center space-x-6 rtl:space-x-reverse">
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="phone" :classes="'text-teal-800 size-4'" /><a href="#"
+                                <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
                                     class="text-sm text-gray-900 hover:underline">(888)
                                     888-8888</a>
                             </div>
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="mobile" :classes="'text-teal-800 size-4'" /><a href="#"
+                                <Icon name="mobile" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
                                     class="text-sm text-gray-900 hover:underline">(999)
                                     999-9999</a>
                             </div>
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="mail" :classes="'text-teal-800 size-4'" /><a href="#"
+                                <Icon name="mail" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
                                     class="text-sm text-gray-900 hover:underline">
                                     poblacion@gmail.com</a>
                             </div>
                         </div>
                         <div class="flex items-center justify-end space-x-4 rtl:space-x-reverse">
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="facebook" :classes="'size-6'" />
+                                <Icon name="facebook" :classes="'size-6'" :fill="'black'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="instagram" :classes="'size-6'" />
+                                <Icon name="instagram" :classes="'size-6'" :fill="'black'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="whatsapp" :classes="'size-6'" />
+                                <Icon name="whatsapp" :classes="'size-6'" :fill="'black'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="youtube" :classes="'size-6'" />
+                                <Icon name="youtube" :classes="'size-6'" :fill="'black'" />
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@ onMounted(() => {
             <nav class="bg-teal-800 uppercase">
                 <div class="max-w-screen-xl px-4 py-3 mx-auto flex flex-row lg:ml-40">
                     <div class="flex flex-row items-center">
-                        <div @click="sidebar = true" class="sm:hidden flex cursor-pointer hover:bg-teal-700 px-1 py-1 rounded-lg">
+                        <div @click="sidebar = true" class="sm:hidden flex cursor-pointer hover:bg-teal-700 px-1 py-1 rounded-lg border border-teal-600 shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="white" class="size-8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -131,7 +131,7 @@ onMounted(() => {
                         <ul
                             class="sm:flex hidden text-white flex-row mt-0 space-x-1 text-[14px] lg:text-lg tracking-tighter">
                             <li>
-                                <Link :href="route('home')" class="hover:bg-teal-700 px-3 py-2 rounded-lg" :class="{
+                                <Link :href="route('home')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg" :class="{
             'bg-teal-700':
                 $page.component === 'Home'
         }">
@@ -139,21 +139,21 @@ onMounted(() => {
                             </li>
                             <li>
                                 <Link :href="route('about.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg text-nowrap" :class="{
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap" :class="{
             'bg-teal-700':
                 $page.component === 'About/Index'
         }">
                                 About us</Link>
                             </li>
                             <li>
-                                <Link :href="route('news.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg" :class="{
+                                <Link :href="route('news.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg" :class="{
             'bg-teal-700':
                 $page.component === 'News/Index'
         }">
                                 News</Link>
                             </li>
                             <li>
-                                <Link :href="route('services.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg"
+                                <Link :href="route('services.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
                                     :class="{
             'bg-teal-700':
                 $page.component === 'Services/Index'
@@ -161,7 +161,7 @@ onMounted(() => {
                                 Services</Link>
                             </li>
                             <li>
-                                <Link :href="route('resources.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg"
+                                <Link :href="route('resources.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
                                     :class="{
             'bg-teal-700':
                 $page.component === 'Resources/Index'
@@ -169,12 +169,12 @@ onMounted(() => {
                                 Resources</Link>
                             </li>
                             <li class="relative group">
-                                <a class="text-white cursor-pointer hover:bg-teal-700 px-3 py-2 rounded-lg" :class="{
+                                <a class="text-white cursor-pointer hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg" :class="{
             'bg-teal-700':
                 $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index'
         }">Committees</a>
                                 <ul
-                                    class="absolute mt-1 drop-shadow-lg text-white z-50 left-0 rounded-lg lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 border border-teal-700 shadow-lg opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
+                                    class="absolute mt-1 drop-shadow-lg text-white z-50 left-0 rounded-lg border border-teal-600 shadow-lg lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
                                     <Link :href="route('committee.agriculture.index')">
                                     <li class="px-4 py-2 hover:bg-teal-700" :class="{
             'bg-teal-700':
@@ -219,7 +219,7 @@ onMounted(() => {
                             </li>
                             <li>
                                 <Link :href="route('contact.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg text-nowrap" :class="{
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap" :class="{
             'bg-teal-700':
                 $page.component === 'Contact/Index'
         }">
@@ -240,7 +240,7 @@ onMounted(() => {
                     <img src="/images/logo.png" class="w-12 h-auto -mt-2" alt="Barangay Logo" />
                     
                     <button @click="sidebar = false" type="button"
-                        class="text-white bg-transparent hover:bg-teal-700 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center">
+                        class="text-white bg-transparent hover:bg-teal-700 rounded-lg border border-teal-600 shadow-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center">
                         <svg aria-hidden="true" class="w-6 h-auto" fill="white" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -255,7 +255,7 @@ onMounted(() => {
                     <ul class="space-y-2 font-medium uppercase tracking-tighter">
                         <li>
                             <Link :href="route('home')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg text-white hover:bg-teal-700 group"
+                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
                                 :class="{
             'bg-teal-700':
                 $page.component === 'Home'
@@ -264,7 +264,7 @@ onMounted(() => {
                         </li>
                         <li>
                             <Link :href="route('about.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg text-white hover:bg-teal-700 group"
+                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
                                 :class="{
             'bg-teal-700':
                 $page.component === 'About/Index'
@@ -273,7 +273,7 @@ onMounted(() => {
                         </li>
                         <li>
                             <Link :href="route('news.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg text-white hover:bg-teal-700 group"
+                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
                                 :class="{
             'bg-teal-700':
                 $page.component === 'News/Index'
@@ -282,7 +282,7 @@ onMounted(() => {
                         </li>
                         <li>
                             <Link :href="route('services.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg text-white hover:bg-teal-700 group"
+                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
                                 :class="{
             'bg-teal-700':
                 $page.component === 'Services/Index'
@@ -291,7 +291,7 @@ onMounted(() => {
                         </li>
                         <li>
                             <Link :href="route('resources.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg text-white hover:bg-teal-700 group"
+                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
                                 :class="{
             'bg-teal-700':
                 $page.component === 'Resources/Index'
@@ -300,7 +300,7 @@ onMounted(() => {
                         </li>
                         <li>
                             <button type="button" @click="toggleDropdown"
-                                class="flex items-center  gap-x-1 w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-teal-700"
+                                class="flex items-center  gap-x-1 w-full p-2 text-base text-white transition duration-75 rounded-lg border border-teal-600 shadow-lg group hover:bg-teal-700"
                                 :class="{
             'bg-teal-700':
                 $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index'
@@ -364,7 +364,7 @@ onMounted(() => {
                         </li>
                         <li>
                             <Link :href="route('contact.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg text-white hover:bg-teal-700 group"
+                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
                                 :class="{
             'bg-teal-700':
                 $page.component === 'Contact/Index'
@@ -390,26 +390,26 @@ onMounted(() => {
                             <div class="flex flex-col items-center">
                                 <a class="text-lg">4-Hour Command Center</a>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="phone" :classes="'size-4 text-black'" />
+                                    <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" />
                                     <a class="text-black hover:text-gray-800">8-888-8888 / 0912-345-6789</a>
                                 </div>
                             </div>
                             <div class="flex flex-col items-center">
                                 <a class="text-lg">Office of the Barangay Captain</a>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="phone" :classes="'size-4 text-black'" />
+                                    <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" />
                                     <a class="text-black hover:text-gray-800">9-999-9999</a>
                                 </div>
                             </div>
                             <div class="flex flex-col items-center">
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="mail" :classes="'size-4 text-black'" />
+                                    <Icon name="mail" :classes="'size-4'" :fill="'#115e59'" />
                                     <a class="text-black hover:text-gray-800">poblacion@gmail.com</a>
                                 </div>
                             </div>
                             <div>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="location" :classes="'size-4 text-black'" />
+                                    <Icon name="location" :classes="'size-4'" :fill="'#115e59'" />
                                     <a class="text-black hover:text-gray-800">Poblacion, Valencia City, Bukidnon</a>
                                 </div>
                             </div>
@@ -426,13 +426,13 @@ onMounted(() => {
                         </h2>
                         <div class="flex flex-row justify-center space-x-4">
                             <div class="cursor-pointer">
-                                <Icon name="facebook" :classes="'text-gray-900 size-12'" />
+                                <Icon name="facebook" :classes="'size-12'" :fill="'black'" />
                             </div>
                             <div class="cursor-pointer">
-                                <Icon name="instagram" :classes="'text-gray-900 size-12'" />
+                                <Icon name="instagram" :classes="'size-12'" :fill="'black'" />
                             </div>
                             <div class="cursor-pointer">
-                                <Icon name="whatsapp" :classes="'text-gray-900 size-12'" />
+                                <Icon name="whatsapp" :classes="'size-12'" :fill="'black'" />
                             </div>
                         </div>
                         <div class="mt-6 flex flex-col items-center">
@@ -446,7 +446,7 @@ onMounted(() => {
                         <h2 class="title-font text-center font-medium text-gray-900 tracking-widest text-2xl mb-3">Be
                             part of our
                             community</h2>
-                        <div class="bg-white flex flex-col px-3 py-2 rounded-lg">
+                        <div class="bg-white flex flex-col px-3 py-2 rounded-lg border border-teal-600 shadow-lg">
                             <div class="relative mb-4">
                                 <label for="name" class="leading-7 text-sm text-black">Name</label>
                                 <input type="text" id="name" name="name"
