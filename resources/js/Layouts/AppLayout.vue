@@ -3,6 +3,7 @@ import { ref, onMounted } from "vue";
 import { Head, router } from "@inertiajs/vue3";
 import { Link } from "@inertiajs/vue3";
 import Icon from '@/Components/Icon.vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
 defineProps({
     title: String,
@@ -74,7 +75,7 @@ onMounted(() => {
                 <div class="flex flex-row flex-wrap w-full lg:justify-between justify-center p-4">
                     <div class="flex lg:flex-row flex-col gap-x-6 items-center lg:items-baseline">
                         <Link :href="route('home')" class="lg:absolute space-x-3 rtl:space-x-reverse">
-                        <img src="/images/poblacion-logo.svg" class="w-24 lg:w-36 h-auto" alt="Barangay Logo" />
+                        <ApplicationLogo class="w-24 lg:w-36 h-auto" />
                         </Link>
                         <div class="flex flex-col gap-y-1 lg:ml-40 items-center lg:items-start">
                             <span class="text-2xl text-gray-900 font-semibold whitespace-nowrap">Barangay
@@ -121,7 +122,8 @@ onMounted(() => {
             <nav class="bg-teal-800 uppercase">
                 <div class="max-w-screen-xl px-4 py-3 mx-auto flex flex-row lg:ml-40">
                     <div class="flex flex-row items-center">
-                        <div @click="sidebar = true" class="sm:hidden flex cursor-pointer hover:bg-teal-700 px-1 py-1 rounded-lg border border-teal-600 shadow-lg">
+                        <div @click="sidebar = true"
+                            class="sm:hidden flex cursor-pointer hover:bg-teal-700 px-1 py-1 rounded-lg border border-teal-600 shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="white" class="size-8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -131,7 +133,9 @@ onMounted(() => {
                         <ul
                             class="sm:flex hidden text-white flex-row mt-0 space-x-1 text-[14px] lg:text-lg tracking-tighter">
                             <li>
-                                <Link :href="route('home')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg" :class="{
+                                <Link :href="route('home')"
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
+                                    :class="{
             'bg-teal-700':
                 $page.component === 'Home'
         }">
@@ -139,21 +143,25 @@ onMounted(() => {
                             </li>
                             <li>
                                 <Link :href="route('about.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap" :class="{
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap"
+                                    :class="{
             'bg-teal-700':
                 $page.component === 'About/Index'
         }">
                                 About us</Link>
                             </li>
                             <li>
-                                <Link :href="route('news.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg" :class="{
+                                <Link :href="route('news.index')"
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
+                                    :class="{
             'bg-teal-700':
                 $page.component === 'News/Index'
         }">
                                 News</Link>
                             </li>
                             <li>
-                                <Link :href="route('services.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
+                                <Link :href="route('services.index')"
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
                                     :class="{
             'bg-teal-700':
                 $page.component === 'Services/Index'
@@ -161,7 +169,8 @@ onMounted(() => {
                                 Services</Link>
                             </li>
                             <li>
-                                <Link :href="route('resources.index')" class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
+                                <Link :href="route('resources.index')"
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
                                     :class="{
             'bg-teal-700':
                 $page.component === 'Resources/Index'
@@ -169,7 +178,8 @@ onMounted(() => {
                                 Resources</Link>
                             </li>
                             <li class="relative group">
-                                <a class="text-white cursor-pointer hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg" :class="{
+                                <a class="text-white cursor-pointer hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
+                                    :class="{
             'bg-teal-700':
                 $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index'
         }">Committees</a>
@@ -219,7 +229,8 @@ onMounted(() => {
                             </li>
                             <li>
                                 <Link :href="route('contact.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap" :class="{
+                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap"
+                                    :class="{
             'bg-teal-700':
                 $page.component === 'Contact/Index'
         }">
@@ -238,7 +249,7 @@ onMounted(() => {
                 class="fixed sm:hidden border border-teal-700 top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto bg-teal-800">
                 <div class="flex justify-between">
                     <img src="/images/logo.png" class="w-12 h-auto -mt-2" alt="Barangay Logo" />
-                    
+
                     <button @click="sidebar = false" type="button"
                         class="text-white bg-transparent hover:bg-teal-700 rounded-lg border border-teal-600 shadow-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center">
                         <svg aria-hidden="true" class="w-6 h-auto" fill="white" viewBox="0 0 20 20"
@@ -446,7 +457,7 @@ onMounted(() => {
                         <h2 class="title-font text-center font-medium text-gray-900 tracking-widest text-2xl mb-3">Be
                             part of our
                             community</h2>
-                        <div class="bg-white flex flex-col px-3 py-2 rounded-lg border border-teal-600 shadow-lg">
+                        <div class="bg-white flex flex-col px-3 py-2 rounded-lg shadow-lg">
                             <div class="relative mb-4">
                                 <label for="name" class="leading-7 text-sm text-black">Name</label>
                                 <input type="text" id="name" name="name"
@@ -474,7 +485,7 @@ onMounted(() => {
                 <div class="px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
                     <a
                         class="flex gap-x-2 title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                        <img src="/images/poblacion-logo.svg" class="w-14 h-auto" alt="Barangay Logo" />
+                        <ApplicationLogo class="w-14 h-auto" />
                         <div class="flex flex-col gap-y-1 text-sm text-white">
                             <span>Copyright © 2024 Barangay Poblacion Valencia City</span>
                             <span>Developed by Johnny Ermio</span>
@@ -533,19 +544,13 @@ onMounted(() => {
 }
 
 .sidebar-enter-from,
-.sidebar-leave-to
-
-/* starting and ending state of the transition */
-    {
+.sidebar-leave-to {
     opacity: 0;
     transform: translateX(-100%);
 }
 
 .sidebar-enter-to,
-.sidebar-leave-from
-
-/* ending and starting state of the transition */
-    {
+.sidebar-leave-from {
     opacity: 1;
     transform: translateX(0);
 }
