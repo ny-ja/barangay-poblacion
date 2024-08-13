@@ -54,7 +54,7 @@ onMounted(() => {
     <div class="container">
         <div
             class="bg-center bg-no-repeat bg-[url('/images/admin-building.webp')] absolute w-[100vw] h-[100vh] top-0 left-0 bg-teal-800 bg-blend-multiply flex flex-col items-center justify-center">
-            <h1 class="text-white text-center text-4xl mb-4 animate-fade-in-down">Welcome to Barangay Poblacion!</h1>
+            <h1 class="text-white text-center text-xl md:text-2xl lg:text-4xl mb-4 animate-fade-in-down">Welcome to Barangay Poblacion!</h1>
             <Link :href="route('home')" class="animate-fade-in-up">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white"
                 class="size-8">

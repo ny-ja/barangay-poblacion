@@ -243,7 +243,6 @@ onMounted(() => {
             </nav>
         </div>
 
-        <!-- drawer component -->
         <Transition name="sidebar">
             <div v-if="sidebar"
                 class="fixed sm:hidden border border-teal-700 top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto bg-teal-800">
@@ -519,23 +518,6 @@ onMounted(() => {
     100% {
         left: 100%;
     }
-}
-
-.header-enter-active,
-.header-leave-active {
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.header-enter-from,
-.header-leave-to {
-    transform: translateY(-100%);
-    opacity: 0;
-}
-
-.header-enter-to,
-.header-leave-from {
-    transform: translateY(0);
-    opacity: 1;
 }
 
 .sidebar-enter-active,
