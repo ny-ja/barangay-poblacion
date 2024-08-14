@@ -15,7 +15,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\AgricultureController;
 use App\Http\Controllers\PeaceAndOrderController;
+use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\HealthAndNutritionController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -45,9 +47,18 @@ Route::middleware([
 
     Route::get('/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::post('/users', [UserController::class, 'store'])->name('admin.users.store');
-    Route::get('/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+    Route::get('/news-categories', [NewsCategoryController::class, 'index'])->name('admin.news-categories.index');
+    Route::post('/news-categories', [NewsCategoryController::class, 'store'])->name('admin.news-categories.store');
+    Route::put('/news-categories/{category}', [NewsCategoryController::class, 'update'])->name('admin.news-categories.update');
+    Route::delete('/news-categories/{category}', [NewsCategoryController::class, 'destroy'])->name('admin.news-categories.destroy');
+
+    Route::get('/news', [AdminNewsController::class, 'index'])->name('admin.news.index');
+    Route::post('/news', [AdminNewsController::class, 'store'])->name('admin.news.store');
+    Route::put('/news/{news}', [AdminNewsController::class, 'update'])->name('admin.news.update');
+    Route::delete('/news/{news}', [AdminNewsController::class, 'destroy'])->name('admin.news.destroy');
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

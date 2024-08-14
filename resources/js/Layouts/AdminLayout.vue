@@ -76,6 +76,28 @@ const logout = () => {
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
                                 </Link>
                             </li>
+                            <li>
+                                <Link :href="route('admin.news-categories.index')"
+                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
+                                    :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/NewsCategories/Index'
+    }">
+                                <Icon name="group" :stroke="'white'" />
+                                <span :class="{ 'lg:hidden': !isSidebarOpen }">News Categories</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link :href="route('admin.news.index')"
+                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
+                                    :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/News/Index'
+    }">
+                                <Icon name="group" :stroke="'white'" />
+                                <span :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
                     <!-- Sidebar footer -->

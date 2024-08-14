@@ -17,11 +17,11 @@ class UserController extends Controller
         $search = $request->input('search');
 
         $users = User::whereNot('email', 'admin@admin.admin')
-                    ->when($search, function ($query, $search) {
-                        return $query->where('name', 'like', '%' . $search . '%');
-                    })
-                    ->latest()
-                    ->paginate(5);
+            ->when($search, function ($query, $search) {
+                return $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->latest()
+            ->paginate(5);
 
         return Inertia::render('Admin/Users/Index', [
             'users' => $users,

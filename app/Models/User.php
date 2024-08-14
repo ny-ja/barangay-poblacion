@@ -59,4 +59,14 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function newsCategory(){
+        
+        return $this->hasMany(NewsCategory::class);
+    }
+
+    public function news(){
+        
+        return $this->hasMany(News::class);
+    }
 }
