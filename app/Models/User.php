@@ -65,6 +65,21 @@ class User extends Authenticatable
         return $this->hasMany(NewsCategory::class);
     }
 
+    public function documentCategory(){
+        
+        return $this->hasMany(DocumentCategory::class);
+    }
+
+    public function documentType(){
+        
+        return $this->hasMany(DocumentType::class);
+    }
+
+    public function document(){
+        
+        return $this->hasMany(Document::class);
+    }
+
     public function news(){
         
         return $this->hasMany(News::class);

@@ -6,7 +6,7 @@ import Pagination from '@/Components/Pagination.vue';
 import Drawer from '@/Components/Drawer.vue';
 import { Inertia } from '@inertiajs/inertia';
 
-const props = defineProps(['categories']);
+const props = defineProps(['types']);
 
 const isDrawerOpen = ref(false);
 const isEditMode = ref(false);
@@ -23,16 +23,16 @@ function openDrawerForCreate() {
     isDrawerOpen.value = true;
 }
 
-function openDrawerForEdit(category) {
-    form.id = category.id;
-    form.name = category.name;
+function openDrawerForEdit(type) {
+    form.id = type.id;
+    form.name = type.name;
     isEditMode.value = true;
     isDrawerOpen.value = true;
 }
 
 function submit() {
     if (isEditMode.value) {
-        form.put(route('admin.news-categories.update', form.id), {
+        form.put(route('admin.document-types.update', form.id), {
             onSuccess: () => {
                 form.reset();
                 isDrawerOpen.value = false;
@@ -49,7 +49,7 @@ function submit() {
             },
         });
     } else {
-        form.post(route('admin.news-categories.store'), {
+        form.post(route('admin.document-types.store'), {
             onSuccess: () => {
                 form.reset();
                 isDrawerOpen.value = false;
@@ -68,14 +68,14 @@ function submit() {
     }
 }
 
-const deleteCategory = (categoryId) => {
-    if (confirm('Are you sure you want to delete this category?')) {
-        Inertia.delete(route('admin.news-categories.destroy', categoryId), {
+const deleteType = (typeId) => {
+    if (confirm('Are you sure you want to delete this type?')) {
+        Inertia.delete(route('admin.document-types.destroy', typeId), {
             onSuccess: () => {
-                alert('Category deleted successfully.');
+                alert('Type deleted successfully.');
             },
             onError: (error) => {
-                alert('Failed to delete category. Please try again.');
+                alert('Failed to delete type. Please try again.');
                 console.error(error);
             },
         });
@@ -85,10 +85,10 @@ const deleteCategory = (categoryId) => {
 
 
 <template>
-    <AdminLayout title="News Categories">
+    <AdminLayout title="Document types">
         <div
             class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-            <h1 class="text-2xl font-semibold whitespace-nowrap">News Categories</h1>
+            <h1 class="text-2xl font-semibold whitespace-nowrap">Document types</h1>
             <button @click="openDrawerForCreate"
                 class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
                 <span>
@@ -97,7 +97,7 @@ const deleteCategory = (categoryId) => {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                 </span>
-                <span>Add Category</span>
+                <span>Add type</span>
             </button>
         </div>
 
@@ -117,15 +117,15 @@ const deleteCategory = (categoryId) => {
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="category in categories.data" :key="category.id"
+                                <tr v-for="type in types.data" :key="type.id"
                                     class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ category.name }}</div>
+                                        <div class="text-sm text-gray-500">{{ type.name }}</div>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <button @click="openDrawerForEdit(category)"
+                                        <button @click="openDrawerForEdit(type)"
                                             class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                        <button @click="deleteCategory(category.id)"
+                                        <button @click="deleteType(type.id)"
                                             class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                                     </td>
                                 </tr>
@@ -136,11 +136,11 @@ const deleteCategory = (categoryId) => {
             </div>
 
             <!-- Pagination Component -->
-            <Pagination :pagination="categories" />
+            <Pagination :pagination="types" />
         </div>
         <Drawer :isOpen="isDrawerOpen" @close="isDrawerOpen = false">
             <template #title>
-                {{ isEditMode ? 'Edit News Category' : 'Create News Category' }}
+                {{ isEditMode ? 'Edit document type' : 'Create document type' }}
             </template>
             <template #content>
                 <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">

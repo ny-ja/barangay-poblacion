@@ -32,7 +32,7 @@ function openDrawerForEdit(category) {
 
 function submit() {
     if (isEditMode.value) {
-        form.put(route('admin.news-categories.update', form.id), {
+        form.put(route('admin.document-categories.update', form.id), {
             onSuccess: () => {
                 form.reset();
                 isDrawerOpen.value = false;
@@ -49,7 +49,7 @@ function submit() {
             },
         });
     } else {
-        form.post(route('admin.news-categories.store'), {
+        form.post(route('admin.document-categories.store'), {
             onSuccess: () => {
                 form.reset();
                 isDrawerOpen.value = false;
@@ -70,7 +70,7 @@ function submit() {
 
 const deleteCategory = (categoryId) => {
     if (confirm('Are you sure you want to delete this category?')) {
-        Inertia.delete(route('admin.news-categories.destroy', categoryId), {
+        Inertia.delete(route('admin.document-categories.destroy', categoryId), {
             onSuccess: () => {
                 alert('Category deleted successfully.');
             },
@@ -85,10 +85,10 @@ const deleteCategory = (categoryId) => {
 
 
 <template>
-    <AdminLayout title="News Categories">
+    <AdminLayout title="Document Categories">
         <div
             class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-            <h1 class="text-2xl font-semibold whitespace-nowrap">News Categories</h1>
+            <h1 class="text-2xl font-semibold whitespace-nowrap">Document Categories</h1>
             <button @click="openDrawerForCreate"
                 class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
                 <span>
@@ -140,7 +140,7 @@ const deleteCategory = (categoryId) => {
         </div>
         <Drawer :isOpen="isDrawerOpen" @close="isDrawerOpen = false">
             <template #title>
-                {{ isEditMode ? 'Edit News Category' : 'Create News Category' }}
+                {{ isEditMode ? 'Edit document Category' : 'Create document Category' }}
             </template>
             <template #content>
                 <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">

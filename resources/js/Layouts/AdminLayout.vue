@@ -83,7 +83,7 @@ const logout = () => {
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/NewsCategories/Index'
     }">
-                                <Icon name="group" :stroke="'white'" />
+                                <Icon name="category" :stroke="'white'" />
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }">News Categories</span>
                                 </Link>
                             </li>
@@ -94,8 +94,41 @@ const logout = () => {
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/News/Index'
     }">
-                                <Icon name="group" :stroke="'white'" />
+                                <Icon name="newspaper" :stroke="'white'" />
                                 <span :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link :href="route('admin.document-categories.index')"
+                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
+                                    :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/DocumentCategories/Index'
+    }">
+                                <Icon name="category" :stroke="'white'" />
+                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Categories</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link :href="route('admin.document-types.index')"
+                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
+                                    :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/DocumentTypes/Index'
+    }">
+                                <Icon name="category" :stroke="'white'" />
+                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Types</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link :href="route('admin.documents.index')"
+                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
+                                    :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/Documents/Index'
+    }">
+                                <Icon name="folder" :stroke="'white'" />
+                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Documents</span>
                                 </Link>
                             </li>
                         </ul>

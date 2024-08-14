@@ -3,26 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NewsCategoryRequest;
 use App\Models\NewsCategory;
 
 class NewsCategoryController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->input('search');
-
-        $categories = NewsCategory::when($search, function ($query, $search) {
-                        return $query->where('name', 'like', '%' . $search . '%');
-                    })
-                    ->latest()
-                    ->paginate(5);
+        $categories = NewsCategory::latest()->paginate(5);
 
         return Inertia::render('Admin/NewsCategories/Index', [
             'categories' => $categories,
-            'filters' => $request->only(['search'])
         ]);
     }
 

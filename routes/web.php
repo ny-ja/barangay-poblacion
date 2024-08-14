@@ -15,8 +15,11 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\AgricultureController;
 use App\Http\Controllers\PeaceAndOrderController;
+use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\DocumentTypeController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\HealthAndNutritionController;
+use App\Http\Controllers\Admin\DocumentCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 Route::get('/', function () {
@@ -59,6 +62,21 @@ Route::middleware([
     Route::post('/news', [AdminNewsController::class, 'store'])->name('admin.news.store');
     Route::put('/news/{news}', [AdminNewsController::class, 'update'])->name('admin.news.update');
     Route::delete('/news/{news}', [AdminNewsController::class, 'destroy'])->name('admin.news.destroy');
+
+    Route::get('/document-categories', [DocumentCategoryController::class, 'index'])->name('admin.document-categories.index');
+    Route::post('/document-categories', [DocumentCategoryController::class, 'store'])->name('admin.document-categories.store');
+    Route::put('/document-categories/{category}', [DocumentCategoryController::class, 'update'])->name('admin.document-categories.update');
+    Route::delete('/document-categories/{category}', [DocumentCategoryController::class, 'destroy'])->name('admin.document-categories.destroy');
+
+    Route::get('/document-types', [DocumentTypeController::class, 'index'])->name('admin.document-types.index');
+    Route::post('/document-types', [DocumentTypeController::class, 'store'])->name('admin.document-types.store');
+    Route::put('/document-types/{type}', [DocumentTypeController::class, 'update'])->name('admin.document-types.update');
+    Route::delete('/document-types/{type}', [DocumentTypeController::class, 'destroy'])->name('admin.document-types.destroy');
+
+    Route::get('/documents', [DocumentController::class, 'index'])->name('admin.documents.index');
+    Route::post('/documents', [DocumentController::class, 'store'])->name('admin.documents.store');
+    Route::put('/documents/{document}', [DocumentController::class, 'update'])->name('admin.documents.update');
+    Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('admin.documents.destroy');
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
