@@ -84,4 +84,9 @@ class User extends Authenticatable
         
         return $this->hasMany(News::class);
     }
+
+    public function barangayOfficial(){
+        
+        return $this->hasMany(BarangayOfficial::class);
+    }
 }

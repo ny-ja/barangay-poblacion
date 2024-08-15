@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\DocumentTypeController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\HealthAndNutritionController;
+use App\Http\Controllers\Admin\BarangayOfficialController;
 use App\Http\Controllers\Admin\DocumentCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
@@ -77,6 +78,11 @@ Route::middleware([
     Route::post('/documents', [DocumentController::class, 'store'])->name('admin.documents.store');
     Route::put('/documents/{document}', [DocumentController::class, 'update'])->name('admin.documents.update');
     Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->name('admin.documents.destroy');
+
+    Route::get('/barangay-officials', [BarangayOfficialController::class, 'index'])->name('admin.barangay-officials.index');
+    Route::post('/barangay-officials', [BarangayOfficialController::class, 'store'])->name('admin.barangay-officials.store');
+    Route::put('/barangay-officials/{official}', [BarangayOfficialController::class, 'update'])->name('admin.barangay-officials.update');
+    Route::delete('/barangay-officials/{official}', [BarangayOfficialController::class, 'destroy'])->name('admin.barangay-officials.destroy');
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

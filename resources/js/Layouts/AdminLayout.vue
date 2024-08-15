@@ -123,6 +123,16 @@ const logout = () => {
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Documents</span>
                             </Link>
                         </li>
+                        <li>
+                            <Link :href="route('admin.barangay-officials.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/BarangayOfficials/Index'
+    }">
+                            <Icon name="folder" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Officials</span>
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
                 <!-- Sidebar footer -->
@@ -227,9 +237,6 @@ const logout = () => {
 
                 <!-- Main content -->
                 <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
-                    <!-- <div v-if="$page.props.flash.success" class="text-green-500">
-                        {{ $page.props.flash.success }}
-                    </div> -->
                     <slot />
 
                 </main>

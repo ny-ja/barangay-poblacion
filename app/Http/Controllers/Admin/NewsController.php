@@ -41,7 +41,7 @@ class NewsController extends Controller
         
         $request->user()->news()->create($validatedData);
 
-        return redirect();
+        return redirect()->back();
     }
 
     public function update(UpdateNewsRequest $request, News $news)
