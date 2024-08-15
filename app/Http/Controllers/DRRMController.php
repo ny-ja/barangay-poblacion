@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
+use App\Models\Document;
+use App\Models\DocumentType;
 
 class DRRMController extends Controller
 {
-    public function index(){
-        return Inertia::render('DRRM/Index');
+    public function index()
+    {
+        $documentTypes = DocumentType::all();
+
+        $documents = Document::with('documentCategory', 'documentType')
+            ->where('document_category_id', 4)
+            ->latest()
+            ->paginate(6);
+
+        return Inertia::render('DRRM/Index', [
+            'documents' => $documents,
+            'documentTypes' => $documentTypes,
+        ]);
     }
 }

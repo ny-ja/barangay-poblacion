@@ -3,22 +3,16 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import Icon from '@/Components/Icon.vue';
 import { ref } from "vue";
 
+const props = defineProps(['documents', 'documentTypes']);
+
 const isFirstTab = ref(true);
 const isSecondTab = ref(false);
 
-const files = ref([
-    { id: 1, title: "Dummy file 1", pdfUrl: "/pdfs/pdf1.pdf" },
-    { id: 2, title: "Dummy file 2", pdfUrl: "/pdfs/pdf2.pdf" },
-    { id: 3, title: "Dummy file 3", pdfUrl: "/pdfs/pdf3.pdf" },
-    { id: 1, title: "Dummy file 4", pdfUrl: "/pdfs/pdf4.pdf" },
-    { id: 2, title: "Dummy file 5", pdfUrl: "/pdfs/pdf5.pdf" },
-    { id: 3, title: "Dummy file 6", pdfUrl: "/pdfs/pdf6.pdf" },
-]);
-
-const downloadPDF = (url) => {
+const downloadPDF = (filePath) => {
+    const url = encodeURI(`/storage/${filePath}`);
     const link = document.createElement('a');
     link.href = url;
-    link.download = url.substring(url.lastIndexOf('/') + 1);
+    link.download = filePath.substring(filePath.lastIndexOf('/') + 1);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -375,58 +369,60 @@ const downloadPDF = (url) => {
                             Support and Funding
                         </button>
                     </div>
-                    <div v-if="isFirstTab" class="px-5 mx-auto">
+                    <div v-if="isFirstTab" class="px-5">
                         <div class="flex flex-wrap -m-4">
-                            <div class="p-4 md:w-1/3" v-for="file in files" :key="file.id">
-                                <div
-                                    class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
-                                    <iframe class="w-full h-auto border rounded-md" :src="file.pdfUrl"
-                                        frameborder="0"></iframe>
-                                    <div class="flex justify-between items-center pt-4">
-                                        <div class="flex gap-3">
-                                            <button
-                                                class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
-                                                <Icon name="view" :classes="'size-4'" :fill="'white'" />
-                                            </button>
-                                            <button @click="downloadPDF(file.pdfUrl)"
-                                                class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
-                                                <Icon name="download" :classes="'size-4'" :fill="'white'" />
-                                            </button>
+                            <temmplate v-for="document in documents.data" :key="document.id">
+                                <div v-if="document.document_type.name == 'Educational Materials'" class="p-4 md:1/3">
+                                    <div
+                                        class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
+                                        <iframe class="w-full h-auto border rounded-md"
+                                            :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
+                                        <div class="flex justify-between items-center pt-4">
+                                            <div class="flex gap-3">
+                                                <button
+                                                    class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
+                                                    <Icon name="view" :classes="'size-4'" :fill="'white'" />
+                                                </button>
+                                                <button @click="downloadPDF(document.file_path)"
+                                                    class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
+                                                    <Icon name="download" :classes="'size-4'" :fill="'white'" />
+                                                </button>
+                                            </div>
+                                            <h1 class="title-font text-lg font-medium text-gray-900 mb-0">
+                                                {{ document.name }}
+                                            </h1>
                                         </div>
-
-                                        <h1 class="title-font text-lg font-medium text-gray-900 mb-0">
-                                            {{ file.title }}
-                                        </h1>
                                     </div>
                                 </div>
-                            </div>
+                            </temmplate>
                         </div>
                     </div>
-                    <div v-if="isSecondTab" class="px-5 mx-auto">
+                    <div v-if="isSecondTab" class="px-5">
                         <div class="flex flex-wrap -m-4">
-                            <div class="p-4 md:w-1/3" v-for="file in files" :key="file.id">
-                                <div
-                                    class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
-                                    <iframe class="w-full h-auto border rounded-md" :src="file.pdfUrl"
-                                        frameborder="0"></iframe>
-                                    <div class="flex justify-between items-center pt-4">
-                                        <div class="flex gap-3">
-                                            <button
-                                                class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
-                                                <Icon name="view" :classes="'size-4'" :fill="'white'" />
-                                            </button>
-                                            <button @click="downloadPDF(file.pdfUrl)"
-                                                class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
-                                                <Icon name="download" :classes="'size-4'" :fill="'white'" />
-                                            </button>
+                            <temmplate v-for="document in documents.data" :key="document.id">
+                                <div v-if="document.document_type.name == 'Support and Funding'" class="p-4 md:1/3">
+                                    <div
+                                        class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
+                                        <iframe class="w-full h-auto border rounded-md"
+                                            :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
+                                        <div class="flex justify-between items-center pt-4">
+                                            <div class="flex gap-3">
+                                                <button
+                                                    class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
+                                                    <Icon name="view" :classes="'size-4'" :fill="'white'" />
+                                                </button>
+                                                <button @click="downloadPDF(document.file_path)"
+                                                    class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
+                                                    <Icon name="download" :classes="'size-4'" :fill="'white'" />
+                                                </button>
+                                            </div>
+                                            <h1 class="title-font text-lg font-medium text-gray-900 mb-0">
+                                                {{ document.name }}
+                                            </h1>
                                         </div>
-
-                                        <h1 class="title-font text-lg font-medium text-gray-900 mb-0">
-                                            {{ file.title }}
-                                        </h1>
                                     </div>
                                 </div>
-                            </div>
+                            </temmplate>
                         </div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@ class UserController extends Controller
             'profile_photo_path' => $path,
         ]);
 
-        return redirect()->back()->with('success', 'User created successfully.');
+        return redirect()->back();
     }
 
     public function update(UpdateUserRequest $request, User $user)
@@ -66,7 +66,7 @@ class UserController extends Controller
 
         $user->update($validatedData);
 
-        return redirect()->back()->with('success', 'User updated successfully.');
+        return redirect()->back();
     }
 
     public function destroy(User $user)
@@ -76,6 +76,6 @@ class UserController extends Controller
         }
         $user->delete();
 
-        return redirect()->back()->with('success', 'User deleted successfully.');
+        return redirect()->back();
     }
 }

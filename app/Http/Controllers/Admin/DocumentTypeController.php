@@ -12,7 +12,7 @@ class DocumentTypeController extends Controller
 {
     public function index()
     {
-        $types = DocumentType::latest()->paginate(5);
+        $types = DocumentType::orderBy('id', 'asc')->latest()->paginate(10);
 
         return Inertia::render('Admin/DocumentTypes/Index', [
             'types' => $types,
@@ -23,20 +23,20 @@ class DocumentTypeController extends Controller
     {
         $request->user()->documentType()->create($request->validated());
 
-        return redirect()->back()->with('success', 'Document Type added successfully.');
+        return redirect()->back();
     }
 
     public function update(DocumentTypeRequest $request, DocumentType $type){
 
         $type->update($request->validated());
 
-        return redirect()->back()->with('success', 'Document Type Updated Succesfully.');
+        return redirect()->back();
     }
 
     public function destroy(DocumentType $type)
     {
         $type->delete();
         
-        return redirect()->back()->with('success', 'Document Type deleted successfully.');
+        return redirect()->back();
     }
 }

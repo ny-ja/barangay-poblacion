@@ -41,7 +41,7 @@ class NewsController extends Controller
         
         $request->user()->news()->create($validatedData);
 
-        return redirect()->back()->with('success', 'News created successfully.');
+        return redirect();
     }
 
     public function update(UpdateNewsRequest $request, News $news)
@@ -59,7 +59,7 @@ class NewsController extends Controller
 
         $news->update($validatedData);
 
-        return redirect()->back()->with('success', 'News updated successfully.');
+        return redirect()->back();
     }
 
     public function destroy(News $news)
@@ -69,6 +69,6 @@ class NewsController extends Controller
         }
         $news->delete();
 
-        return redirect()->back()->with('success', 'News deleted successfully.');
+        return redirect()->back();
     }
 }

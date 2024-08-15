@@ -6,6 +6,8 @@ import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import Drawer from '@/Components/Drawer.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { toast } from "vue3-toastify";
+import 'vue3-toastify/dist/index.css';
 
 const props = defineProps(['documents', 'documentCategories', 'documentTypes', 'filters']);
 
@@ -50,6 +52,14 @@ function submit() {
         })).post(route('admin.documents.update', form.id), {
             forceFormData: true,
             onSuccess: () => {
+                toast("Document has been successfully updated!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -68,6 +78,14 @@ function submit() {
         form.post(route('admin.documents.store'), {
             forceFormData: true,
             onSuccess: () => {
+                toast("Document has been successfully created!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -89,7 +107,14 @@ const deleteDocument = (documentId) => {
     if (confirm('Are you sure you want to delete this document?')) {
         Inertia.delete(route('admin.documents.destroy', documentId), {
             onSuccess: () => {
-                alert('document deleted successfully.');
+                toast("Document has been successfully deleted!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
             },
             onError: (error) => {
                 alert('Failed to delete document. Please try again.');

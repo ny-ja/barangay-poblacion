@@ -27,130 +27,121 @@ const logout = () => {
     <div class="antialiased text-gray-900 bg-white">
         <div class="flex h-screen overflow-y-hidden bg-white">
             <!-- Sidebar -->
-            <Transition name="sidebar">
-                <aside
-                    class="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden transition-all transform bg-teal-800 shadow-lg lg:z-auto lg:static lg:shadow-none"
-                    :class="{
+            <aside
+                class="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden transition-all transform bg-teal-800 shadow-lg lg:z-auto lg:static lg:shadow-none"
+                :class="{
         '-translate-x-full lg:translate-x-0 lg:w-20':
             !isSidebarOpen,
     }">
-                    <!-- sidebar header -->
-                    <div class="flex items-center justify-between flex-shrink-0 p-2"
-                        :class="{ 'lg:justify-center': !isSidebarOpen }">
-                        <span
-                            class="flex flex-nowrap p-2 space-x-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
-                            <img src="/images/poblacion-logo.svg" class="w-12 h-auto -mt-2" alt="Barangay Logo" /><span
-                                class="tracking-tighter leading-none text-white"
-                                :class="{ 'lg:hidden': !isSidebarOpen }">Brgy.<br /> Poblacion</span>
-                        </span>
-                        <button @click="toggleSidbarMenu" class="p-2 rounded-md lg:hidden">
-                            <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                    <!-- Sidebar links -->
-                    <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
-                        <ul class="flex flex-col gap-y-1 p-2 overflow-hidden">
-                            <li>
-                                <Link :href="route('admin.index')"
-                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
-                                    :class="{
+                <!-- sidebar header -->
+                <div class="flex items-center justify-between flex-shrink-0 p-2"
+                    :class="{ 'lg:justify-center': !isSidebarOpen }">
+                    <span
+                        class="flex flex-nowrap p-2 space-x-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
+                        <img src="/images/poblacion-logo.svg" class="w-12 h-auto -mt-2" alt="Barangay Logo" /><span
+                            class="tracking-tighter leading-none text-white"
+                            :class="{ 'lg:hidden': !isSidebarOpen }">Brgy.<br /> Poblacion</span>
+                    </span>
+                    <button @click="toggleSidbarMenu" class="p-2 rounded-md lg:hidden">
+                        <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <!-- Sidebar links -->
+                <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
+                    <ul class="flex flex-col gap-y-1 p-2 overflow-hidden">
+                        <li>
+                            <Link :href="route('admin.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/Index'
     }">
-                                <Icon name="home" :stroke="'white'" />
-                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link :href="route('admin.users.index')"
-                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
-                                    :class="{
+                            <Icon name="home" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('admin.users.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/Users/Index'
     }">
-                                <Icon name="group" :stroke="'white'" />
-                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link :href="route('admin.news-categories.index')"
-                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
-                                    :class="{
+                            <Icon name="group" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('admin.news-categories.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/NewsCategories/Index'
     }">
-                                <Icon name="category" :stroke="'white'" />
-                                <span :class="{ 'lg:hidden': !isSidebarOpen }">News Categories</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link :href="route('admin.news.index')"
-                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
-                                    :class="{
+                            <Icon name="category" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">News Categories</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('admin.news.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/News/Index'
     }">
-                                <Icon name="newspaper" :stroke="'white'" />
-                                <span :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link :href="route('admin.document-categories.index')"
-                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
-                                    :class="{
+                            <Icon name="newspaper" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('admin.document-categories.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/DocumentCategories/Index'
     }">
-                                <Icon name="category" :stroke="'white'" />
-                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Categories</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link :href="route('admin.document-types.index')"
-                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
-                                    :class="{
+                            <Icon name="category" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Categories</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('admin.document-types.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/DocumentTypes/Index'
     }">
-                                <Icon name="category" :stroke="'white'" />
-                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Types</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link :href="route('admin.documents.index')"
-                                    class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700"
-                                    :class="{
+                            <Icon name="category" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Types</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link :href="route('admin.documents.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
         'justify-center': !isSidebarOpen, 'bg-teal-700':
             $page.component === 'Admin/Documents/Index'
     }">
-                                <Icon name="folder" :stroke="'white'" />
-                                <span :class="{ 'lg:hidden': !isSidebarOpen }">Documents</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </nav>
-                    <!-- Sidebar footer -->
-                    <div class="flex-shrink-0 p-2 max-h-14">
-                        <button
-                            class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider uppercase bg-gray-100 border rounded-md focus:outline-none focus:ring">
-                            <span>
-                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                                </svg>
-                            </span>
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">
-                                Logout
-                            </span>
-                        </button>
-                    </div>
-                </aside>
-            </Transition>
+                            <Icon name="folder" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Documents</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- Sidebar footer -->
+                <div class="flex-shrink-0 p-2 max-h-14">
+                    <button
+                        class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider uppercase bg-gray-100 border rounded-md focus:outline-none focus:ring">
+                        <span>
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                        </span>
+                        <span :class="{ 'lg:hidden': !isSidebarOpen }">
+                            Logout
+                        </span>
+                    </button>
+                </div>
+            </aside>
 
             <div class="flex flex-col flex-1 h-full overflow-hidden">
                 <header class="flex-shrink-0 border-b">
@@ -236,9 +227,9 @@ const logout = () => {
 
                 <!-- Main content -->
                 <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
-                    <div v-if="$page.props.flash.success" class="text-green-500">
+                    <!-- <div v-if="$page.props.flash.success" class="text-green-500">
                         {{ $page.props.flash.success }}
-                    </div>
+                    </div> -->
                     <slot />
 
                 </main>
@@ -246,15 +237,3 @@ const logout = () => {
         </div>
     </div>
 </template>
-
-<style scoped>
-.sidebar-enter-active,
-.sidebar-leave-active {
-    transition: transform 0.3s ease;
-}
-
-.sidebar-enter,
-.sidebar-leave-to {
-    transform: translateX(-100%);
-}
-</style>

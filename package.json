@@ -21,6 +21,7 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
         "gsap": "^3.12.5",
-        "moment": "^2.30.1"
+        "moment": "^2.30.1",
+        "vue3-toastify": "^0.2.1"
     }
 }

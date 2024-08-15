@@ -44,7 +44,7 @@ class DocumentController extends Controller
         
         $request->user()->document()->create($validatedData);
 
-        return redirect()->back()->with('success', 'Document created successfully.');
+        return redirect()->back();
     }
 
     public function update(UpdateDocumentRequest $request, Document $document)
@@ -62,7 +62,7 @@ class DocumentController extends Controller
 
         $document->update($validatedData);
 
-        return redirect()->back()->with('success', 'Document updated successfully.');
+        return redirect()->back();
     }
 
     public function destroy(Document $document)
@@ -72,6 +72,6 @@ class DocumentController extends Controller
         }
         $document->delete();
 
-        return redirect()->back()->with('success', 'Document deleted successfully.');
+        return redirect()->back();
     }
 }

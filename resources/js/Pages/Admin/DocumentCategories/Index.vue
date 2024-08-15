@@ -5,6 +5,8 @@ import { useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import Drawer from '@/Components/Drawer.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { toast } from "vue3-toastify";
+import 'vue3-toastify/dist/index.css';
 
 const props = defineProps(['categories']);
 
@@ -34,6 +36,14 @@ function submit() {
     if (isEditMode.value) {
         form.put(route('admin.document-categories.update', form.id), {
             onSuccess: () => {
+                toast("Document category has been successfully updated!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -51,6 +61,14 @@ function submit() {
     } else {
         form.post(route('admin.document-categories.store'), {
             onSuccess: () => {
+                toast("Document category has been successfully created!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -72,7 +90,14 @@ const deleteCategory = (categoryId) => {
     if (confirm('Are you sure you want to delete this category?')) {
         Inertia.delete(route('admin.document-categories.destroy', categoryId), {
             onSuccess: () => {
-                alert('Category deleted successfully.');
+                toast("Document category has been successfully deleted!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
             },
             onError: (error) => {
                 alert('Failed to delete category. Please try again.');
@@ -82,7 +107,6 @@ const deleteCategory = (categoryId) => {
     }
 };
 </script>
-
 
 <template>
     <AdminLayout title="Document Categories">
@@ -110,7 +134,10 @@ const deleteCategory = (categoryId) => {
                                 <tr>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Name</th>
+                                        Document Category Name</th>
+                                    <th scope="col"
+                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                        Document Category ID</th>
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Actions</span>
                                     </th>
@@ -119,6 +146,9 @@ const deleteCategory = (categoryId) => {
                             <tbody class="bg-white divide-y divide-gray-200">
                                 <tr v-for="category in categories.data" :key="category.id"
                                     class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">{{ category.id }}</div>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-500">{{ category.name }}</div>
                                     </td>
@@ -166,6 +196,5 @@ const deleteCategory = (categoryId) => {
                 </div>
             </template>
         </Drawer>
-
     </AdminLayout>
 </template>

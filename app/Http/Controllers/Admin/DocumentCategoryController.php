@@ -11,7 +11,7 @@ class DocumentCategoryController extends Controller
 {
     public function index()
     {
-        $categories = DocumentCategory::latest()->paginate(5);
+        $categories = DocumentCategory::orderBy('id', 'asc')->latest()->paginate(10);
 
         return Inertia::render('Admin/DocumentCategories/Index', [
             'categories' => $categories,
@@ -22,20 +22,20 @@ class DocumentCategoryController extends Controller
     {
         $request->user()->documentCategory()->create($request->validated());
 
-        return redirect()->back()->with('success', 'Document Category added successfully.');
+        return redirect()->back();
     }
 
     public function update(DocumentCategoryRequest $request, DocumentCategory $category){
 
         $category->update($request->validated());
 
-        return redirect()->back()->with('success', 'Document Category Updated Succesfully.');
+        return redirect()->back();
     }
 
     public function destroy(DocumentCategory $category)
     {
         $category->delete();
         
-        return redirect()->back()->with('success', 'Document Category deleted successfully.');
+        return redirect()->back();
     }
 }

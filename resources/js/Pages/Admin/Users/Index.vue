@@ -6,6 +6,8 @@ import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import Drawer from '@/Components/Drawer.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { toast } from "vue3-toastify";
+import 'vue3-toastify/dist/index.css';
 
 const props = defineProps(['users', 'filters']);
 
@@ -49,6 +51,14 @@ function submit() {
         })).post(route('admin.users.update', form.id), {
             forceFormData: true,
             onSuccess: () => {
+                toast("User has been successfully updated!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -67,6 +77,14 @@ function submit() {
         form.post(route('admin.users.store'), {
             forceFormData: true,
             onSuccess: () => {
+                toast("User has been successfully created!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -88,7 +106,14 @@ const deleteUser = (userId) => {
     if (confirm('Are you sure you want to delete this user?')) {
         Inertia.delete(route('admin.users.destroy', userId), {
             onSuccess: () => {
-                alert('User deleted successfully.');
+                toast("User has been successfully deleted!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
             },
             onError: (error) => {
                 alert('Failed to delete user. Please try again.');

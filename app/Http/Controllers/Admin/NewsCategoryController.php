@@ -11,7 +11,7 @@ class NewsCategoryController extends Controller
 {
     public function index()
     {
-        $categories = NewsCategory::latest()->paginate(5);
+        $categories = NewsCategory::orderBy('id', 'asc')->latest()->paginate(10);
 
         return Inertia::render('Admin/NewsCategories/Index', [
             'categories' => $categories,
@@ -22,20 +22,20 @@ class NewsCategoryController extends Controller
     {
         $request->user()->newsCategory()->create($request->validated());
 
-        return redirect()->back()->with('success', 'News Category added successfully.');
+        return redirect()->back();
     }
 
     public function update(NewsCategoryRequest $request, NewsCategory $category){
 
         $category->update($request->validated());
 
-        return redirect()->back()->with('success', 'News Category Updated Succesfully.');
+        return redirect()->back();
     }
 
     public function destroy(NewsCategory $category)
     {
         $category->delete();
         
-        return redirect()->back()->with('success', 'News Category deleted successfully.');
+        return redirect()->back();
     }
 }

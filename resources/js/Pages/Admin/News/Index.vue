@@ -6,6 +6,8 @@ import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import Drawer from '@/Components/Drawer.vue';
 import { Inertia } from '@inertiajs/inertia';
+import { toast } from "vue3-toastify";
+import 'vue3-toastify/dist/index.css';
 
 const props = defineProps(['news', 'newsCategories', 'filters']);
 
@@ -50,6 +52,14 @@ function submit() {
         })).post(route('admin.news.update', form.id), {
             forceFormData: true,
             onSuccess: () => {
+                toast("News has been successfully updated!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -68,6 +78,14 @@ function submit() {
         form.post(route('admin.news.store'), {
             forceFormData: true,
             onSuccess: () => {
+                toast("News has been successfully created!", {
+                    "type": "success",
+                    "position": "bottom-right",
+                    "autoClose": 1000,
+                    "hideProgressBar": true,
+                    "transition": "flip",
+                    "dangerouslyHTMLString": true
+                })
                 form.reset();
                 isDrawerOpen.value = false;
             },
@@ -89,7 +107,14 @@ const deleteNews = (newsId) => {
     if (confirm('Are you sure you want to delete this news?')) {
         Inertia.delete(route('admin.news.destroy', newsId), {
             onSuccess: () => {
-                alert('News deleted successfully.');
+                toast("News has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
             },
             onError: (error) => {
                 alert('Failed to delete news. Please try again.');
