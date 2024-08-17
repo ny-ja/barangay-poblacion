@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\CommitteeMember;
+use App\Models\CommitteeDocument;
 
 class PeaceAndOrderController extends Controller
 {
@@ -14,13 +15,13 @@ class PeaceAndOrderController extends Controller
         $documentTypes = DocumentType::all();
         $members = CommitteeMember::with('committee')->get();
 
-        $documents = Document::with('documentCategory', 'documentType')
-            ->where('document_category_id', 7)
+        $committeeDocuments = CommitteeDocument::with('committee', 'documentType')
+            ->where('committee_id', 5)
             ->latest()
             ->paginate(6);
 
         return Inertia::render('PeaceAndOrder/Index', [
-            'documents' => $documents,
+            'committeeDocuments' => $committeeDocuments,
             'members' => $members,
             'documentTypes' => $documentTypes,
         ]);

@@ -22,4 +22,9 @@ class DocumentType extends Model
         
         return $this->hasMany(Document::class);
     }
+
+    public function committeeDocument(){
+        
+        return $this->hasMany(CommitteeDocument::class);
+    }
 }

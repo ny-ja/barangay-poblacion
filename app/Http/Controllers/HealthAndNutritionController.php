@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Document;
 use App\Models\DocumentType;
 use App\Models\CommitteeMember;
+use App\Models\CommitteeDocument;
 
 class HealthAndNutritionController extends Controller
 {
@@ -14,13 +15,13 @@ class HealthAndNutritionController extends Controller
         $documentTypes = DocumentType::all();
         $members = CommitteeMember::with('committee')->get();
 
-        $documents = Document::with('documentCategory', 'documentType')
-            ->where('document_category_id', 6)
+        $committeeDocuments = CommitteeDocument::with('committee', 'documentType')
+            ->where('committee_id', 4)
             ->latest()
             ->paginate(6);
 
         return Inertia::render('HealthAndNutrition/Index', [
-            'documents' => $documents,
+            'committeeDocuments' => $committeeDocuments,
             'members' => $members,
             'documentTypes' => $documentTypes,
         ]);

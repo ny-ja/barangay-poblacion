@@ -99,4 +99,9 @@ class User extends Authenticatable
         
         return $this->hasMany(CommitteeMember::class);
     }
+
+    public function committeeDocument(){
+        
+        return $this->hasMany(CommitteeDocument::class);
+    }
 }

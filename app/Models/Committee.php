@@ -27,4 +27,9 @@ class Committee extends Model
         
         return $this->hasMany(CommitteeMember::class);
     }
+
+    public function committeeDocument(){
+        
+        return $this->hasMany(CommitteeDocument::class);
+    }
 }
