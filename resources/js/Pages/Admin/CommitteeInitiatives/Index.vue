@@ -9,7 +9,7 @@ import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 
-const props = defineProps(['members', 'committees', 'filters']);
+const props = defineProps(['initiatives', 'committees', 'filters']);
 
 const isDrawerOpen = ref(false);
 const isEditMode = ref(false);
@@ -19,16 +19,17 @@ const form = useForm({
     id: null,
     user_id: '',
     committee_id: '',
-    full_name: '',
-    position: '',
+    title: '',
+    description: '',
     start_date: '',
     end_date: '',
-    contact_number: '',
-    email: '',
-    address: '',
-    role: '',
-    profile: '',
-    member_photo: null,
+    status: '',
+    budget: '',
+    source: '',
+    beneficiaries: '',
+    contact_person: '',
+    remarks: '',
+    initiative_photo: null,
 
 });
 
@@ -38,25 +39,26 @@ function openDrawerForCreate() {
     isDrawerOpen.value = true;
 }
 
-function openDrawerForEdit(member) {
-    form.id = member.id;
-    form.committee_id = member.committee_id,
-    form.full_name = member.full_name;
-    form.position = member.position;
-    form.start_date = member.start_date;
-    form.end_date = member.end_date;
-    form.contact_number = member.contact_number;
-    form.email = member.email;
-    form.address = member.address;
-    form.role = member.role;
-    form.profile = member.profile;
-    form.member_photo = null;
+function openDrawerForEdit(initiative) {
+    form.id = initiative.id;
+    form.committee_id = initiative.committee_id,
+    form.title = initiative.title;
+    form.description = initiative.description;
+    form.start_date = initiative.start_date;
+    form.end_date = initiative.end_date;
+    form.status = initiative.status;
+    form.budget = initiative.budget;
+    form.source = initiative.source;
+    form.beneficiaries = initiative.beneficiaries;
+    form.contact_person = initiative.contact_person;
+    form.remarks = initiative.remarks;
+    form.initiative_photo = null;
     isEditMode.value = true;
     isDrawerOpen.value = true;
 }
 
 function handleFileChange(event) {
-    form.member_photo = event.target.files[0];
+    form.initiative_photo = event.target.files[0];
 }
 
 function submit() {
@@ -64,10 +66,10 @@ function submit() {
         form.transform((data) => ({
             ...data,
             _method: 'PUT',
-        })).post(route('admin.committee-members.update', form.id), {
+        })).post(route('admin.committee-initiatives.update', form.id), {
             forceFormData: true,
             onSuccess: () => {
-                toast("Committee Member has been successfully updated!", {
+                toast("Committee Initiative has been successfully updated!", {
                     "type": "success",
                     "position": "bottom-right",
                     "autoClose": 1000,
@@ -90,10 +92,10 @@ function submit() {
             },
         });
     } else {
-        form.post(route('admin.committee-members.store'), {
+        form.post(route('admin.committee-initiatives.store'), {
             forceFormData: true,
             onSuccess: () => {
-                toast("Committee Member has been successfully created!", {
+                toast("Committee Initiative has been successfully created!", {
                     "type": "success",
                     "position": "bottom-right",
                     "autoClose": 1000,
@@ -118,11 +120,11 @@ function submit() {
     }
 }
 
-const deleteMember = (memberId) => {
-    if (confirm('Are you sure you want to delete this member?')) {
-        Inertia.delete(route('admin.committee-members.destroy', memberId), {
+const deleteInitiative = (initiativeId) => {
+    if (confirm('Are you sure you want to delete this initiative?')) {
+        Inertia.delete(route('admin.committee-initiatives.destroy', initiativeId), {
             onSuccess: () => {
-                toast("Committee member has been successfully deleted!", {
+                toast("Committee initiative has been successfully deleted!", {
                     "type": "success",
                     "position": "bottom-right",
                     "autoClose": 1000,
@@ -132,7 +134,7 @@ const deleteMember = (memberId) => {
                 })
             },
             onError: (error) => {
-                alert('Failed to delete news. Please try again.');
+                alert('Failed to delete initiative. Please try again.');
                 console.error(error);
             },
         });
@@ -142,10 +144,10 @@ const deleteMember = (memberId) => {
 
 
 <template>
-    <AdminLayout title="Committee Members">
+    <AdminLayout title="Committee Initiatives">
         <div
             class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-            <h1 class="text-2xl font-semibold whitespace-nowrap">Committee Members</h1>
+            <h1 class="text-2xl font-semibold whitespace-nowrap">Committee Initiatives</h1>
             <button @click="openDrawerForCreate"
                 class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
                 <span>
@@ -154,13 +156,13 @@ const deleteMember = (memberId) => {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                 </span>
-                <span>Add Member</span>
+                <span>Add Initiative</span>
             </button>
         </div>
 
         <!-- Search Form -->
         <div class="mt-4">
-            <SearchForm :filters="filters" routeName="admin.committee-members.index" />
+            <SearchForm :filters="filters" routeName="admin.committee-initiatives.index" />
         </div>
 
         <div class="flex flex-col mt-6">
@@ -172,50 +174,50 @@ const deleteMember = (memberId) => {
                                 <tr>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Full Name</th>
+                                        Title</th>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Contact</th>
+                                        Description</th>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Email</th>
+                                        Contact Person</th>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Address</th>
+                                        Status</th>
                                     <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="member in members.data" :key="member.id"
+                                <tr v-for="initiative in initiatives.data" :key="initiative.id"
                                     class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 w-10 h-10">
-                                                <img :src="`/storage/${member.member_photo_path}`" alt="Member Photo"
-                                                    class="w-10 h-10 rounded-full" v-if="member.member_photo_path" />
+                                                <img :src="`/storage/${initiative.initiative_photo_path}`" alt="initiative Photo"
+                                                    class="w-10 h-10 rounded-full" v-if="initiative.initiative_photo_path" />
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ member.full_name }}
+                                                <div class="text-sm font-medium text-gray-900">{{ initiative.title }}
                                                 </div>
-                                                <div class="text-sm text-gray-500">{{ member.committee.name }}</div>
+                                                <div class="text-sm text-gray-500">{{ initiative.committee.name }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-500">{{ member.contact_number }}</div>
+                                        <div class="text-sm text-gray-500">{{ initiative.description }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ member.email }}</div>
+                                        <div class="text-sm text-gray-500">{{ initiative.contact_person }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ member.address }}</div>
+                                        <div class="text-sm text-gray-500">{{ initiative.status }}</div>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <button @click="openDrawerForEdit(member)"
+                                        <button @click="openDrawerForEdit(initiative)"
                                             class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                        <button @click="deleteMember(member.id)"
+                                        <button @click="deleteInitiative(initiative.id)"
                                             class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                                     </td>
                                 </tr>
@@ -226,11 +228,11 @@ const deleteMember = (memberId) => {
             </div>
 
             <!-- Pagination Component -->
-            <Pagination :pagination="members" />
+            <Pagination :pagination="initiatives" />
         </div>
         <Drawer :isOpen="isDrawerOpen" @close="isDrawerOpen = false">
             <template #title>
-                {{ isEditMode ? 'Edit Member' : 'Create Member' }}
+                {{ isEditMode ? 'Edit Initiative' : 'Create Initiative' }}
             </template>
             <template #content>
                 <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
@@ -239,11 +241,11 @@ const deleteMember = (memberId) => {
                             {{ errorMessage }}
                         </div>
                         <div>
-                            <label for="full_name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                            <input type="text" v-model="form.full_name" id="full_name"
+                            <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                            <input type="text" v-model="form.title" id="title"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                            <div v-if="form.errors.full_name" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.full_name }}
+                            <div v-if="form.errors.title" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.title }}
                             </div>
                         </div>
                         <div>
@@ -259,14 +261,11 @@ const deleteMember = (memberId) => {
                             </div>
                         </div>
                         <div>
-                            <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
-                            <select v-model="form.position" id="position"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="Committee Chairman/Chairwoman">Committee Chairman/Chairwoman</option>
-                                <option value="Committee Member">Committee Member</option>
-                            </select>
-                            <div v-if="form.errors.position" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.position }}
+                            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                            <textarea type="text" v-model="form.description" id="description"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                            <div v-if="form.errors.description" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.description }}
                             </div>
                         </div>
                         <div>
@@ -286,57 +285,63 @@ const deleteMember = (memberId) => {
                             </div>
                         </div>
                         <div>
-                            <label for="contact_number" class="block text-sm font-medium text-gray-700">Contact
-                                Number</label>
-                            <input type="text" v-model="form.contact_number" id="contact_number"
+                            <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                            <input type="text" v-model="form.status" id="status"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.contact_number" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.contact_number }}
+                            <div v-if="form.errors.status" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.status }}
                             </div>
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" v-model="form.email" id="email"
+                            <label for="budget" class="block text-sm font-medium text-gray-700">budget</label>
+                            <input type="number" v-model="form.budget" id="budget"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.email" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.email }}
+                            <div v-if="form.errors.budget" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.budget }}
                             </div>
                         </div>
                         <div>
-                            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                            <input type="text" v-model="form.address" id="address"
+                            <label for="source" class="block text-sm font-medium text-gray-700">Source</label>
+                            <input type="text" v-model="form.source" id="source"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.address" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.address }}
+                            <div v-if="form.errors.source" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.source }}
                             </div>
                         </div>
                         <div>
-                            <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
-                            <input type="text" v-model="form.role" id="role"
+                            <label for="beneficiaries" class="block text-sm font-medium text-gray-700">Beneficiaries</label>
+                            <input type="text" v-model="form.beneficiaries" id="beneficiaries"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.role" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.role }}
+                            <div v-if="form.errors.beneficiaries" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.beneficiaries }}
                             </div>
                         </div>
                         <div>
-                            <label for="profile" class="block text-sm font-medium text-gray-700">Biographical
-                                Sketch</label>
-                            <textarea type="text" v-model="form.profile" id="profile"
+                            <label for="contact_person" class="block text-sm font-medium text-gray-700">Contact Person</label>
+                            <input type="text" v-model="form.contact_person" id="contact_person"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
+                            <div v-if="form.errors.contact_person" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.contact_person }}
+                            </div>
+                        </div>
+                        <div>
+                            <label for="remarks" class="block text-sm font-medium text-gray-700">Remarks</label>
+                            <textarea type="text" v-model="form.remarks" id="remarks"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-                            <div v-if="form.errors.profile" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.profile }}
+                            <div v-if="form.errors.remarks" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.remarks }}
                             </div>
                         </div>
                         <div>
-                            <label for="member_photo" class="block text-sm font-medium text-gray-700">Committee Member
+                            <label for="initiative_photo" class="block text-sm font-medium text-gray-700">Committee Initiative
                                 Photo</label>
-                            <input type="file" @change="handleFileChange" id="member_photo"
+                            <input type="file" @change="handleFileChange" id="initiative_photo"
                                 class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
-                            <div v-if="form.errors.member_photo" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.member_photo }}
+                            <div v-if="form.errors.initiative_photo" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.initiative_photo }}
                             </div>
                         </div>
                         <div class="flex justify-end">

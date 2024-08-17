@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\CommitteeMemberController;
 use App\Http\Controllers\Admin\BarangayOfficialController;
 use App\Http\Controllers\Admin\DocumentCategoryController;
 use App\Http\Controllers\Admin\CommitteeDocumentController;
+use App\Http\Controllers\Admin\CommitteeInitiativeController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 
 Route::get('/', function () {
@@ -101,6 +102,11 @@ Route::middleware([
     Route::post('/committee-documents', [CommitteeDocumentController::class, 'store'])->name('admin.committee-documents.store');
     Route::put('/committee-documents/{committeeDocument}', [CommitteeDocumentController::class, 'update'])->name('admin.committee-documents.update');
     Route::delete('/committee-documents/{committeeDocument}', [CommitteeDocumentController::class, 'destroy'])->name('admin.committee-documents.destroy');
+
+    Route::get('/committee-initiatives', [CommitteeInitiativeController::class, 'index'])->name('admin.committee-initiatives.index');
+    Route::post('/committee-initiatives', [CommitteeInitiativeController::class, 'store'])->name('admin.committee-initiatives.store');
+    Route::put('/committee-initiatives/{initiative}', [CommitteeInitiativeController::class, 'update'])->name('admin.committee-initiatives.update');
+    Route::delete('/committee-initiatives/{initiative}', [CommitteeInitiativeController::class, 'destroy'])->name('admin.committee-initiatives.destroy');
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

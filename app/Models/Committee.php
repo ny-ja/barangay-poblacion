@@ -32,4 +32,9 @@ class Committee extends Model
         
         return $this->hasMany(CommitteeDocument::class);
     }
+
+    public function committeeInitiative(){
+        
+        return $this->hasMany(CommitteeInitiative::class);
+    }
 }

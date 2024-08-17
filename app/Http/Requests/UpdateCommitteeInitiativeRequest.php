@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCommitteeRequest extends FormRequest
+class UpdateCommitteeInitiativeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,18 @@ class StoreCommitteeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:100',
-            'committee_profile' => 'required|string',
+            'committee_id' => 'required|exists:committees,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
-            'contact_number' => 'required|string|max:25',
-            'committee_profile_photo_path' => 'required|image',
+            'status' => 'required|string',
+            'budget' => 'required|numeric',
+            'source' => 'nullable|string',
+            'beneficiaries' => 'nullable|string',
+            'contact_person' => 'nullable|string',
+            'remarks' => 'nullable|string',
+            'initiative_photo' => 'nullable|image',
         ];
     }
 }

@@ -3,7 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import Icon from '@/Components/Icon.vue';
 import { ref } from "vue";
 
-const props = defineProps(['committeeDocuments', 'members', 'documentTypes']);
+const props = defineProps(['committeeDocuments', 'initiatives', 'members', 'documentTypes']);
 
 const isFirstTab = ref(true);
 const isSecondTab = ref(false);
@@ -117,61 +117,35 @@ const downloadPDF = (filePath) => {
                     <h1 class="text-2xl w-full border-b mb-12 uppercase">Disaster Risk Reduction Management Programs
                     </h1>
                     <div class="flex flex-wrap -m-4">
-                        <div class="p-4 md:w-1/3">
+                        <div v-for="initiative in initiatives.data" :key="initiative.id" class="p-4 md:w-1/3">
                             <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                                 <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                                    src="/images/drrm-programs.webp" alt="drrm programs" />
+                                    :src="`/storage/${initiative.initiative_photo_path}`" alt="initiatives" />
                                 <div class="p-6">
                                     <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                        DRRM INITIATIVE
+                                        {{ initiative.committee.name }}
                                     </h2>
                                     <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                                        Emergency Response Training
+                                        {{ initiative.title }}
                                     </h1>
                                     <p class="leading-relaxed mb-3">
-                                        Participate in our comprehensive emergency response training session this
-                                        Sunday. Equip yourself with the skills to respond effectively to disasters.
+                                        {{ initiative.description }}
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 md:w-1/3">
-                            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                                    src="/images/drrm-programs.webp" alt="drrm programs" />
-                                <div class="p-6">
-                                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                        AWARENESS CAMPAIGN
-                                    </h2>
-                                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                                        Disaster Preparedness Workshop
-                                    </h1>
-                                    <p class="leading-relaxed mb-3">
-                                        Join our workshop to learn about disaster preparedness and resilience. Ensure
-                                        your family's safety by being well-prepared for any emergency.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 md:w-1/3">
-                            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                                    src="/images/drrm-programs.webp" alt="drrm programs" />
-                                <div class="p-6">
-                                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                        COMMUNITY MEETING
-                                    </h2>
-                                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                                        Town Hall Meeting
-                                    </h1>
-                                    <p class="leading-relaxed mb-3">
-                                        Attend the barangay-wide town hall meeting to discuss disaster risk reduction
-                                        projects and community concerns. Your participation is crucial!
-                                    </p>
+                                    <div class="flex items-center flex-wrap justify-end">
+                                        <a class="text-teal-800 inline-flex items-center md:mb-2 lg:mb-0">View
+                                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor"
+                                                stroke-width="2" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M5 12h14"></path>
+                                                <path d="M12 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <Pagination :pagination="initiatives" />
                 </div>
             </section>
             <section class="text-gray-600 body-font">
@@ -193,7 +167,8 @@ const downloadPDF = (filePath) => {
                     <div v-if="isFirstTab" class="px-5">
                         <div class="flex flex-wrap -m-4">
                             <temmplate v-for="committeeDocument in committeeDocuments.data" :key="committeeDocument.id">
-                                <div v-if="committeeDocument.document_type.name == 'Educational Materials'" class="p-4 md:1/3">
+                                <div v-if="committeeDocument.document_type.name == 'Educational Materials'"
+                                    class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
                                         <iframe class="w-full h-auto border rounded-md"
@@ -221,7 +196,8 @@ const downloadPDF = (filePath) => {
                     <div v-if="isSecondTab" class="px-5">
                         <div class="flex flex-wrap -m-4">
                             <temmplate v-for="committeeDocument in committeeDocuments.data" :key="committeeDocument.id">
-                                <div v-if="committeeDocument.document_type.name == 'Support and Funding'" class="p-4 md:1/3">
+                                <div v-if="committeeDocument.document_type.name == 'Support and Funding'"
+                                    class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
                                         <iframe class="w-full h-auto border rounded-md"
