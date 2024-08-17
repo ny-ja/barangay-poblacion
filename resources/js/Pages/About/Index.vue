@@ -1,5 +1,7 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
+
+const props = defineProps(['officials']);
 </script>
 <template>
     <AppLayout title="About us">
@@ -66,8 +68,8 @@ import AppLayout from "@/Layouts/AppLayout.vue";
             <section class="text-gray-600 body-font">
                 <div class="mx-auto flex px-5 py-16 items-center justify-center flex-col">
                     <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Barangay Officials</h1>
-                    <img class="w-3/4 mb-10 object-cover object-center rounded"
-                        alt="Barangay Officials" src="/images/officials.webp">
+                    <img class="w-3/4 mb-10 object-cover object-center rounded" alt="Barangay Officials"
+                        src="/images/officials.webp">
                     <div class="text-center lg:w-3/4 w-full text-lg">
                         <p class="mb-8 leading-relaxed text-justify indent-12">The barangay officials play a pivotal
                             role in
@@ -93,28 +95,24 @@ import AppLayout from "@/Layouts/AppLayout.vue";
             </section>
 
             <section class="text-gray-600 body-font">
-                <div class="mx-auto flex px-5 py-16 md:flex-row flex-col items-center  bg-teal-800">
-                    <div
-                        class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col text-white md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-                        <h1 class="title-font border-b w-full sm:text-4xl text-3xl mb-4 font-medium">Barangay Captain
-                            Juan
-                            Dela Cruz</h1>
-                        <p class="mb-8 text-xl leading-relaxed text-justify">Barangay Captain Juan Dela Cruz has been a
-                            dedicated leader in
-                            our community for over a decade. Known for his unwavering commitment to public service,
-                            Captain Juan has initiated numerous community programs aimed at improving local
-                            infrastructure, health services, and educational opportunities. Under his leadership, the
-                            barangay has seen significant advancements in peace and order, as well as economic
-                            development. Captain Juan is also highly respected for his ability to resolve disputes and
-                            his proactive approach in addressing the needs and concerns of the residents. His vision and
-                            dedication continue to inspire and drive positive change within our community.</p>
+                <template v-for="official in officials" :key="official.id">
+                    <div v-if="official.position === 'Barangay Captain'"
+                        class="mx-auto flex px-5 py-16 md:flex-row flex-col items-center bg-teal-800">
+                        <div
+                            class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col text-white md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                            <h1 class="title-font border-b w-full sm:text-4xl text-3xl mb-4 font-medium">
+                                {{ official.full_name }}
+                            </h1>
+                            <p class="mb-8 text-xl leading-relaxed text-justify">{{ official.profile }}</p>
+                        </div>
+                        <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                            <img class="object-cover object-center rounded" :alt="`Captain ${official.full_name}`"
+                                :src="`/storage/${official.photo_path}`">
+                        </div>
                     </div>
-                    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-                        <img class="object-cover object-center rounded" alt="Captain Juan Dela Cruz"
-                            src="/images/captain.webp">
-                    </div>
-                </div>
+                </template>
             </section>
+
 
             <section class="text-gray-600 body-font">
                 <div class="px-5 py-16 mx-auto">
@@ -128,227 +126,50 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                             for the development and well-being of the barangay.</p>
                     </div>
                     <div class="flex flex-wrap -m-4">
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/man.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Juan Dela Cruz</h2>
-                                    <h3 class="text-gray-500 mb-3">Community Organizer</h3>
-                                    <p class="mb-4">Juan Dela Cruz has been instrumental in organizing community
-                                        programs that promote health, safety, and environmental sustainability. His
-                                        efforts in mobilizing resources and volunteers have greatly benefited the
-                                        barangay.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
+                        <template v-for="official in officials" :key="official.id">
+                            <div v-if="official.position == 'Barangay Kagawad'" class="p-4 lg:w-1/2">
+                                <div
+                                    class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                                    <img class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
+                                        :src="`/storage/${official.photo_path}`" alt="Official photo">
+                                    <div class="flex-grow sm:pl-8">
+                                        <h2 class="title-font font-medium text-lg text-gray-900">{{ official.full_name
+                                            }}</h2>
+                                        <h3 class="text-gray-500 mb-3">{{ official.role }}</h3>
+                                        <p class="mb-4">{{ official.profile }}</p>
+                                        <span class="inline-flex">
+                                            <a class="text-gray-500">
+                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                            <a class="ml-2 text-gray-500">
+                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                            <a class="ml-2 text-gray-500">
+                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/woman.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Maria Santos</h2>
-                                    <h3 class="text-gray-500 mb-3">Education Advocate</h3>
-                                    <p class="mb-4">Maria Santos focuses on improving educational opportunities for the
-                                        youth in the barangay. She has spearheaded numerous initiatives to provide
-                                        scholarships, enhance school facilities, and promote literacy programs.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/man.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Carlos Reyes</h2>
-                                    <h3 class="text-gray-500 mb-3">Health Advocate</h3>
-                                    <p class="mb-4">Carlos Reyes is dedicated to promoting health and wellness in the
-                                        barangay. He has organized medical missions, vaccination drives, and fitness
-                                        programs to ensure the well-being of the community.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/woman.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Anna Mendoza</h2>
-                                    <h3 class="text-gray-500 mb-3">Youth Coordinator</h3>
-                                    <p class="mb-4">Anna Mendoza is passionate about empowering the youth in the
-                                        barangay. She has established various youth programs that focus on leadership,
-                                        skills development, and community service.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/man.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Luis Rivera</h2>
-                                    <h3 class="text-gray-500 mb-3">Disaster Response Officer</h3>
-                                    <p class="mb-4">Luis Rivera is responsible for coordinating disaster response and
-                                        preparedness efforts in the barangay. His proactive measures have ensured the
-                                        safety and resilience of the community during emergencies.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </section>
@@ -360,227 +181,50 @@ import AppLayout from "@/Layouts/AppLayout.vue";
                             Kabataan</h1>
                     </div>
                     <div class="flex flex-wrap -m-4">
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/man.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Juan Dela Cruz</h2>
-                                    <h3 class="text-gray-500 mb-3">Community Organizer</h3>
-                                    <p class="mb-4">Juan Dela Cruz has been instrumental in organizing community
-                                        programs that promote health, safety, and environmental sustainability. His
-                                        efforts in mobilizing resources and volunteers have greatly benefited the
-                                        barangay.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
+                        <template v-for="official in officials" :key="official.id">
+                            <div v-if="official.position == 'SK Kagawad' || official.position == 'SK Chairman/Chairwoman'" class="p-4 lg:w-1/2">
+                                <div
+                                    class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                                    <img class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
+                                        :src="`/storage/${official.photo_path}`" alt="Official photo">
+                                    <div class="flex-grow sm:pl-8">
+                                        <h2 class="title-font font-medium text-lg text-gray-900">{{ official.full_name
+                                            }}</h2>
+                                        <h3 class="text-gray-500 mb-3">{{ official.role }}</h3>
+                                        <p class="mb-4">{{ official.profile }}</p>
+                                        <span class="inline-flex">
+                                            <a class="text-gray-500">
+                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                            <a class="ml-2 text-gray-500">
+                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                            <a class="ml-2 text-gray-500">
+                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
+                                                    </path>
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/woman.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Maria Santos</h2>
-                                    <h3 class="text-gray-500 mb-3">Education Advocate</h3>
-                                    <p class="mb-4">Maria Santos focuses on improving educational opportunities for the
-                                        youth in the barangay. She has spearheaded numerous initiatives to provide
-                                        scholarships, enhance school facilities, and promote literacy programs.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/man.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Carlos Reyes</h2>
-                                    <h3 class="text-gray-500 mb-3">Health Advocate</h3>
-                                    <p class="mb-4">Carlos Reyes is dedicated to promoting health and wellness in the
-                                        barangay. He has organized medical missions, vaccination drives, and fitness
-                                        programs to ensure the well-being of the community.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/woman.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Anna Mendoza</h2>
-                                    <h3 class="text-gray-500 mb-3">Youth Coordinator</h3>
-                                    <p class="mb-4">Anna Mendoza is passionate about empowering the youth in the
-                                        barangay. She has established various youth programs that focus on leadership,
-                                        skills development, and community service.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 lg:w-1/2">
-                            <div
-                                class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
-                                <img alt="team"
-                                    class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
-                                    src="/images/man.webp">
-                                <div class="flex-grow sm:pl-8">
-                                    <h2 class="title-font font-medium text-lg text-gray-900">Luis Rivera</h2>
-                                    <h3 class="text-gray-500 mb-3">Disaster Response Officer</h3>
-                                    <p class="mb-4">Luis Rivera is responsible for coordinating disaster response and
-                                        preparedness efforts in the barangay. His proactive measures have ensured the
-                                        safety and resilience of the community during emergencies.</p>
-                                    <span class="inline-flex">
-                                        <a class="text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a class="ml-2 text-gray-500">
-                                            <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                viewBox="0 0 24 24">
-                                                <path
-                                                    d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        </template>
                     </div>
                 </div>
             </section>

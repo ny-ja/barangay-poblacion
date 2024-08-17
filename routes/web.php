@@ -16,9 +16,11 @@ use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\AgricultureController;
 use App\Http\Controllers\PeaceAndOrderController;
 use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\CommitteeController;
 use App\Http\Controllers\Admin\DocumentTypeController;
 use App\Http\Controllers\Admin\NewsCategoryController;
 use App\Http\Controllers\HealthAndNutritionController;
+use App\Http\Controllers\Admin\CommitteeMemberController;
 use App\Http\Controllers\Admin\BarangayOfficialController;
 use App\Http\Controllers\Admin\DocumentCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
@@ -83,6 +85,16 @@ Route::middleware([
     Route::post('/barangay-officials', [BarangayOfficialController::class, 'store'])->name('admin.barangay-officials.store');
     Route::put('/barangay-officials/{official}', [BarangayOfficialController::class, 'update'])->name('admin.barangay-officials.update');
     Route::delete('/barangay-officials/{official}', [BarangayOfficialController::class, 'destroy'])->name('admin.barangay-officials.destroy');
+
+    Route::get('/committees', [CommitteeController::class, 'index'])->name('admin.committees.index');
+    Route::post('/committees', [CommitteeController::class, 'store'])->name('admin.committees.store');
+    Route::put('/committees/{committee}', [CommitteeController::class, 'update'])->name('admin.committees.update');
+    Route::delete('/committees/{committee}', [CommitteeController::class, 'destroy'])->name('admin.committees.destroy');
+
+    Route::get('/committee-members', [CommitteeMemberController::class, 'index'])->name('admin.committee-members.index');
+    Route::post('/committee-members', [CommitteeMemberController::class, 'store'])->name('admin.committee-members.store');
+    Route::put('/committee-members/{member}', [CommitteeMemberController::class, 'update'])->name('admin.committee-members.update');
+    Route::delete('/committee-members/{member}', [CommitteeMemberController::class, 'destroy'])->name('admin.committee-members.destroy');
 });
 
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

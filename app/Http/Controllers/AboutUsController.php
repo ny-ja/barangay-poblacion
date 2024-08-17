@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangayOfficial;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
 {
-    public function index(){
-        return Inertia::render('About/Index');
+    public function index()
+    {
+        $officials = BarangayOfficial::all();
+
+        return Inertia::render('About/Index', [
+            'officials' => $officials,
+        ]);
     }
 }

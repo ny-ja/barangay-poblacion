@@ -29,6 +29,8 @@ class UpdateOfficialRequest extends FormRequest
             'end_date' => 'nullable|date',
             'contact_number' => 'required|string|max:25',
             'email' => 'required|string|email|max:255|unique:barangay_officials,email,' . $officialId,
+            'role' => 'nullable|string',
+            'profile' => 'nullable|string',
             'address' => 'required|string',
             'photo_path' => 'nullable|image',
         ];

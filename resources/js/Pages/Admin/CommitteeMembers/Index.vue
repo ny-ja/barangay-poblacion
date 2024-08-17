@@ -9,7 +9,7 @@ import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 
-const props = defineProps(['officials', 'filters']);
+const props = defineProps(['members', 'committees', 'filters']);
 
 const isDrawerOpen = ref(false);
 const isEditMode = ref(false);
@@ -18,6 +18,7 @@ const errorMessage = ref('');
 const form = useForm({
     id: null,
     user_id: '',
+    committee_id: '',
     full_name: '',
     position: '',
     start_date: '',
@@ -27,8 +28,8 @@ const form = useForm({
     address: '',
     role: '',
     profile: '',
-    official_photo: null,
-    
+    member_photo: null,
+
 });
 
 function openDrawerForCreate() {
@@ -37,24 +38,25 @@ function openDrawerForCreate() {
     isDrawerOpen.value = true;
 }
 
-function openDrawerForEdit(official) {
-    form.id = official.id;
-    form.full_name = official.full_name;
-    form.position = official.position;
-    form.start_date = official.start_date;
-    form.end_date = official.end_date;
-    form.contact_number = official.contact_number;
-    form.email = official.email;
-    form.address = official.address;
-    form.role = official.role;
-    form.profile = official.profile;
-    form.official_photo = null;
+function openDrawerForEdit(member) {
+    form.id = member.id;
+    form.committee_id = member.committee_id,
+        form.full_name = member.full_name;
+    form.position = member.position;
+    form.start_date = member.start_date;
+    form.end_date = member.end_date;
+    form.contact_number = member.contact_number;
+    form.email = member.email;
+    form.address = member.address;
+    form.role = member.role;
+    form.profile = member.profile;
+    form.member_photo = null;
     isEditMode.value = true;
     isDrawerOpen.value = true;
 }
 
 function handleFileChange(event) {
-    form.official_photo = event.target.files[0];
+    form.member_photo = event.target.files[0];
 }
 
 function submit() {
@@ -62,10 +64,10 @@ function submit() {
         form.transform((data) => ({
             ...data,
             _method: 'PUT',
-        })).post(route('admin.barangay-officials.update', form.id), {
+        })).post(route('admin.committee-members.update', form.id), {
             forceFormData: true,
             onSuccess: () => {
-                toast("Barangay Official has been successfully updated!", {
+                toast("Committee Member has been successfully updated!", {
                     "type": "success",
                     "position": "bottom-right",
                     "autoClose": 1000,
@@ -88,10 +90,10 @@ function submit() {
             },
         });
     } else {
-        form.post(route('admin.barangay-officials.store'), {
+        form.post(route('admin.committee-members.store'), {
             forceFormData: true,
             onSuccess: () => {
-                toast("Barangay Official has been successfully created!", {
+                toast("Committee Member has been successfully created!", {
                     "type": "success",
                     "position": "bottom-right",
                     "autoClose": 1000,
@@ -116,11 +118,11 @@ function submit() {
     }
 }
 
-const deleteNews = (officialId) => {
-    if (confirm('Are you sure you want to delete this official?')) {
-        Inertia.delete(route('admin.barangay-officials.destroy', officialId), {
+const deleteMember = (memberId) => {
+    if (confirm('Are you sure you want to delete this member?')) {
+        Inertia.delete(route('admin.committee-members.destroy', memberId), {
             onSuccess: () => {
-                toast("Barangay Official has been successfully deleted!", {
+                toast("Committee member has been successfully deleted!", {
                     "type": "success",
                     "position": "bottom-right",
                     "autoClose": 1000,
@@ -140,10 +142,10 @@ const deleteNews = (officialId) => {
 
 
 <template>
-    <AdminLayout title="Barangay Officials">
+    <AdminLayout title="Committee Members">
         <div
             class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-            <h1 class="text-2xl font-semibold whitespace-nowrap">Barangay Officials</h1>
+            <h1 class="text-2xl font-semibold whitespace-nowrap">Committee Members</h1>
             <button @click="openDrawerForCreate"
                 class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
                 <span>
@@ -152,13 +154,13 @@ const deleteNews = (officialId) => {
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                 </span>
-                <span>Add Official</span>
+                <span>Add Member</span>
             </button>
         </div>
 
         <!-- Search Form -->
         <div class="mt-4">
-            <SearchForm :filters="filters" routeName="admin.barangay-officials.index" />
+            <SearchForm :filters="filters" routeName="admin.committee-members.index" />
         </div>
 
         <div class="flex flex-col mt-6">
@@ -186,33 +188,34 @@ const deleteNews = (officialId) => {
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="official in officials.data" :key="official.id"
+                                <tr v-for="member in members.data" :key="member.id"
                                     class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 w-10 h-10">
-                                                <img :src="`/storage/${official.photo_path}`" alt="Official Photo"
-                                                    class="w-10 h-10 rounded-full" v-if="official.photo_path" />
+                                                <img :src="`/storage/${member.member_photo_path}`" alt="Member Photo"
+                                                    class="w-10 h-10 rounded-full" v-if="member.member_photo_path" />
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ official.full_name }}</div>
-                                                <div class="text-sm text-gray-500">{{ official.position }}</div>
+                                                <div class="text-sm font-medium text-gray-900">{{ member.full_name }}
+                                                </div>
+                                                <div class="text-sm text-gray-500">{{ member.committee.name }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-500">{{ official.contact_number }}</div>
+                                        <div class="text-sm text-gray-500">{{ member.contact_number }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ official.email }}</div>
+                                        <div class="text-sm text-gray-500">{{ member.email }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ official.address }}</div>
+                                        <div class="text-sm text-gray-500">{{ member.address }}</div>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <button @click="openDrawerForEdit(official)"
+                                        <button @click="openDrawerForEdit(member)"
                                             class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                        <button @click="deleteNews(official.id)"
+                                        <button @click="deleteMember(member.id)"
                                             class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                                     </td>
                                 </tr>
@@ -223,11 +226,11 @@ const deleteNews = (officialId) => {
             </div>
 
             <!-- Pagination Component -->
-            <Pagination :pagination="officials" />
+            <Pagination :pagination="members" />
         </div>
         <Drawer :isOpen="isDrawerOpen" @close="isDrawerOpen = false">
             <template #title>
-                {{ isEditMode ? 'Edit Official' : 'Create Official' }}
+                {{ isEditMode ? 'Edit Member' : 'Create Member' }}
             </template>
             <template #content>
                 <div class="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
@@ -244,13 +247,23 @@ const deleteNews = (officialId) => {
                             </div>
                         </div>
                         <div>
+                            <label for="committee_id" class="block text-sm font-medium text-gray-700">Committee</label>
+                            <select v-model="form.committee_id" id="committee"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                <option v-for="committee in committees" :value="committee.id">
+                                    {{ committee.name }}
+                                </option>
+                            </select>
+                            <div v-if="form.errors.committee_id" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.committee_id }}
+                            </div>
+                        </div>
+                        <div>
                             <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
                             <select v-model="form.position" id="position"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                <option value="Barangay Captain">Barangay Captain</option>
-                                <option value="Barangay Kagawad">Barangay Kagawad</option>
-                                <option value="SK Chairman/Chairwoman">SK Chairman/Chairwoman</option>
-                                <option value="SK Kagawad">SK Kagawad</option>
+                                <option value="Committee Chairman/Chairwoman">Committee Chairman/Chairwoman</option>
+                                <option value="Committee Member">Committee Member</option>
                             </select>
                             <div v-if="form.errors.position" class="text-red-500 text-sm mt-1">
                                 {{ form.errors.position }}
@@ -273,7 +286,8 @@ const deleteNews = (officialId) => {
                             </div>
                         </div>
                         <div>
-                            <label for="contact_number" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                            <label for="contact_number" class="block text-sm font-medium text-gray-700">Contact
+                                Number</label>
                             <input type="text" v-model="form.contact_number" id="contact_number"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
                             <div v-if="form.errors.contact_number" class="text-red-500 text-sm mt-1">
@@ -305,7 +319,8 @@ const deleteNews = (officialId) => {
                             </div>
                         </div>
                         <div>
-                            <label for="profile" class="block text-sm font-medium text-gray-700">Biographical Sketch</label>
+                            <label for="profile" class="block text-sm font-medium text-gray-700">Biographical
+                                Sketch</label>
                             <textarea type="text" v-model="form.profile" id="profile"
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                             <div v-if="form.errors.profile" class="text-red-500 text-sm mt-1">
@@ -313,15 +328,15 @@ const deleteNews = (officialId) => {
                             </div>
                         </div>
                         <div>
-                            <label for="official_photo" class="block text-sm font-medium text-gray-700">Official
+                            <label for="member_photo" class="block text-sm font-medium text-gray-700">Committee Member
                                 Photo</label>
-                            <input type="file" @change="handleFileChange" id="official_photo"
+                            <input type="file" @change="handleFileChange" id="member_photo"
                                 class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
-                            <div v-if="form.errors.official_photo" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.official_photo }}
+                            <div v-if="form.errors.member_photo" class="text-red-500 text-sm mt-1">
+                                {{ form.errors.member_photo }}
                             </div>
                         </div>
                         <div class="flex justify-end">

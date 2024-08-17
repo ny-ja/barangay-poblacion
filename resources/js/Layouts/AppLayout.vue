@@ -471,7 +471,7 @@ onMounted(() => {
                                 <input type="checkbox">
                                 <p class="text-xs">
                                     In compliance with RA 10173 (Data Privacy Act of 2012), I hereby agree to provide
-                                    information that Barangay San Antonio Pasig City commits to safeguard with utmost
+                                    information that Barangay Poblacion Valencia City commits to safeguard with utmost
                                     confidentiality and to use it only for purpose of providing community updates.</p>
                             </div>
                             <button

@@ -5,25 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BarangayOfficial extends Model
+class Committee extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'full_name',
         'user_id',
-        'position',
+        'name',
+        'committee_profile',
         'start_date',
         'end_date',
         'contact_number',
-        'email',
-        'address',
-        'profile',
-        'role',
-        'photo_path',
+        'committee_profile_photo_path',
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function committeeMember(){
+        
+        return $this->hasMany(CommitteeMember::class);
     }
 }

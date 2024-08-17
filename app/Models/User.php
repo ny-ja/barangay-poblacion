@@ -89,4 +89,14 @@ class User extends Authenticatable
         
         return $this->hasMany(BarangayOfficial::class);
     }
+
+    public function committee(){
+        
+        return $this->hasMany(Committee::class);
+    }
+
+    public function committeeMember(){
+        
+        return $this->hasMany(CommitteeMember::class);
+    }
 }
