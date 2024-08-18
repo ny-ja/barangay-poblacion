@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\EducationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\AgricultureController;
 use App\Http\Controllers\PeaceAndOrderController;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Admin\DocumentCategoryController;
 use App\Http\Controllers\Admin\CommitteeDocumentController;
 use App\Http\Controllers\Admin\CommitteeInitiativeController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\SubsciberController as AdminSubscriberController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -107,6 +109,10 @@ Route::middleware([
     Route::post('/committee-initiatives', [CommitteeInitiativeController::class, 'store'])->name('admin.committee-initiatives.store');
     Route::put('/committee-initiatives/{initiative}', [CommitteeInitiativeController::class, 'update'])->name('admin.committee-initiatives.update');
     Route::delete('/committee-initiatives/{initiative}', [CommitteeInitiativeController::class, 'destroy'])->name('admin.committee-initiatives.destroy');
+
+    Route::get('/subscribers', [AdminSubscriberController::class, 'index'])->name('admin.subscribers.index');
+    Route::delete('/subscribers/{subscriber}', [AdminSubscriberController::class, 'destroy'])->name('admin.subscribers.destroy');
 });
 
+Route::post('/subscribers', [SubscriberController::class, 'store'])->name('subscribers.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

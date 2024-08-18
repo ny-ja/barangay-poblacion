@@ -4,10 +4,9 @@ import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
   users: Object,
-  totalUsers: Number,
   news: Object,
-  totalNews: Number,
 });
+
 </script>
 
 <template>
@@ -23,7 +22,7 @@ const props = defineProps({
         <div class="flex flex-col flex-shrink-0 space-y-2">
           <span class="text-gray-400">Total Users</span>
           <span class="text-lg font-semibold">{{
-        totalUsers
+        users.length
       }}</span>
         </div>
         <div class="relative min-w-0 ml-auto h-14">
@@ -35,14 +34,13 @@ const props = defineProps({
         <span>from 2020</span>
       </div>
       </Link>
-      <Link :href="route('admin.news.index')"
-        class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
+      <Link :href="route('admin.news.index')" class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
       <div class="flex items-start">
         <div class="flex flex-col flex-shrink-0 space-y-2">
           <span class="text-gray-400">Total News</span>
           <span class="text-lg font-semibold">{{
-        totalNews
-      }}</span>
+        news.length
+            }}</span>
         </div>
         <div class="relative min-w-0 ml-auto h-14">
           <canvas id="usersChart"></canvas>

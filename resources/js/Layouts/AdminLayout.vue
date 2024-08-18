@@ -173,24 +173,18 @@ const logout = () => {
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Committee Initiatives</span>
                             </Link>
                         </li>
+                        <li>
+                            <Link :href="route('admin.subscribers.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/Subscribers/Index'
+    }">
+                            <Icon name="folder" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Subscribers</span>
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
-                <!-- Sidebar footer -->
-                <div class="flex-shrink-0 p-2 max-h-14">
-                    <button
-                        class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider uppercase bg-gray-100 border rounded-md focus:outline-none focus:ring">
-                        <span>
-                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                            </svg>
-                        </span>
-                        <span :class="{ 'lg:hidden': !isSidebarOpen }">
-                            Logout
-                        </span>
-                    </button>
-                </div>
             </aside>
 
             <div class="flex flex-col flex-1 h-full overflow-hidden">

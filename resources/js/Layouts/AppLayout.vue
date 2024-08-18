@@ -1,18 +1,53 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { Head, router } from "@inertiajs/vue3";
-import { Link } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import Icon from '@/Components/Icon.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import { toast } from "vue3-toastify";
+import 'vue3-toastify/dist/index.css';
 
 defineProps({
     title: String,
+});
+
+const form = useForm({
+    name: '',
+    email: '',
 });
 
 const scrollDirection = ref('down');
 const prevScrollPos = ref(window.pageYOffset);
 const sidebar = ref(false);
 const isDropdownOpen = ref(false);
+const errorMessage = ref('');
+const acceptedPrivacyPolicy = ref(false);
+
+function submit() {
+    form.post(route('subscribers.store'), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("You are now part of our community!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 2000,
+                "hideProgressBar": true,
+                "transition": "slide",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+        },
+        onError: (errors) => {
+            if (errors) {
+                errorMessage.value = 'There was an error submitting the form. Please check the fields and try again.';
+            }
+        },
+        onFinish: () => {
+            if (!form.hasErrors) {
+                errorMessage.value = '';
+            }
+        },
+    });
+}
 
 const toggleDropdown = () => {
     isDropdownOpen.value = !isDropdownOpen.value;
@@ -453,29 +488,47 @@ onMounted(() => {
                         </div>
                     </div>
                     <div class="lg:w-1/4 md:w-1/2 w-full flex flex-col">
-                        <h2 class="title-font text-center font-medium text-gray-900 tracking-widest text-2xl mb-3">Be
-                            part of our
-                            community</h2>
-                        <div class="bg-white flex flex-col px-3 py-2 rounded-lg shadow-lg">
-                            <div class="relative mb-4">
-                                <label for="name" class="leading-7 text-sm text-black">Name</label>
-                                <input type="text" id="name" name="name"
-                                    class="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-teal-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            </div>
-                            <div class="relative mb-4">
-                                <label for="email" class="leading-7 text-sm text-black">Email</label>
-                                <input type="email" id="email" name="email"
-                                    class="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-teal-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                            </div>
-                            <div class="flex flex-row space-x-1">
-                                <input type="checkbox">
-                                <p class="text-xs">
-                                    In compliance with RA 10173 (Data Privacy Act of 2012), I hereby agree to provide
-                                    information that Barangay Poblacion Valencia City commits to safeguard with utmost
-                                    confidentiality and to use it only for purpose of providing community updates.</p>
-                            </div>
-                            <button
-                                class="text-white mt-4 bg-teal-800 border-0 py-2 px-6 focus:outline-none hover:bg-teal-700 rounded text-lg">Subscribe</button>
+                        <h2 class="title-font text-center font-medium text-gray-900 tracking-widest text-2xl mb-3">
+                            Be part of our community
+                        </h2>
+                        <div class="bg-white flex flex-col px-4 py-6 rounded-lg shadow-lg">
+                            <form @submit.prevent="submit" class="space-y-4">
+                                <div v-if="errorMessage" class="text-red-500 text-sm">
+                                    {{ errorMessage }}
+                                </div>
+                                <div class="relative mb-4">
+                                    <label for="name" class="leading-7 text-sm text-black">Name</label>
+                                    <input type="text" v-model="form.name" id="name" name="name"
+                                        class="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-teal-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
+                                        {{ form.errors.name }}
+                                    </div>
+                                </div>
+                                <div class="relative mb-4">
+                                    <label for="email" class="leading-7 text-sm text-black">Email</label>
+                                    <input type="email" v-model="form.email" id="email" name="email"
+                                        class="w-full bg-white rounded border border-gray-300 focus:ring-2 focus:ring-teal-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                                    <div v-if="form.errors.email" class="text-red-500 text-sm mt-1">
+                                        {{ form.errors.email }}
+                                    </div>
+                                </div>
+                                <div class="flex flex-row space-x-1">
+                                    <input type="checkbox" v-model="acceptedPrivacyPolicy" />
+                                    <p class="text-xs">
+                                        In compliance with RA 10173 (Data Privacy Act of 2012), I hereby
+                                        agree to provide information that Barangay Poblacion Valencia City
+                                        commits to safeguard with utmost confidentiality and to use it only
+                                        for the purpose of providing community updates.
+                                    </p>
+                                </div>
+                                <div class="flex justify-center">
+                                    <button type="submit" :disabled="!acceptedPrivacyPolicy"
+                                        class="text-white w-full mt-2 bg-teal-800 border-0 py-2 px-6 focus:outline-none hover:bg-teal-700 rounded text-lg"
+                                        :class="{ 'opacity-50 cursor-not-allowed': !acceptedPrivacyPolicy }">
+                                        Subscribe
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
