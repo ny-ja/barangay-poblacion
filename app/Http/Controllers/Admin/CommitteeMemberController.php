@@ -61,6 +61,16 @@ class CommitteeMemberController extends Controller
         return redirect()->back();
     }
 
+    public function show(CommitteeMember $member)
+    {
+        $member->load('committee');
+
+        return Inertia::render('Admin/CommitteeMembers/Show', [
+            'member' => $member,
+            'committee' => $member->committee,
+        ]);
+    }
+
     public function destroy(CommitteeMember $member)
     {
         if ($member->member_photo_path) {

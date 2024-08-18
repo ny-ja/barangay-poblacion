@@ -58,6 +58,14 @@ class BarangayOfficialController extends Controller
         return redirect()->back();
     }
 
+    public function show(BarangayOfficial $official)
+    {
+
+        return Inertia::render('Admin/BarangayOfficials/Show', [
+            'official' => $official,
+        ]);
+    }
+
     public function destroy(BarangayOfficial $official)
     {
         if ($official->photo_path) {

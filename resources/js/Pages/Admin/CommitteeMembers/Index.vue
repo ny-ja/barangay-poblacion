@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import Drawer from '@/Components/Drawer.vue';
@@ -213,8 +213,10 @@ const deleteMember = (memberId) => {
                                         <div class="text-sm text-gray-500">{{ member.address }}</div>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                        <Link :href="route('admin.committee-members.show', member)"
+                                            class="text-green-600 hover:text-indigo-900">Show</Link>
                                         <button @click="openDrawerForEdit(member)"
-                                            class="text-indigo-600 hover:text-indigo-900">Edit</button>
+                                            class="ml-4 text-yellow-600 hover:text-indigo-900">Edit</button>
                                         <button @click="deleteMember(member.id)"
                                             class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                                     </td>

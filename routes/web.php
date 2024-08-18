@@ -91,6 +91,7 @@ Route::middleware([
     Route::post('/barangay-officials', [BarangayOfficialController::class, 'store'])->name('admin.barangay-officials.store');
     Route::put('/barangay-officials/{official}', [BarangayOfficialController::class, 'update'])->name('admin.barangay-officials.update');
     Route::delete('/barangay-officials/{official}', [BarangayOfficialController::class, 'destroy'])->name('admin.barangay-officials.destroy');
+    Route::get('/barangay-officials/{official}', [BarangayOfficialController::class, 'show'])->name('admin.barangay-officials.show');
 
     Route::get('/committees', [CommitteeController::class, 'index'])->name('admin.committees.index');
     Route::post('/committees', [CommitteeController::class, 'store'])->name('admin.committees.store');
@@ -101,6 +102,7 @@ Route::middleware([
     Route::post('/committee-members', [CommitteeMemberController::class, 'store'])->name('admin.committee-members.store');
     Route::put('/committee-members/{member}', [CommitteeMemberController::class, 'update'])->name('admin.committee-members.update');
     Route::delete('/committee-members/{member}', [CommitteeMemberController::class, 'destroy'])->name('admin.committee-members.destroy');
+    Route::get('/committee-members/{member}', [CommitteeMemberController::class, 'show'])->name('admin.committee-members.show');
 
     Route::get('/committee-documents', [CommitteeDocumentController::class, 'index'])->name('admin.committee-documents.index');
     Route::post('/committee-documents', [CommitteeDocumentController::class, 'store'])->name('admin.committee-documents.store');
@@ -111,6 +113,8 @@ Route::middleware([
     Route::post('/committee-initiatives', [CommitteeInitiativeController::class, 'store'])->name('admin.committee-initiatives.store');
     Route::put('/committee-initiatives/{initiative}', [CommitteeInitiativeController::class, 'update'])->name('admin.committee-initiatives.update');
     Route::delete('/committee-initiatives/{initiative}', [CommitteeInitiativeController::class, 'destroy'])->name('admin.committee-initiatives.destroy');
+    Route::get('/committee-initiatives/{initiative}', [CommitteeInitiativeController::class, 'show'])->name('admin.committee-initiatives.show');
+
 
     Route::get('/subscribers', [AdminSubscriberController::class, 'index'])->name('admin.subscribers.index');
     Route::delete('/subscribers/{subscriber}', [AdminSubscriberController::class, 'destroy'])->name('admin.subscribers.destroy');

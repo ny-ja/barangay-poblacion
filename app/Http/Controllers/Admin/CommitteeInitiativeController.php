@@ -61,6 +61,16 @@ class CommitteeInitiativeController extends Controller
         return redirect()->back();
     }
 
+    public function show(CommitteeInitiative $initiative)
+    {
+        $initiative->load('committee');
+
+        return Inertia::render('Admin/CommitteeInitiatives/Show', [
+            'initiative' => $initiative,
+            'committee' => $initiative->committee,
+        ]);
+    }
+
     public function destroy(CommitteeInitiative $initiative)
     {
         if ($initiative->initiative_photo_path) {

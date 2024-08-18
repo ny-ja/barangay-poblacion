@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
-import { useForm } from '@inertiajs/vue3';
+import { Link, useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import Drawer from '@/Components/Drawer.vue';
@@ -215,8 +215,10 @@ const deleteInitiative = (initiativeId) => {
                                         <div class="text-sm text-gray-500">{{ initiative.status }}</div>
                                     </td>
                                     <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                        <Link :href="route('admin.committee-initiatives.show', initiative)"
+                                            class="text-green-600 hover:text-indigo-900">Show</Link>
                                         <button @click="openDrawerForEdit(initiative)"
-                                            class="text-indigo-600 hover:text-indigo-900">Edit</button>
+                                            class="ml-4 text-indigo-600 hover:text-indigo-900">Edit</button>
                                         <button @click="deleteInitiative(initiative.id)"
                                             class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                                     </td>
