@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\EducationController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\Admin\CommitteeDocumentController;
 use App\Http\Controllers\Admin\CommitteeInitiativeController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\SubsciberController as AdminSubscriberController;
+use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -112,7 +114,11 @@ Route::middleware([
 
     Route::get('/subscribers', [AdminSubscriberController::class, 'index'])->name('admin.subscribers.index');
     Route::delete('/subscribers/{subscriber}', [AdminSubscriberController::class, 'destroy'])->name('admin.subscribers.destroy');
+
+    Route::get('/feedback', [AdminFeedbackController::class, 'index'])->name('admin.feedback.index');
+    Route::delete('/feedback/{feedback}', [AdminFeedbackController::class, 'destroy'])->name('admin.feedback.destroy');
 });
 
 Route::post('/subscribers', [SubscriberController::class, 'store'])->name('subscribers.store');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

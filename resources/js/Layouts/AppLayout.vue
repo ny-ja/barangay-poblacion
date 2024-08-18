@@ -514,7 +514,7 @@ onMounted(() => {
                                 </div>
                                 <div class="flex flex-row space-x-1">
                                     <input type="checkbox" v-model="acceptedPrivacyPolicy" />
-                                    <p class="text-xs">
+                                    <p class="text-xs text-justify">
                                         In compliance with RA 10173 (Data Privacy Act of 2012), I hereby
                                         agree to provide information that Barangay Poblacion Valencia City
                                         commits to safeguard with utmost confidentiality and to use it only

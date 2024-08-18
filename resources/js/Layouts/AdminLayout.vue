@@ -183,6 +183,16 @@ const logout = () => {
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Subscribers</span>
                             </Link>
                         </li>
+                        <li>
+                            <Link :href="route('admin.feedback.index')"
+                                class="flex text-white items-center p-2 space-x-2 rounded-md hover:bg-teal-700" :class="{
+        'justify-center': !isSidebarOpen, 'bg-teal-700':
+            $page.component === 'Admin/Feedback/Index'
+    }">
+                            <Icon name="folder" :stroke="'white'" />
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Feedback</span>
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </aside>
