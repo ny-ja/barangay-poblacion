@@ -5,9 +5,18 @@ import { useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import Drawer from '@/Components/Drawer.vue';
+import MainContentHeader from '@/Components/MainContentHeader.vue';
+import TableContainer from '@/Components/TableContainer.vue';
+import ButtonIcon from '@/Components/ButtonIcon.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import Icon from '@/Components/Icon.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
+import TextInput from '@/Components/TextInput.vue';
+import Textarea from '@/Components/Textarea.vue';
 
 const props = defineProps(['committees', 'filters']);
 
@@ -24,16 +33,19 @@ const form = useForm({
     end_date: '',
     contact_number: '',
     committee_profile_photo: null,
-    
+
 });
 
 function openDrawerForCreate() {
     form.reset();
+    form.clearErrors();
     isEditMode.value = false;
+    errorMessage.value = false;
     isDrawerOpen.value = true;
 }
 
 function openDrawerForEdit(committee) {
+    form.clearErrors();
     form.id = committee.id;
     form.name = committee.name;
     form.committee_profile = committee.committee_profile;
@@ -42,6 +54,7 @@ function openDrawerForEdit(committee) {
     form.contact_number = committee.contact_number;
     form.committee_profile_photo = null;
     isEditMode.value = true;
+    errorMessage.value = false;
     isDrawerOpen.value = true;
 }
 
@@ -133,84 +146,81 @@ const deleteCommittee = (committeeId) => {
 
 <template>
     <AdminLayout title="Committees">
-        <div
-            class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-            <h1 class="text-2xl font-semibold whitespace-nowrap">Committees</h1>
-            <button @click="openDrawerForCreate"
-                class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                </span>
-                <span>Add Committee</span>
-            </button>
-        </div>
+        <MainContentHeader>
+            <template #title>
+                Committees
+            </template>
+            <template #buttons>
+                <ButtonIcon @click="openDrawerForCreate">
+                    <template #icon>
+                        <Icon name="plus" />
+                    </template>
+                    <template #text>Add Committee</template>
+                </ButtonIcon>
+            </template>
+        </MainContentHeader>
 
         <!-- Search Form -->
         <div class="mt-4">
             <SearchForm :filters="filters" routeName="admin.committees.index" />
         </div>
 
-        <div class="flex flex-col mt-6">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="overflow-hidden border-b border-gray-200 rounded-md shadow-md">
-                        <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Name</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Committee Profile</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Date Started</th>
-                                    <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Actions</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="committee in committees.data" :key="committee.id"
-                                    class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 w-10 h-10">
-                                                <img :src="`/storage/${committee.committee_profile_photo_path}`" alt="Committee Profile Photo"
-                                                    class="w-10 h-10 rounded-full" v-if="committee.committee_profile_photo_path" />
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ committee.name }}</div>
-                                                <div class="text-sm text-gray-500">{{ committee.contact_number }}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-500">{{ committee.committee_profile }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ committee.start_date }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <button @click="openDrawerForEdit(committee)"
-                                            class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                        <button @click="deleteCommittee(committee.id)"
-                                            class="ml-4 text-red-600 hover:text-red-900">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <TableContainer>
+            <template #table>
+                <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Name</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Committee Profile</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Date Started</th>
+                            <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr v-for="committee in committees.data" :key="committee.id"
+                            class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 w-10 h-10">
+                                        <img :src="`/storage/${committee.committee_profile_photo_path}`"
+                                            alt="Committee Profile Photo" class="w-10 h-10 rounded-full"
+                                            v-if="committee.committee_profile_photo_path" />
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">{{ committee.name }}</div>
+                                        <div class="text-sm text-gray-500">{{ committee.contact_number }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-500">{{ committee.committee_profile }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">{{ committee.start_date }}</div>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                <button @click="openDrawerForEdit(committee)"
+                                    class="text-teal-600 hover:text-teal-900">Edit</button>
+                                <button @click="deleteCommittee(committee.id)"
+                                    class="ml-4 text-red-600 hover:text-red-900">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
+            <template #pagination>
+                <Pagination :pagination="committees" />
+            </template>
+        </TableContainer>
 
-            <!-- Pagination Component -->
-            <Pagination :pagination="committees" />
-        </div>
         <Drawer :isOpen="isDrawerOpen" @close="isDrawerOpen = false">
             <template #title>
                 {{ isEditMode ? 'Edit Committee' : 'Create Committee' }}
@@ -222,61 +232,48 @@ const deleteCommittee = (committeeId) => {
                             {{ errorMessage }}
                         </div>
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">Committee Name</label>
-                            <input type="text" v-model="form.name" id="name"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                            <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.name }}
-                            </div>
+                            <InputLabel for="name" value="Name" />
+                            <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
+                                autocomplete="name" />
+                            <InputError :message="form.errors.name" class="mt-2" />
                         </div>
                         <div>
-                            <label for="committee_profile" class="block text-sm font-medium text-gray-700">committee_profile</label>
-                            <textarea type="text" v-model="form.committee_profile" id="committee_profile"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-                            <div v-if="form.errors.committee_profile" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.committee_profile }}
-                            </div>
+                            <InputLabel for="committee_profile" value="Committee Profile" />
+                            <Textarea v-model="form.committee_profile" id="committee_profile" :rows="5" :cols="60" />
+                            <InputError :message="form.errors.committee_profile" class="mt-2" />
                         </div>
                         <div>
-                            <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
-                            <input type="date" v-model="form.start_date" id="start_date"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.start_date" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.start_date }}
-                            </div>
+                            <InputLabel for="start_date" value="Start Date" />
+                            <TextInput id="start_date" v-model="form.start_date" type="date" class="mt-1 block w-full"
+                                autocomplete="start_date" />
+                            <InputError :message="form.errors.start_date" class="mt-2" />
                         </div>
                         <div>
-                            <label for="end_date" class="block text-sm font-medium text-gray-700">End Date</label>
-                            <input type="date" v-model="form.end_date" id="end_date"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.end_date" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.end_date }}
-                            </div>
+                            <InputLabel for="end_date" value="End Date" />
+                            <TextInput id="end_date" v-model="form.end_date" type="date" class="mt-1 block w-full"
+                                autocomplete="end_date" />
+                            <InputError :message="form.errors.end_date" class="mt-2" />
                         </div>
                         <div>
-                            <label for="contact_number" class="block text-sm font-medium text-gray-700">Contact Number</label>
-                            <input type="text" v-model="form.contact_number" id="contact_number"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.contact_number" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.contact_number }}
-                            </div>
+                            <InputLabel for="contact_number" value="Contact Number" />
+                            <TextInput id="contact_number" v-model="form.contact_number" type="text"
+                                class="mt-1 block w-full" autocomplete="contact_number" />
+                            <InputError :message="form.errors.contact_number" class="mt-2" />
                         </div>
                         <div>
-                            <label for="committee_profile_photo" class="block text-sm font-medium text-gray-700">Committee Profile Photo</label>
+                            <InputLabel for="committee_profile_photo" value="Committee Profile Photo" />
                             <input type="file" @change="handleFileChange" id="committee_profile_photo"
-                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
+                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100" />
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
-                            <div v-if="form.errors.committee_profile_photo" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.committee_profile_photo }}
-                            </div>
+                            <InputError :message="form.errors.committee_profile_photo" class="mt-2" />
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing">
                                 {{ isEditMode ? 'Update' : 'Create' }}
-                            </button>
+                            </PrimaryButton>
                         </div>
                     </form>
                 </div>

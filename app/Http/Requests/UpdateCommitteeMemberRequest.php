@@ -34,7 +34,7 @@ class UpdateCommitteeMemberRequest extends FormRequest
             'role' => 'nullable|string',
             'profile' => 'nullable|string',
             'address' => 'required|string',
-            'member_photo_path' => 'nullable|image',
+            'member_photo' => 'nullable|image',
         ];
     }
 }

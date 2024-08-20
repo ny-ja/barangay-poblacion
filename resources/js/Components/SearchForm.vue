@@ -44,7 +44,7 @@ const searchUsers = () => {
             </svg>
 
             <input v-model="form.search" type="text" placeholder="Search by name"
-                class="px-4 py-3 rounded-md hover:bg-gray-100 lg:max-w-sm md:py-2 md:flex-1 focus:outline-none md:focus:bg-gray-100 md:focus:shadow md:focus:border" />
+                class="px-4 py-3 rounded-md hover:bg-gray-100 lg:max-w-sm md:py-2 md:flex-1 focus:outline-none focus:border-teal-500 focus:ring-teal-500" />
         </div>
     </form>
 </template>

@@ -32,7 +32,7 @@ class UpdateOfficialRequest extends FormRequest
             'role' => 'nullable|string',
             'profile' => 'nullable|string',
             'address' => 'required|string',
-            'photo_path' => 'nullable|image',
+            'official_photo' => 'nullable|image',
         ];
     }
 }

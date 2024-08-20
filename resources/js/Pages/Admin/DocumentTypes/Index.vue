@@ -4,9 +4,17 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import Drawer from '@/Components/Drawer.vue';
+import MainContentHeader from '@/Components/MainContentHeader.vue';
+import TableContainer from '@/Components/TableContainer.vue';
+import ButtonIcon from '@/Components/ButtonIcon.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import Icon from '@/Components/Icon.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
+import TextInput from '@/Components/TextInput.vue';
 
 const props = defineProps(['types']);
 
@@ -21,14 +29,18 @@ const form = useForm({
 
 function openDrawerForCreate() {
     form.reset();
+    form.clearErrors();
     isEditMode.value = false;
+    errorMessage.value = false;
     isDrawerOpen.value = true;
 }
 
 function openDrawerForEdit(type) {
+    form.clearErrors();
     form.id = type.id;
     form.name = type.name;
     isEditMode.value = true;
+    errorMessage.value = false;
     isDrawerOpen.value = true;
 }
 
@@ -111,64 +123,60 @@ const deleteType = (typeId) => {
 
 <template>
     <AdminLayout title="Document types">
-        <div
-            class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-            <h1 class="text-2xl font-semibold whitespace-nowrap">Document types</h1>
-            <button @click="openDrawerForCreate"
-                class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                </span>
-                <span>Add type</span>
-            </button>
-        </div>
+        <MainContentHeader>
+            <template #title>
+                Document Types
+            </template>
+            <template #buttons>
+                <ButtonIcon @click="openDrawerForCreate">
+                    <template #icon>
+                        <Icon name="plus" />
+                    </template>
+                    <template #text>Add Document Type</template>
+                </ButtonIcon>
+            </template>
+        </MainContentHeader>
 
-        <div class="flex flex-col mt-6">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="overflow-hidden border-b border-gray-200 rounded-md shadow-md">
-                        <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Document Type ID</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Document Type Name</th>
-                                    <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Actions</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="type in types.data" :key="type.id"
-                                    class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ type.id }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ type.name }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <button @click="openDrawerForEdit(type)"
-                                            class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                        <button @click="deleteType(type.id)"
-                                            class="ml-4 text-red-600 hover:text-red-900">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        <TableContainer>
+            <template #table>
+                <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Document Type ID</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Document Type Name</th>
+                            <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr v-for="type in types.data" :key="type.id"
+                            class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">{{ type.id }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">{{ type.name }}</div>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                <button @click="openDrawerForEdit(type)"
+                                    class="text-indigo-600 hover:text-indigo-900">Edit</button>
+                                <button @click="deleteType(type.id)"
+                                    class="ml-4 text-red-600 hover:text-red-900">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
+            <template #pagination>
+                <Pagination :pagination="types" />
+            </template>
+        </TableContainer>
 
-            <!-- Pagination Component -->
-            <Pagination :pagination="types" />
-        </div>
         <Drawer :isOpen="isDrawerOpen" @close="isDrawerOpen = false">
             <template #title>
                 {{ isEditMode ? 'Edit document type' : 'Create document type' }}
@@ -180,18 +188,16 @@ const deleteType = (typeId) => {
                             {{ errorMessage }}
                         </div>
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-                            <input type="text" v-model="form.name" id="name"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                            <div v-if="form.errors.name" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.name }}
-                            </div>
+                            <InputLabel for="name" value="Name" />
+                            <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full"
+                                autocomplete="name" />
+                            <InputError :message="form.errors.name" class="mt-2" />
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing">
                                 {{ isEditMode ? 'Update' : 'Create' }}
-                            </button>
+                            </PrimaryButton>
                         </div>
                     </form>
                 </div>

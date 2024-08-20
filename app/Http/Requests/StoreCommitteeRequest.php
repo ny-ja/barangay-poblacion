@@ -27,7 +27,7 @@ class StoreCommitteeRequest extends FormRequest
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
             'contact_number' => 'required|string|max:25',
-            'committee_profile_photo_path' => 'required|image',
+            'committee_profile_photo' => 'required|image',
         ];
     }
 }

@@ -5,9 +5,18 @@ import { Link, useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import Drawer from '@/Components/Drawer.vue';
+import MainContentHeader from '@/Components/MainContentHeader.vue';
+import TableContainer from '@/Components/TableContainer.vue';
+import ButtonIcon from '@/Components/ButtonIcon.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import Icon from '@/Components/Icon.vue';
 import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
+import TextInput from '@/Components/TextInput.vue';
+import Textarea from '@/Components/Textarea.vue';
 
 const props = defineProps(['officials', 'filters']);
 
@@ -28,16 +37,19 @@ const form = useForm({
     role: '',
     profile: '',
     official_photo: null,
-    
+
 });
 
 function openDrawerForCreate() {
+    form.clearErrors();
     form.reset();
     isEditMode.value = false;
+    errorMessage.value = false;
     isDrawerOpen.value = true;
 }
 
 function openDrawerForEdit(official) {
+    form.clearErrors();
     form.id = official.id;
     form.full_name = official.full_name;
     form.position = official.position;
@@ -50,6 +62,7 @@ function openDrawerForEdit(official) {
     form.profile = official.profile;
     form.official_photo = null;
     isEditMode.value = true;
+    errorMessage.value = false;
     isDrawerOpen.value = true;
 }
 
@@ -141,92 +154,89 @@ const deleteNews = (officialId) => {
 
 <template>
     <AdminLayout title="Barangay Officials">
-        <div
-            class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-            <h1 class="text-2xl font-semibold whitespace-nowrap">Barangay Officials</h1>
-            <button @click="openDrawerForCreate"
-                class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                </span>
-                <span>Add Official</span>
-            </button>
-        </div>
+        <MainContentHeader>
+            <template #title>
+                Barangay Officials
+            </template>
+            <template #buttons>
+                <ButtonIcon @click="openDrawerForCreate">
+                    <template #icon>
+                        <Icon name="plus" />
+                    </template>
+                    <template #text>Add Official</template>
+                </ButtonIcon>
+            </template>
+        </MainContentHeader>
 
         <!-- Search Form -->
         <div class="mt-4">
             <SearchForm :filters="filters" routeName="admin.barangay-officials.index" />
         </div>
 
-        <div class="flex flex-col mt-6">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="overflow-hidden border-b border-gray-200 rounded-md shadow-md">
-                        <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Full Name</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Contact</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Email</th>
-                                    <th scope="col"
-                                        class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                        Address</th>
-                                    <th scope="col" class="relative px-6 py-3">
-                                        <span class="sr-only">Actions</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr v-for="official in officials.data" :key="official.id"
-                                    class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 w-10 h-10">
-                                                <img :src="`/storage/${official.photo_path}`" alt="Official Photo"
-                                                    class="w-10 h-10 rounded-full" v-if="official.photo_path" />
-                                            </div>
-                                            <div class="ml-4">
-                                                <div class="text-sm font-medium text-gray-900">{{ official.full_name }}</div>
-                                                <div class="text-sm text-gray-500">{{ official.position }}</div>
-                                            </div>
+        <TableContainer>
+            <template #table>
+                <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Full Name</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Contact</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Email</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Address</th>
+                            <th scope="col" class="relative px-6 py-3">
+                                <span class="sr-only">Actions</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr v-for="official in officials.data" :key="official.id"
+                            class="transition-all hover:bg-gray-100 hover:shadow-lg">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 w-10 h-10">
+                                        <img :src="`/storage/${official.photo_path}`" alt="Official Photo"
+                                            class="w-10 h-10 rounded-full" v-if="official.photo_path" />
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">{{ official.full_name }}
                                         </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-500">{{ official.contact_number }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ official.email }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-500">{{ official.address }}</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                        <Link :href="route('admin.barangay-officials.show', official)"
-                                            class="text-green-600 hover:text-indigo-900">Show</Link>
-                                        <button @click="openDrawerForEdit(official)"
-                                            class="ml-4 text-indigo-600 hover:text-indigo-900">Edit</button>
-                                        <button @click="deleteNews(official.id)"
-                                            class="ml-4 text-red-600 hover:text-red-900">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+                                        <div class="text-sm text-gray-500">{{ official.position }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-500">{{ official.contact_number }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">{{ official.email }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-500">{{ official.address }}</div>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                <Link :href="route('admin.barangay-officials.show', official)"
+                                    class="text-green-600 hover:text-teal-900">Show</Link>
+                                <button @click="openDrawerForEdit(official)"
+                                    class="ml-4 text-teal-600 hover:text-teal-900">Edit</button>
+                                <button @click="deleteNews(official.id)"
+                                    class="ml-4 text-red-600 hover:text-red-900">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
+            <template #pagination>
+                <Pagination :pagination="officials" />
+            </template>
+        </TableContainer>
 
-            <!-- Pagination Component -->
-            <Pagination :pagination="officials" />
-        </div>
         <Drawer :isOpen="isDrawerOpen" @close="isDrawerOpen = false">
             <template #title>
                 {{ isEditMode ? 'Edit Official' : 'Create Official' }}
@@ -238,99 +248,77 @@ const deleteNews = (officialId) => {
                             {{ errorMessage }}
                         </div>
                         <div>
-                            <label for="full_name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                            <input type="text" v-model="form.full_name" id="full_name"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                            <div v-if="form.errors.full_name" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.full_name }}
-                            </div>
+                            <InputLabel for="full_name" value="Full Name" />
+                            <TextInput id="full_name" v-model="form.full_name" type="text" class="mt-1 block w-full"
+                                autocomplete="full_name" />
+                            <InputError :message="form.errors.full_name" class="mt-2" />
                         </div>
                         <div>
-                            <label for="position" class="block text-sm font-medium text-gray-700">Position</label>
+                            <InputLabel for="position" value="Position" />
                             <select v-model="form.position" id="position"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="border-gray-300 focus:border-teal-500 focus:ring-teal-500 rounded-md shadow-sm w-full">
                                 <option value="Barangay Captain">Barangay Captain</option>
                                 <option value="Barangay Kagawad">Barangay Kagawad</option>
                                 <option value="SK Chairman/Chairwoman">SK Chairman/Chairwoman</option>
                                 <option value="SK Kagawad">SK Kagawad</option>
                             </select>
-                            <div v-if="form.errors.position" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.position }}
-                            </div>
+                            <InputError :message="form.errors.position" class="mt-2" />
                         </div>
                         <div>
-                            <label for="start_date" class="block text-sm font-medium text-gray-700">Start Date</label>
-                            <input type="date" v-model="form.start_date" id="start_date"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.start_date" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.start_date }}
-                            </div>
+                            <InputLabel for="start_date" value="Start Date" />
+                            <TextInput id="start_date" v-model="form.start_date" type="date" class="mt-1 block w-full"
+                                autocomplete="start_date" />
+                            <InputError :message="form.errors.start_date" class="mt-2" />
                         </div>
                         <div>
-                            <label for="end_date" class="block text-sm font-medium text-gray-700">End Date</label>
-                            <input type="date" v-model="form.end_date" id="end_date"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.end_date" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.end_date }}
-                            </div>
+                            <InputLabel for="end_date" value="End Date" />
+                            <TextInput id="end_date" v-model="form.end_date" type="date" class="mt-1 block w-full"
+                                autocomplete="end_date" />
+                            <InputError :message="form.errors.end_date" class="mt-2" />
                         </div>
                         <div>
-                            <label for="contact_number" class="block text-sm font-medium text-gray-700">Contact Number</label>
-                            <input type="text" v-model="form.contact_number" id="contact_number"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.contact_number" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.contact_number }}
-                            </div>
+                            <InputLabel for="contact_number" value="Contact Number" />
+                            <TextInput id="contact_number" v-model="form.contact_number" type="text"
+                                class="mt-1 block w-full" autocomplete="contact_number" />
+                            <InputError :message="form.errors.contact_number" class="mt-2" />
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" v-model="form.email" id="email"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.email" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.email }}
-                            </div>
+                            <InputLabel for="email" value="Email" />
+                            <TextInput id="email" v-model="form.email" type="email" class="mt-1 block w-full"
+                                autocomplete="email" />
+                            <InputError :message="form.errors.email" class="mt-2" />
                         </div>
                         <div>
-                            <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-                            <input type="text" v-model="form.address" id="address"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.address" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.address }}
-                            </div>
+                            <InputLabel for="address" value="Address" />
+                            <TextInput id="address" v-model="form.address" type="text" class="mt-1 block w-full"
+                                autocomplete="address" />
+                            <InputError :message="form.errors.address" class="mt-2" />
                         </div>
                         <div>
-                            <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
-                            <input type="text" v-model="form.role" id="role"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></input>
-                            <div v-if="form.errors.role" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.role }}
-                            </div>
+                            <InputLabel for="role" value="Role" />
+                            <TextInput id="role" v-model="form.role" type="text" class="mt-1 block w-full"
+                                autocomplete="role" />
+                            <InputError :message="form.errors.role" class="mt-2" />
                         </div>
                         <div>
-                            <label for="profile" class="block text-sm font-medium text-gray-700">Biographical Sketch</label>
-                            <textarea type="text" v-model="form.profile" id="profile"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
-                            <div v-if="form.errors.profile" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.profile }}
-                            </div>
+                            <InputLabel for="profile" value="Biographical Sketch" />
+                            <Textarea v-model="form.profile" id="profile" :rows="5" :cols="60" />
+                            <InputError :message="form.errors.profile" class="mt-2" />
                         </div>
                         <div>
-                            <label for="official_photo" class="block text-sm font-medium text-gray-700">Official
-                                Photo</label>
+                            <InputLabel for="official_photo" value="Official Photo" />
                             <input type="file" @change="handleFileChange" id="official_photo"
-                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
+                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100" />
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
-                            <div v-if="form.errors.official_photo" class="text-red-500 text-sm mt-1">
-                                {{ form.errors.official_photo }}
-                            </div>
+                            <InputError :message="form.errors.official_photo" class="mt-2" />
                         </div>
                         <div class="flex justify-end">
-                            <button type="submit"
-                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing">
                                 {{ isEditMode ? 'Update' : 'Create' }}
-                            </button>
+                            </PrimaryButton>
                         </div>
                     </form>
                 </div>

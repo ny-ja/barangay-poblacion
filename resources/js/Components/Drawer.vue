@@ -32,9 +32,9 @@ const closeDrawer = () => {
             <div class="flex-1 max-h-full p-4 overflow-auto">
                 <slot name="content" />
             </div>
-            <div class="flex flex-row justify-end px-6 py-4 bg-[#F7F5F5] text-end">
+            <!-- <div class="flex flex-row justify-end px-6 py-4 bg-[#F7F5F5] text-end">
                 <slot name="footer" />
-            </div>
+            </div> -->
         </div>
     </Transition>
 
