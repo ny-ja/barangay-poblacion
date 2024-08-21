@@ -12,15 +12,17 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Icon from '@/Components/Icon.vue';
-import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 import TextInput from '@/Components/TextInput.vue';
 import Textarea from '@/Components/Textarea.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DeleteConfirmation from '@/Components/DeleteConfirmation.vue';
 
 const props = defineProps(['news', 'newsCategories', 'filters']);
 
 const isDrawerOpen = ref(false);
+const isDeleteModalOpen = ref(false);
 const isEditMode = ref(false);
 const errorMessage = ref('');
 
@@ -51,6 +53,11 @@ function openDrawerForEdit(news) {
     isEditMode.value = true;
     errorMessage.value = false;
     isDrawerOpen.value = true;
+}
+
+function openModalForDelete(news) {
+    form.id = news.id;
+    form.title = news.title;
 }
 
 function handleFileChange(event) {
@@ -116,25 +123,25 @@ function submit() {
     }
 }
 
-const deleteNews = (newsId) => {
-    if (confirm('Are you sure you want to delete this news?')) {
-        Inertia.delete(route('admin.news.destroy', newsId), {
-            onSuccess: () => {
-                toast("News has been successfully deleted!", {
-                    "type": "success",
-                    "position": "bottom-right",
-                    "autoClose": 1000,
-                    "hideProgressBar": true,
-                    "transition": "flip",
-                    "dangerouslyHTMLString": true
-                })
-            },
-            onError: (error) => {
-                alert('Failed to delete news. Please try again.');
-                console.error(error);
-            },
-        });
-    }
+const deleteNews = () => {
+    form.transform((data) => ({
+        ...data,
+        _method: 'DELETE',
+    })).post(route('admin.news.destroy', form.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("News has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+            isDeleteModalOpen.value = false;
+        }
+    });
 };
 </script>
 
@@ -157,7 +164,7 @@ const deleteNews = (newsId) => {
 
         <!-- Search Form -->
         <div class="mt-4">
-            <SearchForm :filters="filters" routeName="admin.news.index" />
+            <SearchForm :filters="filters" routeName="admin.news.index" placeholder="Search by title" />
         </div>
 
         <TableContainer>
@@ -203,7 +210,7 @@ const deleteNews = (newsId) => {
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <button @click="openDrawerForEdit(news_item)"
                                     class="text-teal-600 hover:text-teal-900">Edit</button>
-                                <button @click="deleteNews(news_item.id)"
+                                <button @click="isDeleteModalOpen = true, openModalForDelete(news_item)"
                                     class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
@@ -266,5 +273,21 @@ const deleteNews = (newsId) => {
             </template>
         </Drawer>
 
+        <DeleteConfirmation :isOpen="isDeleteModalOpen" @close="isDeleteModalOpen = false">
+            <template #message>
+                Are you sure you want to
+                delete <span class="font-bold">{{ form.title }}</span> news?
+            </template>
+            <template #button>
+                <PrimaryButton @click.prevent="deleteNews"
+                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Yes, I'm sure
+                </PrimaryButton>
+                <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
+                    Cancel
+                </SecondaryButton>
+            </template>
+        </DeleteConfirmation>
     </AdminLayout>
 </template>

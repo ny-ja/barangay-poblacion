@@ -17,10 +17,13 @@ import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 import TextInput from '@/Components/TextInput.vue';
 import Textarea from '@/Components/Textarea.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DeleteConfirmation from '@/Components/DeleteConfirmation.vue';
 
 const props = defineProps(['initiatives', 'committees', 'filters']);
 
 const isDrawerOpen = ref(false);
+const isDeleteModalOpen = ref(false);
 const isEditMode = ref(false);
 const errorMessage = ref('');
 
@@ -68,6 +71,11 @@ function openDrawerForEdit(initiative) {
     isEditMode.value = true;
     errorMessage.value = false;
     isDrawerOpen.value = true;
+}
+
+function openModalForDelete(initiative) {
+    form.id = initiative.id;
+    form.title = initiative.title;
 }
 
 function handleFileChange(event) {
@@ -133,25 +141,25 @@ function submit() {
     }
 }
 
-const deleteInitiative = (initiativeId) => {
-    if (confirm('Are you sure you want to delete this initiative?')) {
-        Inertia.delete(route('admin.committee-initiatives.destroy', initiativeId), {
-            onSuccess: () => {
-                toast("Committee initiative has been successfully deleted!", {
-                    "type": "success",
-                    "position": "bottom-right",
-                    "autoClose": 1000,
-                    "hideProgressBar": true,
-                    "transition": "flip",
-                    "dangerouslyHTMLString": true
-                })
-            },
-            onError: (error) => {
-                alert('Failed to delete initiative. Please try again.');
-                console.error(error);
-            },
-        });
-    }
+const deleteInitiative = () => {
+    form.transform((data) => ({
+        ...data,
+        _method: 'DELETE',
+    })).post(route('admin.committee-initiatives.destroy', form.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("Committee Initiative has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+            isDeleteModalOpen.value = false;
+        }
+    });
 };
 </script>
 
@@ -174,7 +182,7 @@ const deleteInitiative = (initiativeId) => {
 
         <!-- Search Form -->
         <div class="mt-4">
-            <SearchForm :filters="filters" routeName="admin.committee-initiatives.index" />
+            <SearchForm :filters="filters" routeName="admin.committee-initiatives.index" placeholder="Search by title" />
         </div>
 
         <TableContainer>
@@ -228,7 +236,7 @@ const deleteInitiative = (initiativeId) => {
                                     class="text-green-600 hover:text-teal-900">Show</Link>
                                 <button @click="openDrawerForEdit(initiative)"
                                     class="ml-4 text-teal-600 hover:text-teal-900">Edit</button>
-                                <button @click="deleteInitiative(initiative.id)"
+                                <button @click="isDeleteModalOpen = true, openModalForDelete(initiative)"
                                     class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
@@ -342,5 +350,22 @@ const deleteInitiative = (initiativeId) => {
                 </div>
             </template>
         </Drawer>
+
+        <DeleteConfirmation :isOpen="isDeleteModalOpen" @close="isDeleteModalOpen = false">
+            <template #message>
+                Are you sure you want to
+                delete <span class="font-bold">{{ form.title }}</span>?
+            </template>
+            <template #button>
+                <PrimaryButton @click.prevent="deleteInitiative"
+                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Yes, I'm sure
+                </PrimaryButton>
+                <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
+                    Cancel
+                </SecondaryButton>
+            </template>
+        </DeleteConfirmation>
     </AdminLayout>
 </template>

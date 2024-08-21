@@ -34,8 +34,8 @@ const logout = () => {
                     <div class="flex items-center justify-between p-2">
                         <!-- Navbar left -->
                         <div class="flex items-center space-x-3">
-                            <span class="p-2 text-xl font-semibold tracking-wider uppercase lg:hidden"><img
-                                    src="/images/poblacion-logo.svg" class="w-12 h-auto -mt-2"
+                            <span class="text-xl font-semibold tracking-wider uppercase lg:hidden"><img
+                                    src="/images/poblacion-logo.svg" class="w-12 h-auto"
                                     alt="Barangay Logo" /></span>
                             <!-- Toggle sidebar button -->
                             <button @click="toggleSidbarMenu"

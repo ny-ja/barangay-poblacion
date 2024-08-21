@@ -3,9 +3,7 @@ import { useForm } from '@inertiajs/vue3';
 import { watch, ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 
-const props = defineProps(['filters', 'routeName']);
-
-const isSearchBoxOpen = ref(false);
+const props = defineProps(['filters', 'routeName', 'placeholder']);
 
 const form = useForm({
     search: props.filters.search || ''
@@ -41,7 +39,7 @@ const search = () => {
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
 
-            <input v-model="form.search" type="text" placeholder="Search by name"
+            <input v-model="form.search" type="text" :placeholder="placeholder"
                 class="px-4 py-3 rounded-md hover:bg-gray-100 lg:max-w-sm md:py-2 md:flex-1 focus:outline-none focus:border-teal-500 focus:ring-teal-500" />
         </div>
     </form>

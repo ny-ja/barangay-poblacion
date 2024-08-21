@@ -15,10 +15,13 @@ import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 import TextInput from '@/Components/TextInput.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DeleteConfirmation from '@/Components/DeleteConfirmation.vue';
 
 const props = defineProps(['categories']);
 
 const isDrawerOpen = ref(false);
+const isDeleteModalOpen = ref(false);
 const isEditMode = ref(false);
 const errorMessage = ref('');
 
@@ -42,6 +45,11 @@ function openDrawerForEdit(category) {
     isEditMode.value = true;
     errorMessage.value = false;
     isDrawerOpen.value = true;
+}
+
+function openModalForDelete(category) {
+    form.id = category.id;
+    form.name = category.name;
 }
 
 function submit() {
@@ -98,25 +106,25 @@ function submit() {
     }
 }
 
-const deleteCategory = (categoryId) => {
-    if (confirm('Are you sure you want to delete this category?')) {
-        Inertia.delete(route('admin.document-categories.destroy', categoryId), {
-            onSuccess: () => {
-                toast("Document category has been successfully deleted!", {
-                    "type": "success",
-                    "position": "bottom-right",
-                    "autoClose": 1000,
-                    "hideProgressBar": true,
-                    "transition": "flip",
-                    "dangerouslyHTMLString": true
-                })
-            },
-            onError: (error) => {
-                alert('Failed to delete category. Please try again.');
-                console.error(error);
-            },
-        });
-    }
+const deleteCategory = () => {
+    form.transform((data) => ({
+        ...data,
+        _method: 'DELETE',
+    })).post(route('admin.document-categories.destroy', form.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("Document Category has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+            isDeleteModalOpen.value = false;
+        }
+    });
 };
 </script>
 
@@ -164,7 +172,7 @@ const deleteCategory = (categoryId) => {
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <button @click="openDrawerForEdit(category)"
                                     class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                <button @click="deleteCategory(category.id)"
+                                <button @click="isDeleteModalOpen = true, openModalForDelete(category)"
                                     class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
@@ -202,5 +210,22 @@ const deleteCategory = (categoryId) => {
                 </div>
             </template>
         </Drawer>
+
+        <DeleteConfirmation :isOpen="isDeleteModalOpen" @close="isDeleteModalOpen = false">
+            <template #message>
+                Are you sure you want to
+                delete <span class="font-bold">{{ form.name }}</span> category?
+            </template>
+            <template #button>
+                <PrimaryButton @click.prevent="deleteCategory"
+                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Yes, I'm sure
+                </PrimaryButton>
+                <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
+                    Cancel
+                </SecondaryButton>
+            </template>
+        </DeleteConfirmation>
     </AdminLayout>
 </template>

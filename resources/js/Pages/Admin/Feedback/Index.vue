@@ -1,34 +1,50 @@
 <script setup>
+import { ref } from 'vue';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
 import SearchForm from '@/Components/SearchForm.vue';
 import MainContentHeader from '@/Components/MainContentHeader.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TableContainer from '@/Components/TableContainer.vue';
-import { Inertia } from '@inertiajs/inertia';
+import { useForm } from '@inertiajs/vue3';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DeleteConfirmation from '@/Components/DeleteConfirmation.vue';
 
 const props = defineProps(['feedback', 'filters']);
 
-const deleteFeedback = (feedbackId) => {
-    if (confirm('Are you sure you want to delete this feedback?')) {
-        Inertia.delete(route('admin.feedback.destroy', feedbackId), {
-            onSuccess: () => {
-                toast("Feedback has been successfully deleted!", {
-                    "type": "success",
-                    "position": "bottom-right",
-                    "autoClose": 1000,
-                    "hideProgressBar": true,
-                    "transition": "flip",
-                    "dangerouslyHTMLString": true
-                })
-            },
-            onError: (error) => {
-                alert('Failed to delete news. Please try again.');
-                console.error(error);
-            },
-        });
-    }
+const isDeleteModalOpen = ref(false);
+
+const form = useForm({
+    id: null,
+    name: '',
+});
+
+function openModalForDelete(feedback_item) {
+    form.id = feedback_item.id;
+    form.name = feedback_item.name;
+}
+
+const deleteFeedback = () => {
+    form.transform((data) => ({
+        ...data,
+        _method: 'DELETE',
+    })).post(route('admin.feedback.destroy', form.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("Feedback has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+            isDeleteModalOpen.value = false;
+        }
+    });
 };
 </script>
 
@@ -43,7 +59,7 @@ const deleteFeedback = (feedbackId) => {
 
         <!-- Search Form -->
         <div class="mt-4">
-            <SearchForm :filters="filters" routeName="admin.feedback.index" />
+            <SearchForm :filters="filters" routeName="admin.feedback.index" placeholder="Search by name" />
         </div>
 
         <TableContainer>
@@ -78,7 +94,7 @@ const deleteFeedback = (feedbackId) => {
                                 <div class="text-sm text-gray-500">{{ feedback_item.message }}</div>
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                <button @click="deleteFeedback(feedback_item.id)"
+                                <button @click="isDeleteModalOpen = true, openModalForDelete(feedback_item)"
                                     class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
@@ -89,5 +105,22 @@ const deleteFeedback = (feedbackId) => {
                 <Pagination :pagination="feedback" />
             </template>
         </TableContainer>
+
+        <DeleteConfirmation :isOpen="isDeleteModalOpen" @close="isDeleteModalOpen = false">
+            <template #message>
+                Are you sure you want to
+                delete <span class="font-bold">{{ form.name }}'s</span> feedback?
+            </template>
+            <template #button>
+                <PrimaryButton @click.prevent="deleteFeedback"
+                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Yes, I'm sure
+                </PrimaryButton>
+                <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
+                    Cancel
+                </SecondaryButton>
+            </template>
+        </DeleteConfirmation>
     </AdminLayout>
 </template>

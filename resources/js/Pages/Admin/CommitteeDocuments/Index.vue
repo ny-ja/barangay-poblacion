@@ -16,10 +16,13 @@ import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 import TextInput from '@/Components/TextInput.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DeleteConfirmation from '@/Components/DeleteConfirmation.vue';
 
 const props = defineProps(['committeeDocuments', 'committees', 'documentTypes', 'filters']);
 
 const isDrawerOpen = ref(false);
+const isDeleteModalOpen = ref(false);
 const isEditMode = ref(false);
 const errorMessage = ref('');
 
@@ -49,6 +52,11 @@ function openDrawerForEdit(committeeDocument) {
     isEditMode.value = true;
     errorMessage.value = false;
     isDrawerOpen.value = true;
+}
+
+function openModalForDelete(committeeDocument) {
+    form.id = committeeDocument.id;
+    form.name = committeeDocument.name;
 }
 
 function handleFileChange(event) {
@@ -114,25 +122,25 @@ function submit() {
     }
 }
 
-const deleteCommitteeDocument = (committeeDocumentId) => {
-    if (confirm('Are you sure you want to delete this document?')) {
-        Inertia.delete(route('admin.committee-documents.destroy', committeeDocumentId), {
-            onSuccess: () => {
-                toast("Committee Document has been successfully deleted!", {
-                    "type": "success",
-                    "position": "bottom-right",
-                    "autoClose": 1000,
-                    "hideProgressBar": true,
-                    "transition": "flip",
-                    "dangerouslyHTMLString": true
-                })
-            },
-            onError: (error) => {
-                alert('Failed to delete document. Please try again.');
-                console.error(error);
-            },
-        });
-    }
+const deleteCommitteeDocument = () => {
+    form.transform((data) => ({
+        ...data,
+        _method: 'DELETE',
+    })).post(route('admin.committee-documents.destroy', form.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("Committee Document has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+            isDeleteModalOpen.value = false;
+        }
+    });
 };
 </script>
 
@@ -155,7 +163,7 @@ const deleteCommitteeDocument = (committeeDocumentId) => {
 
         <!-- Search Form -->
         <div class="mt-4">
-            <SearchForm :filters="filters" routeName="admin.committee-documents.index" />
+            <SearchForm :filters="filters" routeName="admin.committee-documents.index" placeholder="Search by name" />
         </div>
 
         <TableContainer>
@@ -201,7 +209,7 @@ const deleteCommitteeDocument = (committeeDocumentId) => {
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <button @click="openDrawerForEdit(committeeDocument)"
                                     class="text-teal-600 hover:text-teal-900">Edit</button>
-                                <button @click="deleteCommitteeDocument(committeeDocument.id)"
+                                <button @click="isDeleteModalOpen = true, openModalForDelete(committeeDocument)"
                                     class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
@@ -268,5 +276,22 @@ const deleteCommitteeDocument = (committeeDocumentId) => {
                 </div>
             </template>
         </Drawer>
+
+        <DeleteConfirmation :isOpen="isDeleteModalOpen" @close="isDeleteModalOpen = false">
+            <template #message>
+                Are you sure you want to
+                delete <span class="font-bold">{{ form.name }}</span>?
+            </template>
+            <template #button>
+                <PrimaryButton @click.prevent="deleteCommitteeDocument"
+                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Yes, I'm sure
+                </PrimaryButton>
+                <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
+                    Cancel
+                </SecondaryButton>
+            </template>
+        </DeleteConfirmation>
     </AdminLayout>
 </template>

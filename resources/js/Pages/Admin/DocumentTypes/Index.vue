@@ -15,10 +15,13 @@ import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 import TextInput from '@/Components/TextInput.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DeleteConfirmation from '@/Components/DeleteConfirmation.vue';
 
 const props = defineProps(['types']);
 
 const isDrawerOpen = ref(false);
+const isDeleteModalOpen = ref(false);
 const isEditMode = ref(false);
 const errorMessage = ref('');
 
@@ -42,6 +45,11 @@ function openDrawerForEdit(type) {
     isEditMode.value = true;
     errorMessage.value = false;
     isDrawerOpen.value = true;
+}
+
+function openModalForDelete(type) {
+    form.id = type.id;
+    form.name = type.name;
 }
 
 function submit() {
@@ -98,25 +106,25 @@ function submit() {
     }
 }
 
-const deleteType = (typeId) => {
-    if (confirm('Are you sure you want to delete this type?')) {
-        Inertia.delete(route('admin.document-types.destroy', typeId), {
-            onSuccess: () => {
-                toast("Document type has been successfully deleted!", {
-                    "type": "success",
-                    "position": "bottom-right",
-                    "autoClose": 1000,
-                    "hideProgressBar": true,
-                    "transition": "flip",
-                    "dangerouslyHTMLString": true
-                })
-            },
-            onError: (error) => {
-                alert('Failed to delete type. Please try again.');
-                console.error(error);
-            },
-        });
-    }
+const deleteType = () => {
+    form.transform((data) => ({
+        ...data,
+        _method: 'DELETE',
+    })).post(route('admin.document-types.destroy', form.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("Document Type has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+            isDeleteModalOpen.value = false;
+        }
+    });
 };
 </script>
 
@@ -165,7 +173,7 @@ const deleteType = (typeId) => {
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <button @click="openDrawerForEdit(type)"
                                     class="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                <button @click="deleteType(type.id)"
+                                <button @click="isDeleteModalOpen = true, openModalForDelete(type)"
                                     class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
@@ -203,6 +211,23 @@ const deleteType = (typeId) => {
                 </div>
             </template>
         </Drawer>
+
+        <DeleteConfirmation :isOpen="isDeleteModalOpen" @close="isDeleteModalOpen = false">
+            <template #message>
+                Are you sure you want to
+                delete <span class="font-bold">{{ form.name }}</span> type?
+            </template>
+            <template #button>
+                <PrimaryButton @click.prevent="deleteType"
+                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Yes, I'm sure
+                </PrimaryButton>
+                <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
+                    Cancel
+                </SecondaryButton>
+            </template>
+        </DeleteConfirmation>
 
     </AdminLayout>
 </template>

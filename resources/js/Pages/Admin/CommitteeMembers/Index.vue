@@ -17,10 +17,13 @@ import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 import TextInput from '@/Components/TextInput.vue';
 import Textarea from '@/Components/Textarea.vue';
+import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DeleteConfirmation from '@/Components/DeleteConfirmation.vue';
 
 const props = defineProps(['members', 'committees', 'filters']);
 
 const isDrawerOpen = ref(false);
+const isDeleteModalOpen = ref(false);
 const isEditMode = ref(false);
 const errorMessage = ref('');
 
@@ -66,6 +69,11 @@ function openDrawerForEdit(member) {
     isEditMode.value = true;
     errorMessage.value = false;
     isDrawerOpen.value = true;
+}
+
+function openModalForDelete(member) {
+    form.id = member.id;
+    form.full_name = member.full_name;
 }
 
 function handleFileChange(event) {
@@ -131,25 +139,25 @@ function submit() {
     }
 }
 
-const deleteMember = (memberId) => {
-    if (confirm('Are you sure you want to delete this member?')) {
-        Inertia.delete(route('admin.committee-members.destroy', memberId), {
-            onSuccess: () => {
-                toast("Committee member has been successfully deleted!", {
-                    "type": "success",
-                    "position": "bottom-right",
-                    "autoClose": 1000,
-                    "hideProgressBar": true,
-                    "transition": "flip",
-                    "dangerouslyHTMLString": true
-                })
-            },
-            onError: (error) => {
-                alert('Failed to delete news. Please try again.');
-                console.error(error);
-            },
-        });
-    }
+const deleteMember = () => {
+    form.transform((data) => ({
+        ...data,
+        _method: 'DELETE',
+    })).post(route('admin.committee-members.destroy', form.id), {
+        preserveScroll: true,
+        onSuccess: () => {
+            toast("Committee Member has been successfully deleted!", {
+                "type": "success",
+                "position": "bottom-right",
+                "autoClose": 1000,
+                "hideProgressBar": true,
+                "transition": "flip",
+                "dangerouslyHTMLString": true
+            })
+            form.reset();
+            isDeleteModalOpen.value = false;
+        }
+    });
 };
 </script>
 
@@ -172,7 +180,7 @@ const deleteMember = (memberId) => {
 
         <!-- Search Form -->
         <div class="mt-4">
-            <SearchForm :filters="filters" routeName="admin.committee-members.index" />
+            <SearchForm :filters="filters" routeName="admin.committee-members.index" placeholder="Search by full name" />
         </div>
 
         <TableContainer>
@@ -227,7 +235,7 @@ const deleteMember = (memberId) => {
                                     class="text-green-600 hover:text-teal-900">Show</Link>
                                 <button @click="openDrawerForEdit(member)"
                                     class="ml-4 text-yellow-600 hover:text-teal-900">Edit</button>
-                                <button @click="deleteMember(member.id)"
+                                <button @click="isDeleteModalOpen = true, openModalForDelete(member)"
                                     class="ml-4 text-red-600 hover:text-red-900">Delete</button>
                             </td>
                         </tr>
@@ -334,5 +342,21 @@ const deleteMember = (memberId) => {
                 </div>
             </template>
         </Drawer>
+        <DeleteConfirmation :isOpen="isDeleteModalOpen" @close="isDeleteModalOpen = false">
+            <template #message>
+                Are you sure you want to
+                delete <span class="font-bold">{{ form.full_name }}</span>?
+            </template>
+            <template #button>
+                <PrimaryButton @click.prevent="deleteMember"
+                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    Yes, I'm sure
+                </PrimaryButton>
+                <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
+                    Cancel
+                </SecondaryButton>
+            </template>
+        </DeleteConfirmation>
     </AdminLayout>
 </template>
