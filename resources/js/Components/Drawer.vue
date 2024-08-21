@@ -1,4 +1,6 @@
 <script setup>
+import Icon from "@/Components/Icon.vue";
+
 const props = defineProps({
     isOpen: {
         type: Boolean,
@@ -22,19 +24,12 @@ const closeDrawer = () => {
                 </h6>
                 <button @click="closeDrawer"
                     class="p-1 rounded-md text-[#F7F5F5] focus:outline-none focus:ring ring-[#F7F5F5]">
-                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                    <Icon name="close" stroke="white" />
                 </button>
             </div>
             <div class="flex-1 max-h-full p-4 overflow-auto">
                 <slot name="content" />
             </div>
-            <!-- <div class="flex flex-row justify-end px-6 py-4 bg-[#F7F5F5] text-end">
-                <slot name="footer" />
-            </div> -->
         </div>
     </Transition>
 

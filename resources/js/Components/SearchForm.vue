@@ -1,4 +1,3 @@
-<!-- resources/js/Components/SearchForm.vue -->
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { watch, ref } from 'vue';
@@ -25,7 +24,7 @@ watch(() => form.search, (newSearch) => {
     }
 });
 
-const searchUsers = () => {
+const search = () => {
     form.get(route(props.routeName), {
         preserveState: true,
         replace: true,
@@ -34,8 +33,7 @@ const searchUsers = () => {
 </script>
 
 <template>
-    <form @submit.prevent="searchUsers" class="flex items-center space-x-2">
-        <!-- <input v-model="form.search" type="text" placeholder="Search by name" class="px-4 py-2 border rounded-md" /> -->
+    <form @submit.prevent="search" class="flex items-center space-x-2">
         <div class="items-center flex px-2 space-x-2 md:flex-1 md:flex md:mr-auto md:ml-5">
             <svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">

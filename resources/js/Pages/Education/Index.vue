@@ -3,7 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import Icon from '@/Components/Icon.vue';
 import { ref } from "vue";
 
-const props = defineProps(['committeeDocuments', 'initiatives', 'members', 'documentTypes']);
+const props = defineProps(['committeeDocuments', 'initiatives', 'members', 'documentTypes', 'committees']);
 
 const isFirstTab = ref(true);
 const isSecondTab = ref(false);
@@ -21,33 +21,27 @@ const downloadPDF = (filePath) => {
 <template>
     <AppLayout title="Education">
         <div class="">
-            <section class="text-gray-600 body-font overflow-hidden">
-                <div class="px-5 py-16 mx-auto">
+            <section v-for="committee in committees" class="text-gray-600 body-font overflow-hidden">
+                <div v-if="committee.name == 'Education'" class="px-5 py-16 mx-auto">
                     <div class="lg:w-4/5 mx-auto flex flex-wrap flex-row-reverse">
-                        <img alt="education" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                            src="/images/education.webp" />
+                        <img alt="barangay" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+                            :src="`/storage/${committee.committee_profile_photo_path}`"
+                            v-if="committee.committee_profile_photo_path" />
                         <div class="lg:w-1/2 w-full lg:pr-24 lg:py-6 mt-6 lg:mt-0">
                             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-                                Welcome to the Education Committee Section
+                                Welcome to the {{ committee.name }} Committee Section
                             </h1>
                             <div class="flex mb-4">
                                 <span class="flex py-2 space-x-2">
                                     <div class="flex flex-row space-x-1 items-center">
-                                        <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
-                                            class="text-sm text-gray-900 hover:underline">(888) 888-8888</a>
-                                    </div>
-                                    <div class="flex flex-row space-x-1 items-center">
                                         <Icon name="mobile" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
-                                            class="text-sm text-gray-900 hover:underline">(999) 999-9999</a>
+                                            class="text-sm text-gray-900 hover:underline">{{
+                committee.contact_number }}</a>
                                     </div>
                                 </span>
                             </div>
-                            <p class="leading-relaxed pb-5 border-b-2 border-gray-100 mb-5">
-                                Welcome to Barangay Poblacion, where we prioritize education and lifelong learning.
-                                Our barangay is committed to providing quality education and fostering a culture of
-                                continuous improvement.
-                                Join us in our mission to empower individuals through educational initiatives and
-                                collaborative efforts.
+                            <p class="leading-relaxed pb-5 border-b-2 border-gray-100 mb-5">{{
+                committee.committee_profile }}
                             </p>
                         </div>
                     </div>
@@ -165,7 +159,8 @@ const downloadPDF = (filePath) => {
                     <div v-if="isFirstTab" class="px-5">
                         <div class="flex flex-wrap -m-4">
                             <temmplate v-for="committeeDocument in committeeDocuments.data" :key="committeeDocument.id">
-                                <div v-if="committeeDocument.document_type.name == 'Educational Materials'" class="p-4 md:1/3">
+                                <div v-if="committeeDocument.document_type.name == 'Educational Materials'"
+                                    class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
                                         <iframe class="w-full h-auto border rounded-md"
@@ -193,7 +188,8 @@ const downloadPDF = (filePath) => {
                     <div v-if="isSecondTab" class="px-5">
                         <div class="flex flex-wrap -m-4">
                             <temmplate v-for="committeeDocument in committeeDocuments.data" :key="committeeDocument.id">
-                                <div v-if="committeeDocument.document_type.name == 'Support and Funding'" class="p-4 md:1/3">
+                                <div v-if="committeeDocument.document_type.name == 'Support and Funding'"
+                                    class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
                                         <iframe class="w-full h-auto border rounded-md"

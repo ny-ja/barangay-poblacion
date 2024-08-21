@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Document;
+use App\Models\Committee;
 use App\Models\DocumentType;
 use App\Models\CommitteeMember;
 use App\Models\CommitteeDocument;
@@ -15,6 +16,7 @@ class PeaceAndOrderController extends Controller
     {
         $documentTypes = DocumentType::all();
         $members = CommitteeMember::with('committee')->get();
+        $committees = Committee::all();
 
         $committeeDocuments = CommitteeDocument::with('committee', 'documentType')
             ->where('committee_id', 5)
@@ -31,6 +33,7 @@ class PeaceAndOrderController extends Controller
             'initiatives' => $initiatives,
             'members' => $members,
             'documentTypes' => $documentTypes,
+            'committees' => $committees,
         ]);
     }
 }

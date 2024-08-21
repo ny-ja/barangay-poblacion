@@ -1,56 +1,92 @@
 <script setup>
 import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { Link } from "@inertiajs/vue3";
+import MainContentHeader from '@/Components/MainContentHeader.vue';
+import ChartCard from '@/Components/ChartCard.vue';
 
 const props = defineProps({
   users: Object,
   news: Object,
+  documents: Object,
+  officials: Object,
+  committees: Object,
+  members: Object,
+  committeeDocuments: Object,
+  initiatives: Object,
+  subscribers: Object,
+  feedback: Object,
 });
 
 </script>
 
 <template>
   <AdminLayout title="Dashboard">
-    <div
-      class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
-      <h1 class="text-2xl font-semibold whitespace-nowrap">Dashboard</h1>
-    </div>
+    <MainContentHeader>
+      <template #title>
+        Dashboard
+      </template>
+    </MainContentHeader>
+
     <div class="grid grid-cols-1 gap-6 mt-6 md:grid-cols-2 lg:grid-cols-4">
-      <Link :href="route('admin.users.index')"
-        class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
-      <div class="flex items-start">
-        <div class="flex flex-col flex-shrink-0 space-y-2">
-          <span class="text-gray-400">Total Users</span>
-          <span class="text-lg font-semibold">{{
-        users.length
-      }}</span>
-        </div>
-        <div class="relative min-w-0 ml-auto h-14">
-          <canvas id="usersChart"></canvas>
-        </div>
-      </div>
-      <div>
-        <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">14%</span>
-        <span>from 2020</span>
-      </div>
-      </Link>
-      <Link :href="route('admin.news.index')" class="p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-lg">
-      <div class="flex items-start">
-        <div class="flex flex-col flex-shrink-0 space-y-2">
-          <span class="text-gray-400">Total News</span>
-          <span class="text-lg font-semibold">{{
-        news.length
-            }}</span>
-        </div>
-        <div class="relative min-w-0 ml-auto h-14">
-          <canvas id="usersChart"></canvas>
-        </div>
-      </div>
-      <div>
-        <span class="inline-block px-2 text-sm text-white bg-green-300 rounded">14%</span>
-        <span>from 2020</span>
-      </div>
-      </Link>
+      <ChartCard :href="route('admin.users.index')">
+        <template #title>
+          Total Users
+        </template>
+        <template #value>{{ (users.length - 1) }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.news.index')">
+        <template #title>
+          Total News
+        </template>
+        <template #value>{{ news.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.documents.index')">
+        <template #title>
+          Total Documents
+        </template>
+        <template #value>{{ documents.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.barangay-officials.index')">
+        <template #title>
+          Total Barangay Officials
+        </template>
+        <template #value>{{ officials.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.committees.index')">
+        <template #title>
+          Total Committees
+        </template>
+        <template #value>{{ committees.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.committee-members.index')">
+        <template #title>
+          Total Committee Members
+        </template>
+        <template #value>{{ members.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.committee-documents.index')">
+        <template #title>
+          Total Committee Documents
+        </template>
+        <template #value>{{ committeeDocuments.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.committee-initiatives.index')">
+        <template #title>
+          Total Committee Initiatives
+        </template>
+        <template #value>{{ initiatives.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.subscribers.index')">
+        <template #title>
+          Total Subscribers
+        </template>
+        <template #value>{{ subscribers.length }}</template>
+      </ChartCard>
+      <ChartCard :href="route('admin.feedback.index')">
+        <template #title>
+          Total Feedback
+        </template>
+        <template #value>{{ feedback.length }}</template>
+      </ChartCard>
     </div>
   </AdminLayout>
 </template>

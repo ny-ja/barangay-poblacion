@@ -3,7 +3,7 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import Icon from '@/Components/Icon.vue';
 import { ref } from "vue";
 
-const props = defineProps(['committeeDocuments', 'members', 'documentTypes']);
+const props = defineProps(['committeeDocuments', 'members', 'documentTypes', 'committees']);
 
 const isFirstTab = ref(true);
 const isSecondTab = ref(false);
@@ -21,35 +21,27 @@ const downloadPDF = (filePath) => {
 <template>
     <AppLayout title="Peace and order">
         <div class="">
-            <section class="text-gray-600 body-font overflow-hidden">
-                <div class="px-5 py-16 mx-auto">
+            <section v-for="committee in committees" class="text-gray-600 body-font overflow-hidden">
+                <div v-if="committee.name == 'Peace And Order'" class="px-5 py-16 mx-auto">
                     <div class="lg:w-4/5 mx-auto flex flex-wrap flex-row-reverse">
                         <img alt="barangay" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-                            src="/images/peace-order.webp" />
+                            :src="`/storage/${committee.committee_profile_photo_path}`"
+                            v-if="committee.committee_profile_photo_path" />
                         <div class="lg:w-1/2 w-full lg:pr-24 lg:py-6 mt-6 lg:mt-0">
                             <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
-                                Welcome to the Peace And Order Committee Section
+                                Welcome to the {{ committee.name }} Committee Section
                             </h1>
                             <div class="flex mb-4">
                                 <span class="flex py-2 space-x-2">
                                     <div class="flex flex-row space-x-1 items-center">
-                                        <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
-                                            class="text-sm text-gray-900 hover:underline">(888) 888-8888</a>
-                                    </div>
-                                    <div class="flex flex-row space-x-1 items-center">
                                         <Icon name="mobile" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
-                                            class="text-sm text-gray-900 hover:underline">(999) 999-9999</a>
+                                            class="text-sm text-gray-900 hover:underline">{{
+                committee.contact_number }}</a>
                                     </div>
                                 </span>
                             </div>
-                            <p class="leading-relaxed pb-5 border-b-2 border-gray-100 mb-5">
-                                Welcome to Barangay Poblacion, where we prioritize peace and order to ensure the safety
-                                and
-                                well-being of all our residents. Our barangay is committed to maintaining a secure and
-                                harmonious
-                                environment through various initiatives and programs. Join us in our mission to build a
-                                peaceful
-                                and orderly community through proactive measures and collaborative efforts.
+                            <p class="leading-relaxed pb-5 border-b-2 border-gray-100 mb-5">{{
+                committee.committee_profile }}
                             </p>
                         </div>
                     </div>

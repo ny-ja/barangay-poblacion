@@ -139,10 +139,10 @@ const deleteDocument = (documentId) => {
 
 
 <template>
-    <AdminLayout title="Documents">
+    <AdminLayout title="Barangay Documents">
         <MainContentHeader>
             <template #title>
-                Documents
+                Barangay Documents
             </template>
             <template #buttons>
                 <ButtonIcon @click="openDrawerForCreate">
