@@ -22,7 +22,7 @@ const closeDrawer = () => {
                 !isSidebarOpen,
         }">
         <!-- sidebar header -->
-        <div class="overflow-y-auto">
+        <div class="overflow-y-auto overflow-x-hidden">
             <div class="flex items-center justify-between flex-shrink-0 p-2"
                 :class="{ 'lg:justify-center': !isSidebarOpen }">
                 <span

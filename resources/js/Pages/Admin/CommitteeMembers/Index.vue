@@ -9,10 +9,10 @@ import MainContentHeader from '@/Components/MainContentHeader.vue';
 import TableContainer from '@/Components/TableContainer.vue';
 import ButtonIcon from '@/Components/ButtonIcon.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+import DeleteButton from '@/Components/DeleteButton.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Icon from '@/Components/Icon.vue';
-import { Inertia } from '@inertiajs/inertia';
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 import TextInput from '@/Components/TextInput.vue';
@@ -348,11 +348,11 @@ const deleteMember = () => {
                 delete <span class="font-bold">{{ form.full_name }}</span>?
             </template>
             <template #button>
-                <PrimaryButton @click.prevent="deleteMember"
-                    class="ms-4 bg-red-800  hover:bg-red-700 focus:bg-red-700 active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-500"
+                <DeleteButton @click.prevent="deleteMember"
+                    class="ms-4"
                     :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Yes, I'm sure
-                </PrimaryButton>
+                </DeleteButton>
                 <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">
                     Cancel
                 </SecondaryButton>

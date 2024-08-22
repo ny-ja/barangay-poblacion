@@ -3,14 +3,14 @@
         <Link
             v-if="pagination.prev_page_url"
             :href="pagination.prev_page_url"
-            class="text-gray-800 px-3 py-2 bg-gray-300 rounded shadow-md"
+            class="text-white px-4 py-2 bg-teal-600 rounded shadow-md hover:bg-teal-700 transition-colors"
         >
             &lt;&lt; Previous
         </Link>
         <Link
             v-if="pagination.next_page_url"
             :href="pagination.next_page_url"
-            class="text-gray-800 px-3 py-2 bg-gray-300 rounded shadow-md"
+            class="text-white px-4 py-2 bg-teal-600 rounded shadow-md hover:bg-teal-700 transition-colors"
         >
             Next &gt;&gt;
         </Link>
