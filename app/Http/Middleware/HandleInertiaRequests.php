@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
+use App\Models\News;
 use Inertia\Middleware;
+use Illuminate\Http\Request;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,8 +37,12 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        // Retrieve the description of the latest news item
+        $latestNews = News::orderBy('created_at', 'desc')
+                                     ->value('description');
+
         return array_merge(parent::share($request), [
-            //
+            'latestNews' => $latestNews,
         ]);
     }
 }

@@ -1,6 +1,8 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Link } from "@inertiajs/vue3";
+
+const props = defineProps(['news', 'newsCategories'])
 </script>
 
 <template>
@@ -24,76 +26,19 @@ import { Link } from "@inertiajs/vue3";
                 <div class="px-5 py-16 mx-auto">
                     <h1 class="text-2xl w-full border-b mb-12 uppercase">Barangay News</h1>
                     <div class="flex flex-wrap -m-4">
-                        <div class="p-4 md:w-1/3">
+                        <div v-for="news_item in news.data" :key="news_item.id" class="p-4 md:w-1/3">
                             <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                                 <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                                    src="/images/clean-up-drive.webp" alt="news" />
+                                    :src="`/storage/${news_item.news_photo_path}`" alt="news" />
                                 <div class="p-6">
                                     <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                        COMMUNITY EVENT
+                                        {{ news_item.news_category.name }}
                                     </h2>
                                     <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                                        Clean-Up Drive
+                                        {{ news_item.title }}
                                     </h1>
                                     <p class="leading-relaxed mb-3">
-                                        Join us for a barangay-wide clean-up drive this Saturday. Let's keep our
-                                        community clean and green!
-                                    </p>
-                                    <div class="flex items-center flex-wrap justify-end">
-                                        <a class="text-teal-800 inline-flex items-center md:mb-2 lg:mb-0">View
-                                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor"
-                                                stroke-width="2" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M5 12h14"></path>
-                                                <path d="M12 5l7 7-7 7"></path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 md:w-1/3">
-                            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                                    src="/images/vaccination-drive.webp" alt="news" />
-                                <div class="p-6">
-                                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                        HEALTH CAMPAIGN
-                                    </h2>
-                                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                                        Vaccination Drive
-                                    </h1>
-                                    <p class="leading-relaxed mb-3">
-                                        The barangay health center will conduct a free vaccination drive next week.
-                                        Ensure your family's health and safety.
-                                    </p>
-                                    <div class="flex items-center flex-wrap justify-end">
-                                        <a class="text-teal-800 inline-flex items-center md:mb-2 lg:mb-0">View
-                                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor"
-                                                stroke-width="2" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path d="M5 12h14"></path>
-                                                <path d="M12 5l7 7-7 7"></path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 md:w-1/3">
-                            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                <img class="lg:h-48 md:h-36 w-full object-cover object-center"
-                                    src="/images/th-meeting.webp" alt="news" />
-                                <div class="p-6">
-                                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
-                                        ANNOUNCEMENT
-                                    </h2>
-                                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
-                                        Town Hall Meeting
-                                    </h1>
-                                    <p class="leading-relaxed mb-3">
-                                        There will be a barangay-wide town hall meeting to discuss upcoming projects and
-                                        community concerns. Your presence is important!
+                                        {{ news_item.description }}
                                     </p>
                                     <div class="flex items-center flex-wrap justify-end">
                                         <a class="text-teal-800 inline-flex items-center md:mb-2 lg:mb-0">View
@@ -163,8 +108,8 @@ import { Link } from "@inertiajs/vue3";
                             <div class="flex">
                                 <Link :href="route('about.index')"
                                     class="flex text-white bg-teal-800 border-0 py-2 px-6 focus:outline-none hover:bg-teal-700 rounded">
-                                    Read more
-                                </Link :href="route {{  }}">
+                                Read more
+                                </Link>
                             </div>
                         </div>
                     </div>

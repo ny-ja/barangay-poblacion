@@ -1,6 +1,6 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { ref, onMounted, computed } from "vue";
+import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import Icon from '@/Components/Icon.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { toast } from "vue3-toastify";
@@ -15,12 +15,16 @@ const form = useForm({
     email: '',
 });
 
+const page = usePage();
+
 const scrollDirection = ref('down');
 const prevScrollPos = ref(window.pageYOffset);
 const sidebar = ref(false);
 const isDropdownOpen = ref(false);
 const errorMessage = ref('');
 const acceptedPrivacyPolicy = ref(false);
+
+const latestNews = computed(() => page.props.latestNews)
 
 function submit() {
     form.post(route('subscribers.store'), {
@@ -100,10 +104,8 @@ onMounted(() => {
         <Head :title="title" />
         <div :class="scrollDirection === 'up' ? 'sticky top-0 z-40' : ''">
             <div class="runner-container z-40">
-                <p class="runner flex text-teal-800 text-md">
-                    <Icon name="megaphone" :classes="'size-6 text-green-500'" />Join us for a barangay-wide clean-up
-                    drive this Saturday. Let's keep our
-                    community clean and green!
+                <p v-if="latestNews" class="runner flex text-teal-800 text-md">
+                    <Icon name="megaphone" :classes="'size-6 text-green-500'" />{{ latestNews }}
                 </p>
             </div>
             <div class="bg-white border-gray-200">
