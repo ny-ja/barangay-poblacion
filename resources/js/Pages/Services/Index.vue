@@ -10,6 +10,10 @@ const isSecondTab = ref(false);
 const isThirdTab = ref(false);
 const isFourthTab = ref(false);
 
+const viewPDF = (filePath) => {
+    window.open(`/storage/${filePath}`, '_blank');
+}
+
 const downloadPDF = (filePath) => {
     const url = encodeURI(`/storage/${filePath}`);
     const link = document.createElement('a');
@@ -61,7 +65,7 @@ const downloadPDF = (filePath) => {
                                             :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
                                         <div class="flex justify-between items-center pt-4">
                                             <div class="flex gap-3">
-                                                <button
+                                                <button @click="viewPDF(document.file_path)"
                                                     class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
                                                     <Icon name="view" :classes="'size-4'" :fill="'white'" />
                                                 </button>
@@ -82,7 +86,8 @@ const downloadPDF = (filePath) => {
                     <div v-if="isSecondTab" class="px-5">
                         <div class="flex flex-wrap -m-4">
                             <temmplate v-for="document in documents.data" :key="document.id">
-                                <div v-if="document.document_type.name == 'Barangay Clearance Requirements'" class="p-4 md:1/3">
+                                <div v-if="document.document_type.name == 'Barangay Clearance Requirements'"
+                                    class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
                                         <iframe class="w-full h-auto border rounded-md"
