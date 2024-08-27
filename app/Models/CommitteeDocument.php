@@ -12,6 +12,7 @@ class CommitteeDocument extends Model
     protected $fillable = [
         'name',
         'file_path',
+        'background_image_path',
         'user_id',
         'committee_id',
         'document_type_id'

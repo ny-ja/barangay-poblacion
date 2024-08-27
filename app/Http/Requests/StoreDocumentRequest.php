@@ -24,6 +24,7 @@ class StoreDocumentRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'file' => 'required|file|mimes:pdf',
+            'background_image' => 'required|image',
             'document_category_id' => 'required|exists:document_categories,id',
             'document_type_id' => 'required|exists:document_types,id',
         ];

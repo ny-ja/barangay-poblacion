@@ -30,6 +30,7 @@ const form = useForm({
     id: null,
     name: '',
     file: null,
+    background_image: null,
     user_id: '',
     document_category_id: '',
     document_type_id: '',
@@ -48,6 +49,7 @@ function openDrawerForEdit(document) {
     form.id = document.id;
     form.name = document.name;
     form.file = null;
+    form.background_image = null;
     form.document_category_id = document.document_category_id;
     form.document_type_id = document.document_type_id;
     isEditMode.value = true;
@@ -58,10 +60,6 @@ function openDrawerForEdit(document) {
 function openModalForDelete(document) {
     form.id = document.id;
     form.name = document.name;
-}
-
-function handleFileChange(event) {
-    form.file = event.target.files[0];
 }
 
 function submit() {
@@ -203,8 +201,8 @@ const deleteDocument = (documentId) => {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex-shrink-0">
-                                    <iframe class="w-24 h-auto border rounded-md"
-                                        :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
+                                    <img :src="`/storage/${document.background_image_path}`" alt="Document image"
+                                        class="w-24 h-auto rounded" v-if="document.background_image_path" />
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
@@ -260,12 +258,21 @@ const deleteDocument = (documentId) => {
                         </div>
                         <div>
                             <InputLabel for="file" value="File" />
-                            <input type="file" @change="handleFileChange" id="file"
+                            <input type="file" @input="form.file = $event.target.files[0]" id="file"
                                 class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100" />
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
                             <InputError :message="form.errors.file" class="mt-2" />
+                        </div>
+                        <div>
+                            <InputLabel for="background_image" value="Document background image" />
+                            <input type="file" @input="form.background_image = $event.target.files[0]" id="background_image"
+                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100" />
+                            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                {{ form.progress.percentage }}%
+                            </progress>
+                            <InputError :message="form.errors.background_image" class="mt-2" />
                         </div>
                         <div class="flex justify-end">
                             <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }"

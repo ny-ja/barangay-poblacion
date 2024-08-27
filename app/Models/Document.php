@@ -12,6 +12,7 @@ class Document extends Model
     protected $fillable = [
         'name',
         'file_path',
+        'background_image_path',
         'user_id',
         'document_category_id',
         'document_type_id'

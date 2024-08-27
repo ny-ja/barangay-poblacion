@@ -30,6 +30,7 @@ const form = useForm({
     id: null,
     name: '',
     committee_file: null,
+    background_image: null,
     user_id: '',
     committee_id: '',
     document_type_id: '',
@@ -47,6 +48,7 @@ function openDrawerForEdit(committeeDocument) {
     form.id = committeeDocument.id;
     form.name = committeeDocument.name;
     form.committee_file = null;
+    form.background_image = null;
     form.committee_id = committeeDocument.committee_id;
     form.document_type_id = committeeDocument.document_type_id;
     isEditMode.value = true;
@@ -57,10 +59,6 @@ function openDrawerForEdit(committeeDocument) {
 function openModalForDelete(committeeDocument) {
     form.id = committeeDocument.id;
     form.name = committeeDocument.name;
-}
-
-function handleFileChange(event) {
-    form.committee_file = event.target.files[0];
 }
 
 function submit() {
@@ -202,8 +200,8 @@ const deleteCommitteeDocument = () => {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex-shrink-0">
-                                    <iframe class="w-24 h-auto border rounded-md"
-                                        :src="`/storage/${committeeDocument.file_path}`" frameborder="0"></iframe>
+                                    <img :src="`/storage/${committeeDocument.background_image_path}`" alt="Document image"
+                                        class="w-24 h-auto rounded" v-if="committeeDocument.background_image_path" />
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
@@ -259,12 +257,21 @@ const deleteCommitteeDocument = () => {
                         </div>
                         <div>
                             <InputLabel for="committee_file" value="File" />
-                            <input type="file" @change="handleFileChange" id="committee_file"
+                            <input type="file" @input="form.committee_file = $event.target.files[0]" id="committee_file"
                                 class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100" />
                             <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                 {{ form.progress.percentage }}%
                             </progress>
                             <InputError :message="form.errors.committee_file" class="mt-2" />
+                        </div>
+                        <div>
+                            <InputLabel for="background_image" value="Document background image" />
+                            <input type="file" @input="form.background_image = $event.target.files[0]" id="background_image"
+                                class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100" />
+                            <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                {{ form.progress.percentage }}%
+                            </progress>
+                            <InputError :message="form.errors.background_image" class="mt-2" />
                         </div>
                         <div class="flex justify-end">
                             <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }"

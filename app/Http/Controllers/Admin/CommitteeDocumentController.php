@@ -41,6 +41,9 @@ class CommitteeDocumentController extends Controller
 
         $path = $request->file('committee_file') ? $request->file('committee_file')->store('committee_files', 'public') : null;
         $validatedData['file_path'] = $path;
+
+        $bg_path = $request->file('background_image') ? $request->file('background_image')->store('background_images', 'public') : null;
+        $validatedData['background_image_path'] = $bg_path;
         
         $request->user()->committeeDocument()->create($validatedData);
 
@@ -60,6 +63,15 @@ class CommitteeDocumentController extends Controller
             $validatedData['file_path'] = $path;
         }
 
+        if ($request->hasFile('background_image')) {
+            // Delete the old file if it exists
+            if ($committeeDocument->background_image_path) {
+                Storage::disk('public')->delete($committeeDocument->background_image_path);
+            }
+            $bg_path = $request->file('background_image')->store('background_images', 'public');
+            $validatedData['background_image_path'] = $bg_path;
+        }
+
         $committeeDocument->update($validatedData);
 
         return redirect()->back();
@@ -70,6 +82,11 @@ class CommitteeDocumentController extends Controller
         if ($committeeDocument->file_path) {
             Storage::disk('public')->delete($committeeDocument->file_path);
         }
+
+        if ($committeeDocument->background_image_path) {
+            Storage::disk('public')->delete($committeeDocument->background_image_path);
+        }
+
         $committeeDocument->delete();
 
         return redirect()->back();

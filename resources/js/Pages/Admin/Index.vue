@@ -88,26 +88,5 @@ const props = defineProps({
         <template #value>{{ feedback.length }}</template>
       </ChartCard>
     </div>
-    <div class="px-4 py-6 bg-gray-200 my-4 rounded-lg">
-      <div class="bg-red-500 px-6 py-8">
-        <div
-          class="image-container object-contain h-60 bg-center bg-no-repeat bg-[url('/images/captain.webp')] bg-transparent bg-blend-multiply lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
-        </div>
-      </div>
-
-    </div>
-
   </AdminLayout>
 </template>
-
-<style scoped>
-.image-container {
-  background-position: top;
-  background-size: cover;
-  transition: background-position 1s ease-in-out;
-}
-
-.image-container:hover {
-  background-position: center bottom;
-}
-</style>

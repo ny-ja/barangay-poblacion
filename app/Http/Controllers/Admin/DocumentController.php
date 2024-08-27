@@ -41,6 +41,9 @@ class DocumentController extends Controller
 
         $path = $request->file('file') ? $request->file('file')->store('files', 'public') : null;
         $validatedData['file_path'] = $path;
+
+        $bg_path = $request->file('background_image') ? $request->file('background_image')->store('background_images', 'public') : null;
+        $validatedData['background_image_path'] = $bg_path;
         
         $request->user()->document()->create($validatedData);
 
@@ -60,6 +63,15 @@ class DocumentController extends Controller
             $validatedData['file_path'] = $path;
         }
 
+        if ($request->hasFile('background_image')) {
+            // Delete the old file if it exists
+            if ($document->background_image_path) {
+                Storage::disk('public')->delete($document->background_image_path);
+            }
+            $bg_path = $request->file('background_image')->store('background_images', 'public');
+            $validatedData['background_image_path'] = $bg_path;
+        }
+
         $document->update($validatedData);
 
         return redirect()->back();
@@ -70,6 +82,11 @@ class DocumentController extends Controller
         if ($document->file_path) {
             Storage::disk('public')->delete($document->file_path);
         }
+
+        if ($document->background_image_path) {
+            Storage::disk('public')->delete($document->background_image_path);
+        }
+
         $document->delete();
 
         return redirect()->back();

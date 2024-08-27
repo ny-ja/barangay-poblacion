@@ -24,6 +24,7 @@ class UpdateDocumentRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'file' => 'nullable|file|mimes:pdf',
+            'background_image' => 'nullable|image',
             'document_category_id' => 'required|exists:document_categories,id',
             'document_type_id' => 'required|exists:document_types,id',
         ];

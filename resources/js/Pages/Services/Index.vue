@@ -61,8 +61,16 @@ const downloadPDF = (filePath) => {
                                 <div v-if="document.document_type.name == 'Application Form'" class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
-                                        <iframe class="w-full h-auto border rounded-md"
-                                            :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
+                                        <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
+                                            class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
+                                            <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="white" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                         <div class="flex justify-between items-center pt-4">
                                             <div class="flex gap-3">
                                                 <button @click="viewPDF(document.file_path)"
@@ -90,8 +98,16 @@ const downloadPDF = (filePath) => {
                                     class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
-                                        <iframe class="w-full h-auto border rounded-md"
-                                            :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
+                                        <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
+                                            class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
+                                            <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="white" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                         <div class="flex justify-between items-center pt-4">
                                             <div class="flex gap-3">
                                                 <button
@@ -118,8 +134,16 @@ const downloadPDF = (filePath) => {
                                 <div v-if="document.document_type.name == 'Health Services'" class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
-                                        <iframe class="w-full h-auto border rounded-md"
-                                            :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
+                                        <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
+                                            class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
+                                            <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="white" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                         <div class="flex justify-between items-center pt-4">
                                             <div class="flex gap-3">
                                                 <button
@@ -146,8 +170,16 @@ const downloadPDF = (filePath) => {
                                 <div v-if="document.document_type.name == 'Informational Materials'" class="p-4 md:1/3">
                                     <div
                                         class="h-full px-6 py-6 border-2 border-gray-300 rounded-lg overflow-hidden shadow-lg">
-                                        <iframe class="w-full h-auto border rounded-md"
-                                            :src="`/storage/${document.file_path}`" frameborder="0"></iframe>
+                                        <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
+                                            class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
+                                            <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="white" class="size-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                         <div class="flex justify-between items-center pt-4">
                                             <div class="flex gap-3">
                                                 <button
@@ -173,3 +205,29 @@ const downloadPDF = (filePath) => {
         </div>
     </AppLayout>
 </template>
+
+<style scoped>
+.image-container {
+    background-position: top;
+    background-size: cover;
+    transition: background-position 1s ease-in-out;
+    position: relative;
+}
+
+.image-container:hover {
+    background-position: center bottom;
+}
+
+.icon-container {
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-container:hover .icon-container {
+    transform: translate(-50%, calc(-50% + 50px));
+    opacity: 0;
+}
+</style>
