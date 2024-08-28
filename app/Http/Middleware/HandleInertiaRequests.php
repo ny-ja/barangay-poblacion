@@ -41,8 +41,15 @@ class HandleInertiaRequests extends Middleware
         $latestNews = News::orderBy('created_at', 'desc')
                                      ->value('description');
 
+        // return array_merge(parent::share($request), [
+        //     'latestNews' => $latestNews,
+        // ]);
+
+        $apiKey = env('GOOGLE_MAPS_API_KEY');
+
         return array_merge(parent::share($request), [
             'latestNews' => $latestNews,
+            'apiKey' => $apiKey, // Share the API key with all Inertia pages
         ]);
     }
 }

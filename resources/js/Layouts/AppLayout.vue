@@ -24,7 +24,8 @@ const isDropdownOpen = ref(false);
 const errorMessage = ref('');
 const acceptedPrivacyPolicy = ref(false);
 
-const latestNews = computed(() => page.props.latestNews)
+const latestNews = computed(() => page.props.latestNews);
+const googleMapsApiKey =  page.props.apiKey;
 
 function submit() {
     form.post(route('subscribers.store'), {
@@ -78,7 +79,7 @@ onMounted(() => {
 // Google Maps initialization
 onMounted(() => {
     const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyCKVvI-0R1P3Bd-5L8JH--PRSTSEDWwHo0&libraries=places&callback=initMap&loading=async`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&libraries=places&callback=initMap&loading=async`;
     script.async = true;
     script.defer = true;
     document.head.appendChild(script);
