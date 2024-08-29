@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { Head, router, Link } from "@inertiajs/vue3";
 import Sidebar from "@/Components/Sidebar.vue";
+import Icon from "@/Components/Icon.vue";
 
 defineProps({
     title: String,
@@ -44,13 +45,13 @@ const logout = () => {
                                     src="/images/poblacion-logo.svg" class="w-12 h-auto" alt="Barangay Logo" /></span>
                             <button @click="isSidebarOpen = !isSidebarOpen"
                                 class="p-2 rounded-md focus:outline-none focus:ring focus:ring-teal-800">
-                                <svg class="w-4 h-4 text-gray-600" :class="{
+                                <div :class="{
         'transform transition-transform -rotate-180':
             isSidebarOpen,
-    }" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-                                </svg>
+    }">
+                                    <Icon name="chevron_double_right" stroke="#115e59" :classes="'size-5'" fill="none"
+                                        stroke_width="2" />
+                                </div>
                             </button>
                         </div>
 

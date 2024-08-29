@@ -19,7 +19,7 @@ const props = defineProps(['official']);
             <template #buttons>
                 <LinkIcon :href="route('admin.barangay-officials.index')">
                     <template #icon>
-                        <Icon name="back" />
+                        <Icon name="back" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                     </template>
                     <template #text>Back</template>
                 </LinkIcon>

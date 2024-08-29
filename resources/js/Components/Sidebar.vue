@@ -41,14 +41,14 @@ const closeDrawer = () => {
                     <li>
                         <SideNavLink :href="route('admin.index')" :active="route().current('admin.index')"
                             :isSidebarOpen="isSidebarOpen">
-                            <Icon name="home" :stroke="'white'" />
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
+                            <Icon name="home" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
                         </SideNavLink>
                     </li>
                     <li>
                         <DropdownButton :isSidebarOpen="isSidebarOpen">
                             <template #icon>
-                                <Icon name="category" />
+                                <Icon name="category" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                             </template>
                             <template #text>
                                 Categories & Types
@@ -57,20 +57,20 @@ const closeDrawer = () => {
                                 <SideNavLink :href="route('admin.document-categories.index')"
                                     :active="route().current('admin.document-categories.index')"
                                     :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="rectangle-stack" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Categories</span>
+                                    <Icon name="rectangle_stack" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Document Categories</span>
                                 </SideNavLink>
                                 <SideNavLink :href="route('admin.document-types.index')"
                                     :active="route().current('admin.document-types.index')"
                                     :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="numbered-list" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Document Types</span>
+                                    <Icon name="numbered_list" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Document Types</span>
                                 </SideNavLink>
                                 <SideNavLink :href="route('admin.news-categories.index')"
                                     :active="route().current('admin.news-categories.index')"
                                     :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="square-stack-3" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">News Categories</span>
+                                    <Icon name="square_stack_3" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">News Categories</span>
                                 </SideNavLink>
                             </template>
                         </DropdownButton>
@@ -78,7 +78,7 @@ const closeDrawer = () => {
                     <li>
                         <DropdownButton :isSidebarOpen="isSidebarOpen" >
                             <template #icon>
-                                <Icon name="folder-open" />
+                                <Icon name="folder_open" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                             </template>
                             <template #text>
                                 Documents
@@ -86,14 +86,14 @@ const closeDrawer = () => {
                             <template #nav>
                                 <SideNavLink :href="route('admin.documents.index')"
                                     :active="route().current('admin.documents.index')" :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="folder" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Barangay Documents</span>
+                                    <Icon name="folder" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Barangay Documents</span>
                                 </SideNavLink>
                                 <SideNavLink :href="route('admin.committee-documents.index')"
                                     :active="route().current('admin.committee-documents.index')"
                                     :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="square-stack-2" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Committee Documents</span>
+                                    <Icon name="square_stack_2" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee Documents</span>
                                 </SideNavLink>
                             </template>
                         </DropdownButton>
@@ -101,7 +101,7 @@ const closeDrawer = () => {
                     <li>
                         <DropdownButton :isSidebarOpen="isSidebarOpen">
                             <template #icon>
-                                <Icon name="group" />
+                                <Icon name="group" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                             </template>
                             <template #text>
                                 People
@@ -110,24 +110,24 @@ const closeDrawer = () => {
                                 <SideNavLink :href="route('admin.barangay-officials.index')"
                                     :active="route().current('admin.barangay-officials.index')"
                                     :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="user" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Barangay Officials</span>
+                                    <Icon name="user" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Barangay Officials</span>
                                 </SideNavLink>
                                 <SideNavLink :href="route('admin.committee-members.index')"
                                     :active="route().current('admin.committee-members.index')"
                                     :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="users" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Committee Members</span>
+                                    <Icon name="users" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee Members</span>
                                 </SideNavLink>
                                 <SideNavLink :href="route('admin.users.index')"
                                     :active="route().current('admin.users.index')" :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="user-circle" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
+                                    <Icon name="user_circle" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
                                 </SideNavLink>
                                 <SideNavLink :href="route('admin.subscribers.index')"
                                     :active="route().current('admin.subscribers.index')" :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="user-plus" :stroke="'white'" />
-                                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Subscribers</span>
+                                    <Icon name="user_plus" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Subscribers</span>
                                 </SideNavLink>
                             </template>
                         </DropdownButton>
@@ -135,31 +135,31 @@ const closeDrawer = () => {
                     <li>
                         <SideNavLink :href="route('admin.news.index')" :active="route().current('admin.news.index')"
                             :isSidebarOpen="isSidebarOpen">
-                            <Icon name="newspaper" :stroke="'white'" />
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
+                            <Icon name="newspaper" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
                         </SideNavLink>
 
                     </li>
                     <li>
                         <SideNavLink :href="route('admin.committees.index')"
                             :active="route().current('admin.committees.index')" :isSidebarOpen="isSidebarOpen">
-                            <Icon name="squares" :stroke="'white'" />
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Committees</span>
+                            <Icon name="squares" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committees</span>
                         </SideNavLink>
                     </li>
                     <li>
                         <SideNavLink :href="route('admin.committee-initiatives.index')"
                             :active="route().current('admin.committee-initiatives.index')"
                             :isSidebarOpen="isSidebarOpen">
-                            <Icon name="light" :stroke="'white'" />
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Committee Initiatives</span>
+                            <Icon name="light" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee Initiatives</span>
                         </SideNavLink>
                     </li>
                     <li>
                         <SideNavLink :href="route('admin.feedback.index')"
                             :active="route().current('admin.feedback.index')" :isSidebarOpen="isSidebarOpen">
-                            <Icon name="message" :stroke="'white'" />
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Feedback</span>
+                            <Icon name="message" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Feedback</span>
                         </SideNavLink>
                     </li>
                 </ul>

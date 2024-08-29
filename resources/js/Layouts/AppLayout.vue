@@ -25,7 +25,7 @@ const errorMessage = ref('');
 const acceptedPrivacyPolicy = ref(false);
 
 const latestNews = computed(() => page.props.latestNews);
-const googleMapsApiKey =  page.props.apiKey;
+const googleMapsApiKey = page.props.apiKey;
 
 function submit() {
     form.post(route('subscribers.store'), {
@@ -106,7 +106,7 @@ onMounted(() => {
         <div :class="scrollDirection === 'up' ? 'sticky top-0 z-40' : ''">
             <div class="runner-container z-40">
                 <p v-if="latestNews" class="runner flex text-teal-800 text-md">
-                    <Icon name="megaphone" :classes="'size-6 text-green-500'" />{{ latestNews }}
+                    {{ latestNews }}
                 </p>
             </div>
             <div class="bg-white border-gray-200">
@@ -125,33 +125,33 @@ onMounted(() => {
                     <div class="hidden lg:flex flex-col lg:items-end items-center space-y-2">
                         <div class="flex items-center space-x-6 rtl:space-x-reverse">
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
+                                <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1"/><a href="#"
                                     class="text-sm text-gray-900 hover:underline">(888)
                                     888-8888</a>
                             </div>
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="mobile" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
+                                <Icon name="mobile" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1"/><a href="#"
                                     class="text-sm text-gray-900 hover:underline">(999)
                                     999-9999</a>
                             </div>
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="mail" :classes="'size-4'" :fill="'#115e59'" /><a href="#"
+                                <Icon name="mail" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1"/><a href="#"
                                     class="text-sm text-gray-900 hover:underline">
                                     poblacion@gmail.com</a>
                             </div>
                         </div>
                         <div class="flex items-center justify-end space-x-4 rtl:space-x-reverse">
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="facebook" :classes="'size-6'" :fill="'black'" />
+                                <Icon name="facebook" :classes="'size-6'" fill="black'"stroke="transpaent'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="instagram" :classes="'size-6'" :fill="'black'" />
+                                <Icon name="instagram" :classes="'size-6'" fill="black'"stroke="transpaent'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="whatsapp" :classes="'size-6'" :fill="'black'" />
+                                <Icon name="whatsapp" :classes="'size-6'" fill="black'"stroke="transpaent'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="youtube" :classes="'size-6'" :fill="'black'" />
+                                <Icon name="youtube" :classes="'size-6'" fill="black'"stroke="transpaent'" />
                             </div>
                         </div>
                     </div>
@@ -438,26 +438,26 @@ onMounted(() => {
                             <div class="flex flex-col items-center">
                                 <a class="text-lg">4-Hour Command Center</a>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" />
+                                    <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">8-888-8888 / 0912-345-6789</a>
                                 </div>
                             </div>
                             <div class="flex flex-col items-center">
                                 <a class="text-lg">Office of the Barangay Captain</a>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="phone" :classes="'size-4'" :fill="'#115e59'" />
+                                    <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">9-999-9999</a>
                                 </div>
                             </div>
                             <div class="flex flex-col items-center">
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="mail" :classes="'size-4'" :fill="'#115e59'" />
+                                    <Icon name="mail" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">poblacion@gmail.com</a>
                                 </div>
                             </div>
                             <div>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="location" :classes="'size-4'" :fill="'#115e59'" />
+                                    <Icon name="location" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">Poblacion, Valencia City, Bukidnon</a>
                                 </div>
                             </div>
@@ -474,13 +474,13 @@ onMounted(() => {
                         </h2>
                         <div class="flex flex-row justify-center space-x-4">
                             <div class="cursor-pointer">
-                                <Icon name="facebook" :classes="'size-12'" :fill="'black'" />
+                                <Icon name="facebook" :classes="'size-12'" fill="black'" stroke="transpaent'" />
                             </div>
                             <div class="cursor-pointer">
-                                <Icon name="instagram" :classes="'size-12'" :fill="'black'" />
+                                <Icon name="instagram" :classes="'size-12'" fill="black'" stroke="transpaent'" />
                             </div>
                             <div class="cursor-pointer">
-                                <Icon name="whatsapp" :classes="'size-12'" :fill="'black'" />
+                                <Icon name="whatsapp" :classes="'size-12'" fill="black'" stroke="transpaent'" />
                             </div>
                         </div>
                         <div class="mt-6 flex flex-col items-center">

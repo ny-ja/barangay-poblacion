@@ -152,7 +152,7 @@ const deleteCommitteeDocument = () => {
             <template #buttons>
                 <ButtonIcon @click="openDrawerForCreate">
                     <template #icon>
-                        <Icon name="plus" />
+                        <Icon name="plus" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                     </template>
                     <template #text>Add Committee Document</template>
                 </ButtonIcon>

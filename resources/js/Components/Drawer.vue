@@ -24,7 +24,7 @@ const closeDrawer = () => {
                 </h6>
                 <button @click="closeDrawer"
                     class="p-1 rounded-md text-[#F7F5F5] focus:outline-none focus:ring ring-[#F7F5F5]">
-                    <Icon name="close" stroke="white" />
+                    <Icon name="close" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                 </button>
             </div>
             <div class="flex-1 max-h-full p-4 overflow-auto">

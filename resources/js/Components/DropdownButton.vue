@@ -18,13 +18,14 @@ const toggleDropdown = () => {
         <div class="flex space-x-2">
             <slot name="icon" />
 
-            <span :class="{ 'lg:hidden': !isSidebarOpen }">
+            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">
                 <slot name="text" />
             </span>
         </div>
 
         <span :class="{ 'lg:hidden': !isSidebarOpen }">
-            <Icon name="chevron" />
+            <Icon name="chevron" :classes="'size-5'" />
+
         </span>
     </div>
     <ul class="border border-teal-500 mt-1 p-2 rounded-lg"

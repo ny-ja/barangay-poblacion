@@ -64,11 +64,7 @@ const downloadPDF = (filePath) => {
                                         <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
                                             class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
                                             <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="white" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
-                                                </svg>
+                                                <Icon name="chevron-double-down" />
                                             </div>
                                         </div>
                                         <div class="flex justify-between items-center pt-4">
@@ -101,11 +97,7 @@ const downloadPDF = (filePath) => {
                                         <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
                                             class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
                                             <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="white" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
-                                                </svg>
+                                                <Icon name="chevron-double-down" />
                                             </div>
                                         </div>
                                         <div class="flex justify-between items-center pt-4">
@@ -137,11 +129,7 @@ const downloadPDF = (filePath) => {
                                         <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
                                             class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
                                             <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="white" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
-                                                </svg>
+                                                <Icon name="chevron-double-down" />
                                             </div>
                                         </div>
                                         <div class="flex justify-between items-center pt-4">
@@ -173,11 +161,7 @@ const downloadPDF = (filePath) => {
                                         <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
                                             class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
                                             <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="white" class="size-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
-                                                </svg>
+                                                <Icon name="chevron-double-down" />
                                             </div>
                                         </div>
                                         <div class="flex justify-between items-center pt-4">
