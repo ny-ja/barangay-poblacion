@@ -121,9 +121,9 @@ const logout = () => {
                                         <span class="text-sm text-gray-400">{{ $page.props.auth.user.email }}</span>
                                     </div>
                                     <ul class="flex flex-col p-2 space-y-1">
-                                        <li class=" hover:bg-teal-100">
+                                        <li class="rounded-md hover:bg-teal-100">
                                             <Link :href="route('profile.show')"
-                                                class="block px-2 py-1 transition rounded-md">Profile
+                                                class="block px-2 py-1 transition">Profile
                                             </Link>
                                         </li>
                                     </ul>

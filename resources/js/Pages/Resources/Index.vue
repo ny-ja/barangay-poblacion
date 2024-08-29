@@ -46,18 +46,18 @@ const downloadPDF = (filePath) => {
                                         <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
                                             class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
                                             <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
-                                                <Icon name="chevron-double-down" />
+                                                <Icon name="chevron_double_down" :classes="'size-6'" stroke="white" />
                                             </div>
                                         </div>
                                         <div class="flex justify-between items-center pt-4">
                                             <div class="flex gap-3">
                                                 <button
                                                     class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
-                                                    <Icon name="view" :classes="'size-4'" :fill="'white'" />
+                                                    <Icon name="view" :classes="'size-5'" fill="white" stroke="none" />
                                                 </button>
                                                 <button @click="downloadPDF(document.file_path)"
                                                     class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
-                                                    <Icon name="download" :classes="'size-4'" :fill="'white'" />
+                                                    <Icon name="download" :classes="'size-5'" fill="white" stroke="white" />
                                                 </button>
                                             </div>
                                             <h1 class="title-font text-lg font-medium text-gray-900 mb-0">
@@ -78,18 +78,18 @@ const downloadPDF = (filePath) => {
                                         <div :style="{ backgroundImage: `url(/storage/${document.background_image_path})` }"
                                             class="image-container object-contain w-full h-40 px-40 bg-center bg-no-repeat bg-transparent bg-blend-multiply overflow-hidden flex items-center justify-center relative">
                                             <div class="icon-container bg-gray-800 opacity-60 px-5 py-5 rounded-full">
-                                                <Icon name="chevron-double-down" />
+                                                <Icon name="chevron_double_down" :classes="'size-6'" stroke="white" />
                                             </div>
                                         </div>
                                         <div class="flex justify-between items-center pt-4">
                                             <div class="flex gap-3">
                                                 <button
                                                     class="p-2 bg-amber-400 rounded-md hover:bg-amber-300 transition duration-300">
-                                                    <Icon name="view" :classes="'size-4'" :fill="'white'" />
+                                                    <Icon name="view" :classes="'size-5'" fill="white" stroke="none" />
                                                 </button>
                                                 <button @click="downloadPDF(document.file_path)"
                                                     class="p-2 bg-teal-800 rounded-md hover:bg-teal-700 transition duration-300">
-                                                    <Icon name="download" :classes="'size-4'" :fill="'white'" />
+                                                    <Icon name="download" :classes="'size-5'" fill="white" stroke="white" />
                                                 </button>
                                             </div>
                                             <h1 class="title-font text-lg font-medium text-gray-900 mb-0">
