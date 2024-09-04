@@ -2,7 +2,11 @@
 import { ref, onMounted, computed } from "vue";
 import { Head, Link, useForm, usePage } from "@inertiajs/vue3";
 import Icon from '@/Components/Icon.vue';
+import NavLink from '@/Components/NavLink.vue';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import DropdownNavLink from '@/Components/DropdownNavLink.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import DropdownButton from "@/Components/DropdownButton.vue";
 import { toast } from "vue3-toastify";
 import 'vue3-toastify/dist/index.css';
 
@@ -125,157 +129,100 @@ onMounted(() => {
                     <div class="hidden lg:flex flex-col lg:items-end items-center space-y-2">
                         <div class="flex items-center space-x-6 rtl:space-x-reverse">
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1"/><a href="#"
-                                    class="text-sm text-gray-900 hover:underline">(888)
+                                <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59"
+                                    stroke_width="1" /><a href="#" class="text-sm text-gray-900 hover:underline">(888)
                                     888-8888</a>
                             </div>
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="mobile" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1"/><a href="#"
-                                    class="text-sm text-gray-900 hover:underline">(999)
+                                <Icon name="mobile" :classes="'size-4'" fill="#115e59" stroke="#115e59"
+                                    stroke_width="1" /><a href="#" class="text-sm text-gray-900 hover:underline">(999)
                                     999-9999</a>
                             </div>
                             <div class="flex flex-row space-x-1 items-center">
-                                <Icon name="mail" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1"/><a href="#"
-                                    class="text-sm text-gray-900 hover:underline">
+                                <Icon name="mail" :classes="'size-4'" fill="#115e59" stroke="#115e59"
+                                    stroke_width="1" /><a href="#" class="text-sm text-gray-900 hover:underline">
                                     poblacion@gmail.com</a>
                             </div>
                         </div>
                         <div class="flex items-center justify-end space-x-4 rtl:space-x-reverse">
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="facebook" :classes="'size-6'" fill="black'"stroke="transpaent'" />
+                                <Icon name="facebook" :classes="'size-6'" fill="black'" stroke="transpaent'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="instagram" :classes="'size-6'" fill="black'"stroke="transpaent'" />
+                                <Icon name="instagram" :classes="'size-6'" fill="black'" stroke="transpaent'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="whatsapp" :classes="'size-6'" fill="black'"stroke="transpaent'" />
+                                <Icon name="whatsapp" :classes="'size-6'" fill="black'" stroke="transpaent'" />
                             </div>
                             <div class="flex flex-row space-x-1 items-center cursor-pointer">
-                                <Icon name="youtube" :classes="'size-6'" fill="black'"stroke="transpaent'" />
+                                <Icon name="youtube" :classes="'size-6'" fill="black'" stroke="transpaent'" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <nav class="bg-teal-800 uppercase">
-                <div class="max-w-screen-xl px-4 py-3 mx-auto flex flex-row lg:ml-40">
+            <nav class="bg-teal-800 shadow-2xl">
+                <div class="max-w-screen-xl mx-auto flex flex-row lg:ml-40">
                     <div class="flex flex-row items-center">
                         <div @click="sidebar = true"
-                            class="sm:hidden flex cursor-pointer hover:bg-teal-700 px-1 py-1 rounded-lg border border-teal-600 shadow-lg">
+                            class="sm:hidden flex cursor-pointer hover:bg-teal-700 mx-3 my-2 rounded-md border border-teal-600 shadow-md">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="white" class="size-8">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </div>
-                        <ul
-                            class="sm:flex hidden text-white flex-row mt-0 space-x-1 text-[14px] lg:text-lg tracking-tighter">
-                            <li>
-                                <Link :href="route('home')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'Home'
-        }">
-                                Home</Link>
-                            </li>
-                            <li>
-                                <Link :href="route('about.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'About/Index'
-        }">
-                                About us</Link>
-                            </li>
-                            <li>
-                                <Link :href="route('news.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'News/Index'
-        }">
-                                News</Link>
-                            </li>
-                            <li>
-                                <Link :href="route('services.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'Services/Index'
-        }">
-                                Services</Link>
-                            </li>
-                            <li>
-                                <Link :href="route('resources.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'Resources/Index'
-        }">
-                                Resources</Link>
-                            </li>
-                            <li class="relative group">
-                                <a class="text-white cursor-pointer hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index'
-        }">Committees</a>
-                                <ul
-                                    class="absolute mt-1 drop-shadow-lg text-white z-50 left-0 rounded-lg border border-teal-600 shadow-lg lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
-                                    <Link :href="route('committee.agriculture.index')">
-                                    <li class="px-4 py-2 hover:bg-teal-700" :class="{
-            'bg-teal-700':
-                $page.component === 'Agriculture/Index'
-        }">
-                                        Agriculture
-                                    </li>
-                                    </Link>
-                                    <Link :href="route('committee.drrm.index')">
-                                    <li class="px-4 py-2 hover:bg-teal-700" :class="{
-            'bg-teal-700':
-                $page.component === 'DRRM/Index'
-        }">
-                                        Disaster Risk Reduction Management
-                                    </li>
-                                    </Link>
-                                    <Link :href="route('committee.education.index')">
-                                    <li class="px-4 py-2 hover:bg-teal-700" :class="{
-            'bg-teal-700':
-                $page.component === 'Education/Index'
-        }">
-                                        Education
-                                    </li>
-                                    </Link>
-                                    <Link :href="route('committee.health.index')">
-                                    <li class="px-4 py-2 hover:bg-teal-700" :class="{
-            'bg-teal-700':
-                $page.component === 'HealthAndNutrition/Index'
-        }">
-                                        Health And Nutrition
-                                    </li>
-                                    </Link>
-                                    <Link :href="route('committee.peace.index')">
-                                    <li class="px-4 py-2 hover:bg-teal-700" :class="{
-            'bg-teal-700':
-                $page.component === 'PeaceAndOrder/Index'
-        }">
-                                        Peace And Order
-                                    </li>
-                                    </Link>
-                                </ul>
-                            </li>
-                            <li>
-                                <Link :href="route('contact.index')"
-                                    class="hover:bg-teal-700 px-3 py-2 rounded-lg border border-teal-600 shadow-lg text-nowrap"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'Contact/Index'
-        }">
-                                Contact us</Link>
-                            </li>
+                        <div
+                            class="sm:flex hidden text-white items-center flex-row space-x-2 text-[14px] lg:text-lg tracking-wider lg:h-14 h-12 justify-between">
+                            <NavLink :href="route('home')" :active="route().current('home')" class="px-2 py-1">
+                                Home</NavLink>
+                            <NavLink :href="route('about.index')" :active="route().current('about.index')"
+                                class="px-2 py-1">
+                                About us</NavLink>
+                            <NavLink :href="route('news.index')" :active="route().current('news.index')"
+                                class="px-2 py-1">
+                                News</NavLink>
+                            <NavLink :href="route('services.index')" :active="route().current('services.index')"
+                                class="px-2 py-1">
+                                Services</NavLink>
+                            <NavLink :href="route('resources.index')" :active="route().current('resources.index')"
+                                class="px-2 py-1">
+                                Resources</NavLink>
+                            <div class="relative group h-full">
+                                <Link
+                                    class="inline-flex items-center h-full text-md font-medium px-1 leading-5 text-white border-b-2 hover:text-white hover:border-teal-500 focus:outline-none focus:text-white focus:border-teal-500 transition duration-150 ease-in-out"
+                                    :class="[
 
-                        </ul>
+            $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index' ? 'border-teal-500' : 'border-transparent'
+        ]">Committees</Link>
+                                <div
+                                    class="absolute flex flex-col drop-shadow-lg text-white z-50 left-0 rounded-md border border-teal-600 shadow-lg lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
+                                    <DropdownNavLink :href="route('committee.agriculture.index')"
+                                        :active="route().current('committee.agriculture.index')">
+                                        Agriculture
+                                    </DropdownNavLink>
+                                    <DropdownNavLink :href="route('committee.drrm.index')"
+                                        :active="route().current('committee.drrm.index')">
+                                        Disaster Risk Reduction Management
+                                    </DropdownNavLink>
+                                    <DropdownNavLink :href="route('committee.education.index')"
+                                        :active="route().current('committee.education.index')">
+                                        Education
+                                    </DropdownNavLink>
+                                    <DropdownNavLink :href="route('committee.health.index')"
+                                        :active="route().current('committee.health.index')">
+                                        Health And Nutrition
+                                    </DropdownNavLink>
+                                    <DropdownNavLink :href="route('committee.peace.index')"
+                                        :active="route().current('committee.peace.index')">
+                                        Peace And Order
+                                    </DropdownNavLink>
+                                </div>
+                            </div>
+                            <NavLink :href="route('contact.index')" :active="route().current('contact.index')"
+                                class="px-2 py-1">
+                                Contact us</NavLink>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -283,141 +230,103 @@ onMounted(() => {
 
         <Transition name="sidebar">
             <div v-if="sidebar"
-                class="fixed sm:hidden border border-teal-700 top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto bg-teal-800">
-                <div class="flex justify-between">
-                    <img src="/images/logo.png" class="w-12 h-auto -mt-2" alt="Barangay Logo" />
-
-                    <button @click="sidebar = false" type="button"
-                        class="text-white bg-transparent hover:bg-teal-700 rounded-lg border border-teal-600 shadow-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center">
-                        <svg aria-hidden="true" class="w-6 h-auto" fill="white" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="sr-only">Close menu</span>
+                class="fixed sm:hidden border border-teal-700 top-0 left-0 z-40 w-64 h-screen p-2 overflow-y-auto bg-teal-800">
+                <div class="flex items-center justify-between flex-shrink-0">
+                    <span
+                        class="flex items-center flex-nowrap space-x-2 text-xl leading-8 tracking-wider uppercase whitespace-nowrap">
+                        <img src="/images/poblacion-logo.svg" class="w-12 h-auto" alt="Barangay Logo" />
+                        <span class="antialiased tracking-wider font-black leading-none text-white">Brgy.<br />
+                            Poblacion</span>
+                    </span>
+                    <button @click="sidebar = false" class="p-2 rounded-md lg:hidden">
+                        <Icon name="close" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                     </button>
                 </div>
 
                 <div class="py-4 overflow-y-auto">
-                    <ul class="space-y-2 font-medium uppercase tracking-tighter">
+                    <ul class="space-y-1 font-medium tracking-wider text-white">
                         <li>
-                            <Link :href="route('home')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
-                                :class="{
-            'bg-teal-700':
-                $page.component === 'Home'
-        }">
-                            <Icon name="home" />Home</Link>
+                            <ResponsiveNavLink :href="route('home')" :active="route().current('home')"
+                                class="gap-x-1 p-2 border-none shadow-none">
+                                <Icon name="home" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                Home
+                            </ResponsiveNavLink>
                         </li>
                         <li>
-                            <Link :href="route('about.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
-                                :class="{
-            'bg-teal-700':
-                $page.component === 'About/Index'
-        }">
-                            <Icon name="group" />About us</Link>
+                            <ResponsiveNavLink :href="route('about.index')" :active="route().current('about.index')"
+                                class="gap-x-1 p-2 border-none shadow-none">
+                                <Icon name="users" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                About us
+                            </ResponsiveNavLink>
                         </li>
                         <li>
-                            <Link :href="route('news.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
-                                :class="{
-            'bg-teal-700':
-                $page.component === 'News/Index'
-        }">
-                            <Icon name="newspaper" />News</Link>
+                            <ResponsiveNavLink :href="route('news.index')" :active="route().current('news.index')"
+                                class="gap-x-1 p-2 border-none shadow-none">
+                                <Icon name="newspaper" :classes="'size-6'" stroke="white" fill="none"
+                                    stroke_width="1.5" />
+                                News
+                            </ResponsiveNavLink>
                         </li>
                         <li>
-                            <Link :href="route('services.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
-                                :class="{
-            'bg-teal-700':
-                $page.component === 'Services/Index'
-        }">
-                            <Icon name="services" />Services</Link>
+                            <ResponsiveNavLink :href="route('services.index')"
+                                :active="route().current('services.index')" class="gap-x-1 p-2 border-none shadow-none">
+                                <Icon name="users" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                Services
+                            </ResponsiveNavLink>
                         </li>
                         <li>
-                            <Link :href="route('resources.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
-                                :class="{
-            'bg-teal-700':
-                $page.component === 'Resources/Index'
-        }">
-                            <Icon name="folder" />Resources</Link>
+                            <ResponsiveNavLink :href="route('resources.index')"
+                                :active="route().current('resources.index')"
+                                class="gap-x-1 p-2 border-none shadow-none">
+                                <Icon name="folder_open" :classes="'size-6'" stroke="white" fill="none"
+                                    stroke_width="1.5" />
+                                Resources
+                            </ResponsiveNavLink>
                         </li>
                         <li>
-                            <button type="button" @click="toggleDropdown"
-                                class="flex items-center  gap-x-1 w-full p-2 text-base text-white transition duration-75 rounded-lg border border-teal-600 shadow-lg group hover:bg-teal-700"
-                                :class="{
-            'bg-teal-700':
-                $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index'
-        }">
-                                <Icon name="user" />
-                                <span
-                                    class="flex-auto text-left rtl:text-right whitespace-nowrap uppercase">Committees</span>
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
-                            </button>
-                            <ul :class="isDropdownOpen ? 'py-2 space-y-2' : 'hidden py-2 space-y-2'">
-                                <Link :href="route('committee.agriculture.index')">
-                                <li class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-teal-700"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'Agriculture/Index'
-        }">
-                                    Agriculture
-                                </li>
-                                </Link>
-                                <Link :href="route('committee.drrm.index')">
-                                <li class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-teal-700"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'DRRM/Index'
-        }">
-                                    Disaster Risk Reduction Management
-                                </li>
-                                </Link>
-                                <Link :href="route('committee.education.index')">
-                                <li class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-teal-700"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'Education/Index'
-        }">
-                                    Education
-                                </li>
-                                </Link>
-                                <Link :href="route('committee.health.index')">
-                                <li class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-teal-700"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'HealthAndNutrition/Index'
-        }">
-                                    Health And Nutrition
-                                </li>
-                                </Link>
-                                <Link :href="route('committee.peace.index')">
-                                <li class="flex items-center w-full p-2 text-white transition duration-75 rounded-lg pl-11 group hover:bg-teal-700"
-                                    :class="{
-            'bg-teal-700':
-                $page.component === 'PeaceAndOrder/Index'
-        }">
-                                    Peace And Order
-                                </li>
-                                </Link>
-                            </ul>
+                            <DropdownButton :isSidebarOpen=true
+                                :active="route().current('committee.agriculture.index') || route().current('committee.drrm.index') || route().current('committee.education.index') || route().current('committee.health.index') || route().current('committee.peace.index')">
+                                <template #icon>
+                                    <Icon name="squares" :classes="'size-6'" stroke="white" fill="none"
+                                        stroke_width="1.5" />
+                                </template>
+                                <template #text>
+                                    Committees
+                                </template>
+                                <template #nav>
+                                    <ResponsiveNavLink :href="route('committee.agriculture.index')"
+                                        :active="route().current('committee.agriculture.index')"
+                                        class="border-none shadow-none p-2">
+                                        Agriculture</ResponsiveNavLink>
+
+                                    <ResponsiveNavLink :href="route('committee.drrm.index')"
+                                        :active="route().current('committee.drrm.index')"
+                                        class="border-none shadow-none p-2">
+                                        DRRM</ResponsiveNavLink>
+
+                                    <ResponsiveNavLink :href="route('committee.education.index')"
+                                        :active="route().current('committee.education.index')"
+                                        class="border-none shadow-none p-2">
+                                        Education</ResponsiveNavLink>
+
+                                    <ResponsiveNavLink :href="route('committee.health.index')"
+                                        :active="route().current('committee.health.index')"
+                                        class="border-none shadow-none p-2">
+                                        Health And Nutrition</ResponsiveNavLink>
+
+                                    <ResponsiveNavLink :href="route('committee.peace.index')"
+                                        :active="route().current('committee.peace.index')"
+                                        class="border-none shadow-none p-2">
+                                        Peace And Order</ResponsiveNavLink>
+                                </template>
+                            </DropdownButton>
                         </li>
                         <li>
-                            <Link :href="route('contact.index')"
-                                class="flex gap-x-1 items-center p-2 rounded-lg border border-teal-600 shadow-lg text-white hover:bg-teal-700 group"
-                                :class="{
-            'bg-teal-700':
-                $page.component === 'Contact/Index'
-        }">
-                            <Icon name="contact" />Contact us</Link>
+                            <ResponsiveNavLink :href="route('contact.index')" :active="route().current('contact.index')"
+                                class="gap-x-1 p-2 border-none shadow-none">
+                                <Icon name="phone" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                Contact us
+                            </ResponsiveNavLink>
                         </li>
 
                     </ul>
@@ -438,26 +347,30 @@ onMounted(() => {
                             <div class="flex flex-col items-center">
                                 <a class="text-lg">4-Hour Command Center</a>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
+                                    <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59"
+                                        stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">8-888-8888 / 0912-345-6789</a>
                                 </div>
                             </div>
                             <div class="flex flex-col items-center">
                                 <a class="text-lg">Office of the Barangay Captain</a>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
+                                    <Icon name="phone" :classes="'size-4'" fill="#115e59" stroke="#115e59"
+                                        stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">9-999-9999</a>
                                 </div>
                             </div>
                             <div class="flex flex-col items-center">
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="mail" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
+                                    <Icon name="mail" :classes="'size-4'" fill="#115e59" stroke="#115e59"
+                                        stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">poblacion@gmail.com</a>
                                 </div>
                             </div>
                             <div>
                                 <div class="flex flex-row gap-x-1 items-center">
-                                    <Icon name="location" :classes="'size-4'" fill="#115e59" stroke="#115e59" stroke_width="1" />
+                                    <Icon name="location" :classes="'size-4'" fill="#115e59" stroke="#115e59"
+                                        stroke_width="1" />
                                     <a class="text-black hover:text-gray-800">Poblacion, Valencia City, Bukidnon</a>
                                 </div>
                             </div>

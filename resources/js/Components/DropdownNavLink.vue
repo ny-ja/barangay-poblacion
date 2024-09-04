@@ -9,13 +9,13 @@ const props = defineProps({
 
 const classes = computed(() => {
     return props.active
-        ? 'flex bg-teal-700 rounded-md border border-teal-600 shadow-lg text-nowrap'
-        : 'flex rounded-md border border-teal-600 shadow-lg text-nowrap hover:bg-teal-700';
+        ? 'bg-teal-700 px-3 py-2 first:rounded-t-lg last:rounded-b-lg'
+        : 'hover:bg-teal-700 px-3 py-2 first:rounded-t-lg last:rounded-b-lg';
 });
 </script>
 
 <template>
     <Link :href="href" :class="classes">
-    <slot />
+        <slot />
     </Link>
 </template>

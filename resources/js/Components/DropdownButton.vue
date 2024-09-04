@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Icon from "@/Components/Icon.vue";
 
 const props = defineProps({
     isSidebarOpen: Boolean,
+    active: Boolean,
 });
 
 const isDropdownOpen = ref(false);
@@ -11,10 +12,18 @@ const isDropdownOpen = ref(false);
 const toggleDropdown = () => {
     isDropdownOpen.value = !isDropdownOpen.value;
 };
+
+const classes = computed(() => {
+    return [
+        props.active
+            ? 'flex text-white items-center p-2 rounded-md bg-teal-700 cursor-pointer'
+            : 'flex text-white items-center p-2 rounded-md hover:bg-teal-700 cursor-pointer',
+        [!props.isSidebarOpen ? 'justify-center flex-col' : 'justify-between']
+    ];
+});
 </script>
 <template>
-    <div @click="toggleDropdown" class="flex text-white items-center p-2 rounded-md hover:bg-teal-700 cursor-pointer"
-        :class="[!isSidebarOpen ? 'justify-center' : 'justify-between']">
+    <div @click="toggleDropdown" :class="classes">
         <div class="flex space-x-2">
             <slot name="icon" />
 
@@ -23,10 +32,7 @@ const toggleDropdown = () => {
             </span>
         </div>
 
-        <span :class="{ 'lg:hidden': !isSidebarOpen }">
-            <Icon name="chevron" :classes="'size-5'" />
-
-        </span>
+        <Icon name="chevron" :classes="'size-5'" />
     </div>
     <ul class="border border-teal-500 mt-1 p-2 rounded-lg"
         :class="isDropdownOpen ? 'py-2 space-y-1' : 'hidden py-2 space-y-1'">
