@@ -18,5 +18,9 @@ createInertiaApp({
         app.use(ZiggyVue);
         app.use(VueClickAway);
         app.mount(el);
-    }
+    },
+
+    progress: {
+        color: '#0f766e',
+      },
 });

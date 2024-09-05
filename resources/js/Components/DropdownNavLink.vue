@@ -9,8 +9,8 @@ const props = defineProps({
 
 const classes = computed(() => {
     return props.active
-        ? 'bg-teal-700 px-3 py-2 first:rounded-t-lg last:rounded-b-lg'
-        : 'hover:bg-teal-700 px-3 py-2 first:rounded-t-lg last:rounded-b-lg';
+        ? 'bg-teal-700 px-3 py-2'
+        : 'hover:bg-teal-700 px-3 py-2';
 });
 </script>
 

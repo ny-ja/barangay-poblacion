@@ -162,7 +162,7 @@ onMounted(() => {
                 </div>
             </div>
             <nav class="bg-teal-800 shadow-2xl">
-                <div class="max-w-screen-xl mx-auto flex flex-row lg:ml-40">
+                <div class="max-w-screen-xl mx-auto flex flex-row lg:ml-44">
                     <div class="flex flex-row items-center">
                         <div @click="sidebar = true"
                             class="sm:hidden flex cursor-pointer hover:bg-teal-700 mx-3 my-2 rounded-md border border-teal-600 shadow-md">
@@ -188,15 +188,18 @@ onMounted(() => {
                             <NavLink :href="route('resources.index')" :active="route().current('resources.index')"
                                 class="px-2 py-1">
                                 Resources</NavLink>
+                            <NavLink :href="route('contact.index')" :active="route().current('contact.index')"
+                                class="px-2 py-1">
+                                Contact us</NavLink>
                             <div class="relative group h-full">
                                 <Link
-                                    class="inline-flex items-center h-full text-md font-medium px-1 leading-5 text-white border-b-2 hover:text-white hover:border-teal-500 focus:outline-none focus:text-white focus:border-teal-500 transition duration-150 ease-in-out"
+                                    class="inline-flex items-center h-full text-md font-medium px-1 leading-5 border-b-2 hover:text-teal-500 hover:border-teal-500 hover:bg-teal-100 focus:outline-none focus:text-white focus:border-teal-500 transition duration-150 ease-in-out"
                                     :class="[
 
-            $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index' ? 'border-teal-500' : 'border-transparent'
+            $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index' ? 'border-teal-500 bg-teal-100 text-teal-500' : 'border-transparent text-white'
         ]">Committees</Link>
                                 <div
-                                    class="absolute flex flex-col drop-shadow-lg text-white z-50 left-0 rounded-md border border-teal-600 shadow-lg lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
+                                    class="absolute flex flex-col drop-shadow-lg text-white z-50 left-0 border border-white shadow-2xl lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
                                     <DropdownNavLink :href="route('committee.agriculture.index')"
                                         :active="route().current('committee.agriculture.index')">
                                         Agriculture
@@ -219,9 +222,6 @@ onMounted(() => {
                                     </DropdownNavLink>
                                 </div>
                             </div>
-                            <NavLink :href="route('contact.index')" :active="route().current('contact.index')"
-                                class="px-2 py-1">
-                                Contact us</NavLink>
                         </div>
                     </div>
                 </div>
@@ -284,6 +284,13 @@ onMounted(() => {
                             </ResponsiveNavLink>
                         </li>
                         <li>
+                            <ResponsiveNavLink :href="route('contact.index')" :active="route().current('contact.index')"
+                                class="gap-x-1 p-2 border-none shadow-none">
+                                <Icon name="phone" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                                Contact us
+                            </ResponsiveNavLink>
+                        </li>
+                        <li>
                             <DropdownButton :isSidebarOpen=true
                                 :active="route().current('committee.agriculture.index') || route().current('committee.drrm.index') || route().current('committee.education.index') || route().current('committee.health.index') || route().current('committee.peace.index')">
                                 <template #icon>
@@ -321,14 +328,6 @@ onMounted(() => {
                                 </template>
                             </DropdownButton>
                         </li>
-                        <li>
-                            <ResponsiveNavLink :href="route('contact.index')" :active="route().current('contact.index')"
-                                class="gap-x-1 p-2 border-none shadow-none">
-                                <Icon name="phone" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
-                                Contact us
-                            </ResponsiveNavLink>
-                        </li>
-
                     </ul>
                 </div>
             </div>
