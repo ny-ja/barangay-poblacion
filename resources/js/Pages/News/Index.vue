@@ -20,7 +20,8 @@ const props = defineProps(['news', 'newsCategories']);
                         <template #title>{{ news_item.title }}</template>
                         <template #description>{{ news_item.description }}</template>
                         <template #link>
-                            <Link class="text-teal-800 inline-flex items-center md:mb-2 lg:mb-0">Read more...
+                            <Link :href="route('news.show', news_item)"
+                                class="text-teal-800 inline-flex items-center md:mb-2 lg:mb-0 hover:text-teal-500">Read more...
                             </Link>
                         </template>
                     </NewsCard>

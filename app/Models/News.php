@@ -13,6 +13,7 @@ class News extends Model
         'title',
         'description',
         'news_photo_path',
+        'date',
         'user_id',
         'news_category_id'
     ];

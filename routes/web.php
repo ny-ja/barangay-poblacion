@@ -37,6 +37,7 @@ Route::get('/', function () {
 
 Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.index');
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{news_item}', [NewsController::class, 'show'])->name('news.show');
 Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact.index');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/home', [HomeController::class, 'index'])->name('home');

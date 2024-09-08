@@ -60,7 +60,6 @@ class BarangayOfficialController extends Controller
 
     public function show(BarangayOfficial $official)
     {
-
         return Inertia::render('Admin/BarangayOfficials/Show', [
             'official' => $official,
         ]);

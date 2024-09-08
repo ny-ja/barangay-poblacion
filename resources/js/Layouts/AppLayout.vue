@@ -162,7 +162,7 @@ onMounted(() => {
                 </div>
             </div>
             <nav class="bg-teal-800 shadow-2xl">
-                <div class="max-w-screen-xl mx-auto flex flex-row lg:ml-44">
+                <div class="max-w-screen-xl mx-auto flex flex-row ml-6 lg:ml-44">
                     <div class="flex flex-row items-center">
                         <div @click="sidebar = true"
                             class="sm:hidden flex cursor-pointer hover:bg-teal-700 mx-3 my-2 rounded-md border border-teal-600 shadow-md">
@@ -193,10 +193,10 @@ onMounted(() => {
                                 Contact us</NavLink>
                             <div class="relative group h-full">
                                 <Link
-                                    class="inline-flex items-center h-full text-md font-medium px-1 leading-5 border-b-2 hover:text-teal-500 hover:border-teal-500 hover:bg-teal-100 focus:outline-none focus:text-white focus:border-teal-500 transition duration-150 ease-in-out"
+                                    class="inline-flex items-center h-full text-md font-medium px-1  text-white leading-5 border-b-2 hover:text-white hover:border-teal-300 hover:bg-teal-700 focus:outline-none focus:text-white focus:border-teal-300 transition duration-150 ease-in-out"
                                     :class="[
 
-            $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index' ? 'border-teal-500 bg-teal-100 text-teal-500' : 'border-transparent text-white'
+            $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index' ? 'border-teal-300 bg-teal-700' : 'border-transparent'
         ]">Committees</Link>
                                 <div
                                     class="absolute flex flex-col drop-shadow-lg text-white z-50 left-0 border border-white shadow-2xl lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">

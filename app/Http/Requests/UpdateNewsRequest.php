@@ -25,6 +25,7 @@ class UpdateNewsRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'news_photo' => 'nullable|image',
+            'date' => 'nullable|date',
             'news_category_id' => 'required|exists:news_categories,id',
         ];
     }

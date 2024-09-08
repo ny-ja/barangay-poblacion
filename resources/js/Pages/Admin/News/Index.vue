@@ -32,6 +32,7 @@ const form = useForm({
     title: '',
     description: '',
     news_photo: null,
+    date: '',
     user_id: '',
     news_category_id: '',
 });
@@ -50,6 +51,7 @@ function openDrawerForEdit(news) {
     form.title = news.title;
     form.description = news.description;
     form.news_photo = null;
+    form.date = news.date;
     form.news_category_id = news.news_category_id;
     isEditMode.value = true;
     errorMessage.value = false;
@@ -185,6 +187,9 @@ const deleteNews = () => {
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Image</th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Date</th>
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -207,6 +212,9 @@ const deleteNews = () => {
                                     <img :src="`/storage/${news_item.news_photo_path}`" alt="News Photo"
                                         class="w-24 h-auto rounded" v-if="news_item.news_photo_path" />
                                 </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="text-sm text-gray-500">{{ news_item.date }}</div>
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <button @click="openDrawerForEdit(news_item)"
@@ -255,6 +263,12 @@ const deleteNews = () => {
                             <InputError :message="form.errors.news_category_id" class="mt-2" />
                         </div>
                         <div>
+                            <InputLabel for="date" value="Date" />
+                            <TextInput id="date" v-model="form.date" type="date" class="mt-1 block w-full"
+                                autocomplete="date" />
+                            <InputError :message="form.errors.date" class="mt-2" />
+                        </div>
+                        <div>
                             <InputLabel for="news_photo" value="News Photo" />
                             <input type="file" @change="handleFileChange" id="news_photo"
                                 class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100" />
@@ -280,9 +294,8 @@ const deleteNews = () => {
                 delete <span class="font-bold">{{ form.title }}</span> news?
             </template>
             <template #button>
-                <DeleteButton @click.prevent="deleteNews"
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <DeleteButton @click.prevent="deleteNews" class="ms-4" :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing">
                     Yes, I'm sure
                 </DeleteButton>
                 <SecondaryButton @click="isDeleteModalOpen = false" class="ms-4">

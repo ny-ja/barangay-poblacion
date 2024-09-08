@@ -19,4 +19,11 @@ class NewsController extends Controller
             'newsCategories' => $newsCategories,
         ]);
     }
+
+    public function show(News $news_item)
+    {
+        return Inertia::render('News/Show', [
+            'news_item' => $news_item,
+        ]);
+    }
 }

@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $newsCategories = NewsCategory::all();
 
-        $news = News::with('newsCategory')->latest()->paginate();
+        $news = News::with('newsCategory')->latest()->paginate(3);
 
         return Inertia::render('Home', [
             'news' => $news,
