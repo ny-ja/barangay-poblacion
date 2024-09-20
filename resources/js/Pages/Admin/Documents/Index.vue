@@ -179,9 +179,6 @@ const deleteDocument = (documentId) => {
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Category</th>
-                            <th scope="col"
-                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                Document</th>
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -198,12 +195,6 @@ const deleteDocument = (documentId) => {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-500">{{ document.document_category.name }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex-shrink-0">
-                                    <img :src="`/storage/${document.background_image_path}`" alt="Document image"
-                                        class="w-24 h-auto rounded" v-if="document.background_image_path" />
-                                </div>
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <button @click="openDrawerForEdit(document)"

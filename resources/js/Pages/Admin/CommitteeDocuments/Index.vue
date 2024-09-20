@@ -178,9 +178,6 @@ const deleteCommitteeDocument = () => {
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Committee</th>
-                            <th scope="col"
-                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                Image</th>
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -197,12 +194,6 @@ const deleteCommitteeDocument = () => {
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm text-gray-500">{{ committeeDocument.committee.name }}</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex-shrink-0">
-                                    <img :src="`/storage/${committeeDocument.background_image_path}`" alt="Document image"
-                                        class="w-24 h-auto rounded" v-if="committeeDocument.background_image_path" />
-                                </div>
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                 <button @click="openDrawerForEdit(committeeDocument)"
