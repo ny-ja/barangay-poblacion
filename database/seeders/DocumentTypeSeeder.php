@@ -24,7 +24,7 @@ class DocumentTypeSeeder extends Seeder
         ]);
 
         DocumentType::create([
-            'name' => 'Barangay Clearance Requirements',
+            'name' => 'Health Services',
             'user_id' => 1,
         ]);
 
