@@ -22,8 +22,19 @@ class NewsController extends Controller
 
     public function show(News $news_item)
     {
+        $news = News::with('newsCategory')
+            ->where('news_category_id', $news_item->news_category_id)
+            ->where('id', '!=', $news_item->id)
+            ->latest()
+            ->paginate(3);
+
+        $newsCategories = NewsCategory::all();
+
         return Inertia::render('News/Show', [
             'news_item' => $news_item,
+            'news' => $news,
+            'newsCategories' => $newsCategories
         ]);
     }
+
 }

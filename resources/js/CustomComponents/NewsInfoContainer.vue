@@ -1,13 +1,13 @@
 <script setup>
 </script>
 <template>
-    <section class="text-gray-600 body-font">
+    <section class="text-gray-600 body-font bg-gray-100">
         <div class="container px-5 py-16 mx-auto flex flex-col">
             <div class="lg:w-4/6 mx-auto">
                 <div class="rounded-lg px-4 py-4 h-64 overflow-hidden">
                     <slot name="image" />
                 </div>
-                <div class="flex flex-col sm:flex-row mt-10">
+                <div class="flex flex-col sm:flex-row mt-10 bg-white p-4 shadow-md">
                     <div class="sm:w-1/3 sm:pr-8 sm:py-8">
                         <div class="flex flex-col justify-start">
                             <h2 class="font-medium title-font text-2xl text-gray-900">

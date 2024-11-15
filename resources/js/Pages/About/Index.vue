@@ -34,7 +34,7 @@ const props = defineProps(['officials']);
                 </div>
             </section>
 
-            <section class="text-gray-600 body-font overflow-hidden">
+            <section class="text-gray-600 body-font overflow-hidden bg-gray-100">
                 <div class="px-5 py-16 mx-auto">
                     <div class="lg:w-4/5 mx-auto flex flex-wrap items-center">
                         <img alt="barangay" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
@@ -113,7 +113,6 @@ const props = defineProps(['officials']);
                 </template>
             </section>
 
-
             <section class="text-gray-600 body-font">
                 <div class="px-5 py-16 mx-auto">
                     <div class="flex flex-col text-center w-full mb-20">
@@ -137,32 +136,19 @@ const props = defineProps(['officials']);
                                             }}</h2>
                                         <h3 class="text-gray-500 mb-3">{{ official.role }}</h3>
                                         <p class="mb-4">{{ official.profile }}</p>
-                                        <span class="inline-flex">
-                                            <a class="text-gray-500">
-                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                    </path>
+                                        <span class="inline-flex text-gray-400">
+                                            <a class="">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
                                                 </svg>
                                             </a>
-                                            <a class="ml-2 text-gray-500">
-                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                            <a class="ml-2 text-gray-500">
-                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                    </path>
+                                            <a class="ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                                                 </svg>
                                             </a>
                                         </span>
@@ -174,7 +160,7 @@ const props = defineProps(['officials']);
                 </div>
             </section>
 
-            <section class="text-gray-600 body-font">
+            <section class="text-gray-600 body-font bg-gray-100">
                 <div class="px-5 py-16 mx-auto">
                     <div class="flex flex-col text-center w-full mb-20">
                         <h1 class="text-2xl font-medium title-font mb-4 text-gray-900 tracking-widest">Sangguniang
@@ -182,7 +168,8 @@ const props = defineProps(['officials']);
                     </div>
                     <div class="flex flex-wrap -m-4">
                         <template v-for="official in officials" :key="official.id">
-                            <div v-if="official.position == 'SK Kagawad' || official.position == 'SK Chairman/Chairwoman'" class="p-4 lg:w-1/2">
+                            <div v-if="official.position == 'SK Kagawad' || official.position == 'SK Chairman/Chairwoman'"
+                                class="p-4 lg:w-1/2">
                                 <div
                                     class="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
                                     <img class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
@@ -192,32 +179,19 @@ const props = defineProps(['officials']);
                                             }}</h2>
                                         <h3 class="text-gray-500 mb-3">{{ official.role }}</h3>
                                         <p class="mb-4">{{ official.profile }}</p>
-                                        <span class="inline-flex">
-                                            <a class="text-gray-500">
-                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z">
-                                                    </path>
+                                        <span class="inline-flex text-gray-400">
+                                            <a class="">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
                                                 </svg>
                                             </a>
-                                            <a class="ml-2 text-gray-500">
-                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
-                                                    </path>
-                                                </svg>
-                                            </a>
-                                            <a class="ml-2 text-gray-500">
-                                                <svg fill="none" stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
-                                                    viewBox="0 0 24 24">
-                                                    <path
-                                                        d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z">
-                                                    </path>
+                                            <a class="ml-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                                                 </svg>
                                             </a>
                                         </span>

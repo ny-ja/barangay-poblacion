@@ -11,6 +11,9 @@ const props = defineProps(['news', 'newsCategories']);
 <template>
     <AppLayout title="News">
         <NewsContainer>
+            <template #title>
+                Barangay News
+            </template>
             <template #cards>
                 <template v-for="news_item in news.data" :key="news_item.id">
                     <NewsCard>

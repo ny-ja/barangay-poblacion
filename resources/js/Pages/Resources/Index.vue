@@ -28,7 +28,7 @@ const filteredDocuments = computed(() => {
 <template>
     <AppLayout title="Resources">
         <section class="text-gray-600 body-font">
-            <div class="container px-5 py-16 mx-auto flex flex-wrap flex-col">
+            <div class="container px-5 py-16 flex flex-wrap flex-col">
                 <DocumentTabs :tabs="tabs" v-model:currentTab="currentTab" />
 
                 <div v-if="filteredDocuments.length" class="px-5">

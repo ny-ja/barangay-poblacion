@@ -44,11 +44,11 @@ const filteredDocuments = computed(() => {
                         <template #welcome>Welcome to the {{ committee.name }} Committee
                             Section</template>
                         <template #contact>{{
-                committee.contact_number
-            }}</template>
+                            committee.contact_number
+                            }}</template>
                         <template #profile>{{
-                    committee.committee_profile
-                }}</template>
+                            committee.committee_profile
+                            }}</template>
                     </CommitteeHeader>
                 </template>
             </template>
@@ -67,30 +67,26 @@ const filteredDocuments = computed(() => {
                 <template #cards>
                     <template v-for="member in members" :key="member.id">
                         <template v-if="member.committee.name == 'Peace And Order'
-                ">
+                        ">
                             <CommitteeMemberCard>
                                 <template #image><img
                                         class="flex-shrink-0 rounded-lg w-48 h-48 object-cover object-center sm:mb-0 mb-4"
                                         :src="`/storage/${member.member_photo_path}`" alt="member photo" /></template>
                                 <template #name>{{
-                member.full_name
-            }}</template>
+                                    member.full_name
+                                    }}</template>
                                 <template #role>{{ member.role }}</template>
                                 <template #profile>{{
-                member.profile
-            }}</template>
+                                    member.profile
+                                    }}</template>
                                 <template #icons>
-                                    <a class="text-gray-500">
-                                        <Icon name="outline_fb" :classes="'size-5'" fill="none" stroke="currentColor"
-                                            stroke_width="2" />
+                                    <a class="">
+                                        <Icon name="phone" :classes="'size-5'" fill="none" stroke="currentColor"
+                                            stroke_width="1.5" />
                                     </a>
-                                    <a class="ml-2 text-gray-500">
-                                        <Icon name="outline_twitter" :classes="'size-5'" fill="none"
-                                            stroke="currentColor" stroke_width="2" />
-                                    </a>
-                                    <a class="ml-2 text-gray-500">
-                                        <Icon name="outline_whatsapp" :classes="'size-5'" fill="none"
-                                            stroke="currentColor" stroke_width="2" />
+                                    <a class="ml-2">
+                                        <Icon name="mail" :classes="'size-5'" fill="none" stroke="currentColor"
+                                            stroke_width="1.5" />
                                     </a></template>
                             </CommitteeMemberCard>
                         </template>
@@ -116,8 +112,8 @@ const filteredDocuments = computed(() => {
                 </template>
             </InitiativeContainer>
 
-            <section class="text-gray-600 body-font">
-                <div class="container px-5 py-16 mx-auto flex flex-wrap flex-col">
+            <section class="text-gray-600 body-font bg-gray-100">
+                <div class="container px-5 py-16 flex flex-wrap flex-col">
                     <DocumentTabs :tabs="tabs" v-model:currentTab="currentTab" />
 
                     <div v-if="filteredDocuments.length" class="px-5">
