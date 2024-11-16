@@ -38,7 +38,7 @@ const formatDate = (date) => {
                         <template #link>
                             <Link :href="route('news.show', news_item)"
                                 class="text-teal-800 inline-flex items-center md:mb-2 lg:mb-0 hover:text-teal-500">Read
-                            more...
+                            more
                             </Link>
                         </template>
                     </NewsCard>

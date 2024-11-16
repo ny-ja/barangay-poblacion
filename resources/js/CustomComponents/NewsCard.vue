@@ -11,7 +11,7 @@
                 <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
                     <slot name="title" />
                 </h1>
-                <p class="leading-relaxed mb-3">
+                <p class="leading-relaxed line-clamp-3 mb-3">
                     <slot name="description" />
                 </p>
                 <div class="flex items-center flex-wrap justify-end">
