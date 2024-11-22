@@ -15,5 +15,10 @@ import { Link } from '@inertiajs/vue3';
             </span>
         </div>
     </div>
+    <div>
+        <span class="inline-block px-2 text-sm text-white bg-teal-800 rounded">
+            <slot name="date" />
+        </span>
+    </div>
     </Link>
 </template>

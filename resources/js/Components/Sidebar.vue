@@ -49,127 +49,26 @@ const isDropdownOpen = ref(false);
                         </SideNavLink>
                     </li>
                     <li>
-                        <DropdownButton :isSidebarOpen="isSidebarOpen"
-                            :active="route().current('admin.document-categories.index') || route().current('admin.document-types.index') || route().current('admin.news-categories.index')">
-                            <template #icon>
-                                <Icon name="category" :classes="'size-6'" stroke="white" fill="none"
-                                    stroke_width="1.5" />
-                            </template>
-                            <template #text>
-                                Categories & Types
-                            </template>
-                            <template #nav>
-                                <SideNavLink :href="route('admin.document-categories.index')"
-                                    :active="route().current('admin.document-categories.index')"
-                                    :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="rectangle_stack" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Document
-                                        Categories</span>
-                                </SideNavLink>
-                                <SideNavLink :href="route('admin.document-types.index')"
-                                    :active="route().current('admin.document-types.index')"
-                                    :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="numbered_list" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Document
-                                        Types</span>
-                                </SideNavLink>
-                                <SideNavLink :href="route('admin.news-categories.index')"
-                                    :active="route().current('admin.news-categories.index')"
-                                    :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="square_stack_3" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">News
-                                        Categories</span>
-                                </SideNavLink>
-                            </template>
-                        </DropdownButton>
-                    </li>
-                    <li>
-                        <DropdownButton :isSidebarOpen="isSidebarOpen"
-                            :active="route().current('admin.documents.index') || route().current('admin.committee-documents.index')">
-                            <template #icon>
-                                <Icon name="folder_open" :classes="'size-6'" stroke="white" fill="none"
-                                    stroke_width="1.5" />
-                            </template>
-                            <template #text>
-                                Documents
-                            </template>
-                            <template #nav>
-                                <SideNavLink :href="route('admin.documents.index')"
-                                    :active="route().current('admin.documents.index')" :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="folder" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Barangay
-                                        Documents</span>
-                                </SideNavLink>
-                                <SideNavLink :href="route('admin.committee-documents.index')"
-                                    :active="route().current('admin.committee-documents.index')"
-                                    :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="square_stack_2" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee
-                                        Documents</span>
-                                </SideNavLink>
-                            </template>
-                        </DropdownButton>
-                    </li>
-                    <li>
-                        <DropdownButton :isSidebarOpen="isSidebarOpen"
-                            :active="route().current('admin.barangay-officials.index') || route().current('admin.committee-members.index') || route().current('admin.users.index') || route().current('admin.subscribers.index')">
-                            <template #icon>
-                                <Icon name="group" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
-                            </template>
-                            <template #text>
-                                People
-                            </template>
-                            <template #nav>
-                                <SideNavLink :href="route('admin.barangay-officials.index')"
-                                    :active="route().current('admin.barangay-officials.index')"
-                                    :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="user" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Barangay
-                                        Officials</span>
-                                </SideNavLink>
-                                <SideNavLink :href="route('admin.committee-members.index')"
-                                    :active="route().current('admin.committee-members.index')"
-                                    :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="users" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee
-                                        Members</span>
-                                </SideNavLink>
-                                <SideNavLink :href="route('admin.users.index')"
-                                    :active="route().current('admin.users.index')" :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="user_circle" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
-                                </SideNavLink>
-                                <SideNavLink :href="route('admin.subscribers.index')"
-                                    :active="route().current('admin.subscribers.index')" :isSidebarOpen="isSidebarOpen">
-                                    <Icon name="user_plus" :classes="'size-6'" stroke="white" fill="none"
-                                        stroke_width="1.5" />
-                                    <span class="text-nowrap"
-                                        :class="{ 'lg:hidden': !isSidebarOpen }">Subscribers</span>
-                                </SideNavLink>
-                            </template>
-                        </DropdownButton>
-                    </li>
-                    <li>
-                        <SideNavLink :href="route('admin.news.index')" :active="route().current('admin.news.index')"
-                            :isSidebarOpen="isSidebarOpen">
-                            <Icon name="newspaper" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
-                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
+                        <SideNavLink :href="route('admin.barangay-officials.index')"
+                            :active="route().current('admin.barangay-officials.index')" :isSidebarOpen="isSidebarOpen">
+                            <Icon name="users" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Barangay
+                                Officials</span>
                         </SideNavLink>
-
                     </li>
                     <li>
                         <SideNavLink :href="route('admin.committees.index')"
                             :active="route().current('admin.committees.index')" :isSidebarOpen="isSidebarOpen">
-                            <Icon name="squares" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <Icon name="group" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
                             <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committees</span>
+                        </SideNavLink>
+                    </li>
+                    <li>
+                        <SideNavLink :href="route('admin.committee-members.index')"
+                            :active="route().current('admin.committee-members.index')" :isSidebarOpen="isSidebarOpen">
+                            <Icon name="users" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee
+                                Members</span>
                         </SideNavLink>
                     </li>
                     <li>
@@ -180,6 +79,37 @@ const isDropdownOpen = ref(false);
                             <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee
                                 Initiatives</span>
                         </SideNavLink>
+                    </li>
+                    <li>
+                        <SideNavLink :href="route('admin.documents.index')"
+                            :active="route().current('admin.documents.index')" :isSidebarOpen="isSidebarOpen">
+                            <Icon name="folder" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Barangay
+                                Documents</span>
+                        </SideNavLink>
+                    </li>
+                    <li>
+                        <SideNavLink :href="route('admin.committee-documents.index')"
+                            :active="route().current('admin.committee-documents.index')" :isSidebarOpen="isSidebarOpen">
+                            <Icon name="folder" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Committee
+                                Documents</span>
+                        </SideNavLink>
+                    </li>
+                    <li>
+                        <SideNavLink :href="route('admin.subscribers.index')"
+                            :active="route().current('admin.subscribers.index')" :isSidebarOpen="isSidebarOpen">
+                            <Icon name="users" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">Subscribers</span>
+                        </SideNavLink>
+                    </li>
+                    <li>
+                        <SideNavLink :href="route('admin.news.index')" :active="route().current('admin.news.index')"
+                            :isSidebarOpen="isSidebarOpen">
+                            <Icon name="newspaper" :classes="'size-6'" stroke="white" fill="none" stroke_width="1.5" />
+                            <span class="text-nowrap" :class="{ 'lg:hidden': !isSidebarOpen }">News</span>
+                        </SideNavLink>
+
                     </li>
                     <li>
                         <SideNavLink :href="route('admin.feedback.index')"
