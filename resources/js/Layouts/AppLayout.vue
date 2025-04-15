@@ -192,12 +192,12 @@ onMounted(() => {
                                 class="px-2 py-1">
                                 Contact us</NavLink>
                             <div class="relative group h-full">
-                                <Link
-                                    class="inline-flex items-center h-full text-md font-medium px-1  text-white leading-5 border-b-2 hover:text-white hover:border-teal-300 hover:bg-teal-700 focus:outline-none focus:text-white focus:border-teal-300 transition duration-150 ease-in-out"
+                                <div
+                                    class="inline-flex items-center h-full text-md font-medium px-1  text-white leading-5 border-b-2 hover:text-white hover:bg-teal-700 focus:outline-none focus:text-white focus:border-teal-300 transition duration-150 ease-in-out cursor-pointer"
                                     :class="[
 
             $page.component === 'Agriculture/Index' || $page.component === 'DRRM/Index' || $page.component === 'Education/Index' || $page.component === 'HealthAndNutrition/Index' || $page.component === 'PeaceAndOrder/Index' ? 'border-teal-300 bg-teal-700' : 'border-transparent'
-        ]">Committees</Link>
+        ]">Committees</div>
                                 <div
                                     class="absolute flex flex-col drop-shadow-lg text-white z-50 left-0 border border-white shadow-2xl lg:w-72 w-42 text-[14px] lg:text-lg bg-teal-800 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-opacity duration-300">
                                     <DropdownNavLink :href="route('committee.agriculture.index')"
@@ -366,7 +366,7 @@ onMounted(() => {
                                     <a class="text-black hover:text-gray-800">poblacion@gmail.com</a>
                                 </div>
                             </div>
-                            <div>
+                            <div class="flex flex-col items-center">
                                 <div class="flex flex-row gap-x-1 items-center">
                                     <Icon name="location" :classes="'size-4'" fill="#115e59" stroke="#115e59"
                                         stroke_width="1" />
